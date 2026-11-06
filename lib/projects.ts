@@ -5,7 +5,7 @@ export const projects = [
   {
     title: "Aura Platform",
     category: "Fintech / Web Application",
-    image: "/images/image.png",
+    image: "/images/architecture.png",
     wrapper: "",
     overlay: "bg-accent/10",
     titleHover: "group-hover:text-fg",
@@ -15,8 +15,7 @@ export const projects = [
   {
     title: "Lumina Health",
     category: "Brand Identity / Digital Experience",
-    image:
-      "https://images.unsplash.com/photo-1558655146-d09347e92766?q=80&w=2000&auto=format&fit=crop",
+    image: "/images/restaurant.png",
     wrapper: "md:mt-24",
     overlay: "bg-accent/10",
     titleHover: "group-hover:text-fg",
@@ -26,8 +25,7 @@ export const projects = [
   {
     title: "Kroma Studio",
     category: "E-Commerce / Creative Direction",
-    image:
-      "https://images.unsplash.com/photo-1541701494587-cb58502866ab?q=80&w=2000&auto=format&fit=crop",
+    image: "/images/interior.png",
     wrapper: "",
     overlay: "bg-accent/10",
     titleHover: "group-hover:text-fg",
@@ -37,8 +35,7 @@ export const projects = [
   {
     title: "Vanguard Logistics",
     category: "Corporate Website / UI System",
-    image:
-      "https://images.unsplash.com/photo-1600132806370-bf17e65e942f?q=80&w=2000&auto=format&fit=crop",
+    image: "/images/electric.png",
     wrapper: "md:mt-24",
     overlay: "bg-accent/10",
     titleHover: "group-hover:text-fg",

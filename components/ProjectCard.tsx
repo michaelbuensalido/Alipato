@@ -1,10 +1,11 @@
 import Icon from "./Icon";
+import Image from "next/image";
 import type { Project } from "@/lib/projects";
 
 export default function ProjectCard({ project: p, index }: { project: Project; index: number }) {
   return (
     <a href="#" className={`group block ${p.wrapper}`}>
-      <div className="relative overflow-hidden aspect-[4/3] bg-surface mb-6 rounded-sm">
+      <div className="relative overflow-hidden bg-surface mb-6 rounded-sm">
         <div
           className={`absolute inset-0 ${p.overlay} opacity-0 group-hover:opacity-100 transition-opacity duration-700 z-10 pointer-events-none`}
         />
