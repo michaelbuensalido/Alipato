@@ -17,12 +17,15 @@ export default function Navbar() {
 
   return (
     <nav className="fixed top-0 left-0 w-full z-50 bg-canvas/80 backdrop-blur-md border-b border-line/50">
-      <div className="flex items-center justify-between px-6 py-5 md:px-12">
-        <a
-          href="/"
-          className="text-xl font-medium tracking-tighter uppercase leading-none text-fg"
-        >
-          Cendralis
+      <div className="flex items-center justify-between px-6 py-4 md:px-12">
+        <a href="/" className="flex items-center gap-2 group">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/images/logo/logo.svg"
+            alt="Cendralis"
+            className="h-10 md:h-12 w-auto object-contain transition-opacity duration-300 group-hover:opacity-90"
+          />
+          <span className="sr-only">Cendralis</span>
         </a>
 
         <div className="hidden md:flex items-center gap-8">
@@ -51,7 +54,14 @@ export default function Navbar() {
             onClick={() => setOpen((v) => !v)}
             className="md:hidden text-fg hover:text-accent transition-colors flex items-center justify-center"
           >
-            <Icon icon={open ? "solar:close-circle-linear" : "solar:hamburger-menu-linear"} size={24} />
+            <Icon
+              icon={
+                open
+                  ? "solar:close-circle-linear"
+                  : "solar:hamburger-menu-linear"
+              }
+              size={24}
+            />
           </button>
         </div>
       </div>

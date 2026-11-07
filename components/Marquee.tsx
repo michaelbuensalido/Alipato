@@ -1,14 +1,14 @@
 const base = "text-5xl md:text-7xl font-medium tracking-tighter mx-8 uppercase";
 const g1 = "text-accent";
-const g2 = "text-accent";
+const g2 = "text-flame";
 
 const items = [
   { text: "Cendralis", gradient: g1 },
-  { text: "Consulting", gradient: "" },
-  { text: "Local SEO & AEO", gradient: g2 },
-  { text: "24/7 AI Agents", gradient: "" },
-  { text: "Cendralis", gradient: g1 },
-  { text: "PH + SG", gradient: "" },
+  { text: "Digital Growth", gradient: "" },
+  { text: "IT Solutions", gradient: g2 },
+  { text: "Local SEO & AEO", gradient: "" },
+  { text: "24/7 AI Agents", gradient: g1 },
+  { text: "Digital Consulting", gradient: "" },
 ];
 
 export default function Marquee() {

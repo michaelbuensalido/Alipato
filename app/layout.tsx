@@ -9,7 +9,7 @@ const inter = Inter({
   display: "swap",
 });
 
-export const metadata: Metadata = { title: "Cendralis | Digital Agency" };
+export const metadata: Metadata = { title: "Cendralis | Digital Growth & IT Solutions" };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (

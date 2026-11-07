@@ -29,10 +29,10 @@ export default function Agency() {
               Developer-Led by Design
             </h2>
             <p className="text-base md:text-lg font-light text-muted leading-relaxed mb-10 max-w-md">
-              We are a team of developers, not a bloated traditional agency. We
-              embed AI across the whole business lifecycle, so small and medium
-              businesses get fast, full-stack digital infrastructure without the
-              overhead.
+              We are a digital growth and IT solutions partner led by developers,
+              not a bloated traditional agency. We embed AI across the whole
+              business lifecycle, so small and medium businesses get fast,
+              full-stack digital infrastructure without the overhead.
             </p>
           </div>
 

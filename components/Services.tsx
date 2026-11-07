@@ -31,8 +31,8 @@ const services = [
       "AI citation tracking",
     ],
     meta: "One-time setup or monthly retainer",
-    iconBox: "group-hover:text-accent group-hover:border-accent/30",
-    tag: "border-accent/20 text-accent",
+    iconBox: "group-hover:text-flame group-hover:border-flame/30",
+    tag: "border-flame/30 text-flame",
     svg: (
       <>
         <circle cx="12" cy="12" r="10" />
@@ -53,8 +53,8 @@ const services = [
       "Google Sheets / CRM",
     ],
     meta: "Agent deployed in under 90 minutes",
-    iconBox: "group-hover:text-accent group-hover:border-accent/30",
-    tag: "border-accent/20 text-accent",
+    iconBox: "group-hover:text-violet group-hover:border-violet/30",
+    tag: "border-violet/30 text-violet",
     svg: (
       <>
         <polygon points="12 2 21 7 21 17 12 22 3 17 3 7" />
@@ -74,8 +74,8 @@ const services = [
       "A productized AI Workflow & Digital Audit for growing businesses with disjointed tools and manual bottlenecks. We interview your team and deliver a clear Digital Transformation Roadmap you can act on.",
     tags: ["1-day audit", "15-page roadmap", "Fractional CTO"],
     meta: "Fixed scope, no open-ended hourly billing",
-    iconBox: "group-hover:text-accent group-hover:border-accent/30",
-    tag: "border-accent/20 text-accent",
+    iconBox: "group-hover:text-flame group-hover:border-flame/30",
+    tag: "border-flame/30 text-flame",
     border: "border-b",
     svg: (
       <>
