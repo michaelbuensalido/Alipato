@@ -14,9 +14,25 @@ export const metadata: Metadata = {
   description:
     "Alipato is a digital growth and IT solutions partner building web, SEO/AEO, AI agents and automation for SMBs.",
   icons: {
-    icon: "/images/logo/alipato_logo.svg",
-    shortcut: "/images/logo/alipato_logo.svg",
-    apple: "/apple-touch-icon.png",
+    icon: [
+      {
+        url: "/images/logo/alipato_logo.svg?v=3",
+        type: "image/svg+xml",
+        sizes: "any",
+      },
+      {
+        url: "/images/logo/alipato_logo_32.png?v=3",
+        sizes: "32x32",
+        type: "image/png",
+      },
+      {
+        url: "/images/logo/alipato_logo_192.png?v=3",
+        sizes: "192x192",
+        type: "image/png",
+      },
+    ],
+    shortcut: "/images/logo/alipato_logo.svg?v=3",
+    apple: "/apple-touch-icon.png?v=3",
   },
 };
 

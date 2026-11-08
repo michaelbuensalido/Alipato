@@ -7,9 +7,20 @@ import { projects } from "@/lib/projects";
 export const metadata: Metadata = {
   title: "All Projects | Alipato",
   icons: {
-    icon: "/images/logo/alipato_logo.svg",
-    shortcut: "/images/logo/alipato_logo.svg",
-    apple: "/apple-touch-icon.png",
+    icon: [
+      {
+        url: "/images/logo/alipato_logo.svg?v=3",
+        type: "image/svg+xml",
+        sizes: "any",
+      },
+      {
+        url: "/images/logo/alipato_logo_32.png?v=3",
+        sizes: "32x32",
+        type: "image/png",
+      },
+    ],
+    shortcut: "/images/logo/alipato_logo.svg?v=3",
+    apple: "/apple-touch-icon.png?v=3",
   },
 };
 
