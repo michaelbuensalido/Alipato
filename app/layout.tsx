@@ -43,6 +43,21 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="scroll-smooth">
+      <head>
+        <script
+          async
+          src="https://www.googletagmanager.com/gtm.js?id=GTM-N7V92XVG"
+        />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+            `,
+          }}
+        />
+      </head>
       <body
         className={`${inter.variable} bg-canvas text-fg font-sans antialiased selection:bg-accent selection:text-canvas flex flex-col min-h-screen`}
       >
