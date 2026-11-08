@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256">
+  <polygon points="143,5 147,7 147,8 145,10 144,9 143,6" fill="#f96322" stroke="#f96322" stroke-width="1.5" stroke-linejoin="miter"/>
+  <polygon points="160,21 161,20 162,21 165,26 165,27 162,26 160,25" fill="#fc2a5d" stroke="#fc2a5d" stroke-width="1.5" stroke-linejoin="miter"/>
+  <polygon points="156,37 158,28 159,27 163,28 165,29 166,30 165,31 157,37" fill="#a32196" stroke="#a32196" stroke-width="1.5" stroke-linejoin="miter"/>
+  <polygon points="124,79 140,44 144,36 145,37 145,41 144,71 135,76 125,81 124,81" fill="#7d07aa" stroke="#7d07aa" stroke-width="1.5" stroke-linejoin="miter"/>
+  <polygon points="102,78 110,69 140,39 141,39 141,40 139,45 126,73 122,81 121,82 117,82 103,79" fill="#a8239d" stroke="#a8239d" stroke-width="1.5" stroke-linejoin="miter"/>
+  <polygon points="100,50 101,48 104,47 108,47 108,48 102,55 101,54 100,51" fill="#a21e9a" stroke="#a21e9a" stroke-width="1.5" stroke-linejoin="miter"/>
+  <polygon points="117,62 122,57 123,57 117,63" fill="#ac27a0" stroke="#ac27a0" stroke-width="1.5" stroke-linejoin="miter"/>
+  <polygon points="162,64 163,62 169,59 170,59 170,61 167,68 166,70 165,70 163,68 162,66" fill="#f1413c" stroke="#f1413c" stroke-width="1.5" stroke-linejoin="miter"/>
+  <polygon points="123,84 124,83 129,80 143,73 145,73 146,75 151,86 159,104 161,110 161,111 155,107 131,90 124,85" fill="#5a1291" stroke="#5a1291" stroke-width="1.5" stroke-linejoin="miter"/>
+  <polygon points="75,92 76,90 81,82 82,81 82,89 76,92" fill="#fb5619" stroke="#fb5619" stroke-width="1.5" stroke-linejoin="miter"/>
+  <polygon points="102,81 105,81 112,82 119,84 121,85 125,109 127,123 127,128 126,127 103,84" fill="#f305d4" stroke="#f305d4" stroke-width="1.5" stroke-linejoin="miter"/>
+  <polygon points="93,127 95,113 98,94 100,84 104,89 108,96 126,130 127,133 122,133 104,130 99,129 95,128" fill="#fb246f" stroke="#fb246f" stroke-width="1.5" stroke-linejoin="miter"/>
+  <polygon points="123,86 125,87 152,106 156,109 158,111 158,116 151,121 136,130 130,133 126,110 123,89" fill="#b80ca9" stroke="#b80ca9" stroke-width="1.5" stroke-linejoin="miter"/>
+  <polygon points="165,110 171,88 172,87 174,87 175,88 183,102 189,113 197,128 198,130 198,131 197,131 184,124 173,118 166,114 165,113" fill="#95139c" stroke="#95139c" stroke-width="1.5" stroke-linejoin="miter"/>
+  <polygon points="73,96 75,94 80,92 82,92 82,106 76,100" fill="#fa256d" stroke="#fa256d" stroke-width="1.5" stroke-linejoin="miter"/>
+  <polygon points="152,113 158,112 160,112 162,114 160,115 159,115 155,114" fill="#b70da5" stroke="#b70da5" stroke-width="1.5" stroke-linejoin="miter"/>
+  <polygon points="163,117 164,115 168,117 168,118 166,121 164,122 163,120" fill="#fc0a8e" stroke="#fc0a8e" stroke-width="1.5" stroke-linejoin="miter"/>
+  <polygon points="131,137 132,134 159,117 161,116 162,116 162,119 156,149 152,168 144,168 140,159 132,140" fill="#fa2a99" stroke="#fa2a99" stroke-width="1.5" stroke-linejoin="miter"/>
+  <polygon points="74,119 75,118 77,118 83,122 91,128 89,130 83,134 82,134 78,133 77,132 76,130 75,127 74,121" fill="#a80780" stroke="#a80780" stroke-width="1.5" stroke-linejoin="miter"/>
+  <polygon points="151,178 162,123 163,121 169,118 183,125 192,130 199,134 199,135 195,139 174,159 158,174 151,180" fill="#fc0390" stroke="#fc0390" stroke-width="1.5" stroke-linejoin="miter"/>
+  <polygon points="59,145 60,142 69,121 70,120 72,122 73,125 75,134 76,139 76,141 74,142 60,147 59,147" fill="#f70530" stroke="#f70530" stroke-width="1.5" stroke-linejoin="miter"/>
+  <polygon points="131,127 132,121 133,121 133,127" fill="#b70ca5" stroke="#b70ca5" stroke-width="1.5" stroke-linejoin="miter"/>
+  <polygon points="144,123 146,121 147,121 148,123 144,125" fill="#b80ca5" stroke="#b80ca5" stroke-width="1.5" stroke-linejoin="miter"/>
+  <polygon points="93,129 96,129 119,133 119,134 118,160 114,170 111,177 110,179 108,178" fill="#fb0682" stroke="#fb0682" stroke-width="1.5" stroke-linejoin="miter"/>
+  <polygon points="80,140 84,136 91,130 92,131 95,140 100,156 106,176 106,178 87,153 84,149 80,143" fill="#c007ab" stroke="#c007ab" stroke-width="1.5" stroke-linejoin="miter"/>
+  <polygon points="77,133 86,133 83,136 78,140 77,135" fill="#aa027e" stroke="#aa027e" stroke-width="1.5" stroke-linejoin="miter"/>
+  <polygon points="116,150 117,138 118,136 120,134 122,134 128,135 128,136 127,139 124,146 119,156 116,152" fill="#fc0386" stroke="#fc0386" stroke-width="1.5" stroke-linejoin="miter"/>
+  <polygon points="152,182 169,165 189,146 198,138 200,137 200,141 198,175 197,189 196,195 194,195 190,194 160,185 154,183" fill="#c006b1" stroke="#c006b1" stroke-width="1.5" stroke-linejoin="miter"/>
+  <polygon points="57,150 59,149 69,145 75,143 76,143 75,146 60,176 59,174 58,164 57,151" fill="#c4076c" stroke="#c4076c" stroke-width="1.5" stroke-linejoin="miter"/>
+  <polygon points="60,179 65,168 75,148 78,144 81,147 102,175 106,181 106,182 102,182 63,180" fill="#f7244c" stroke="#f7244c" stroke-width="1.5" stroke-linejoin="miter"/>
+  <polygon points="209,157 212,146 213,145 216,151 216,153 215,154 212,156 210,157" fill="#f55e1f" stroke="#f55e1f" stroke-width="1.5" stroke-linejoin="miter"/>
+  <polygon points="39,165 40,164 41,164 53,176 57,181 57,183 51,203 47,215 46,217 45,214 44,209 43,202 41,186 39,168" fill="#fb3431" stroke="#fb3431" stroke-width="1.5" stroke-linejoin="miter"/>
+  <polygon points="145,168 147,166 150,165 151,166 152,169 152,170 151,176 150,181 145,170" fill="#fc269a" stroke="#fc269a" stroke-width="1.5" stroke-linejoin="miter"/>
+  <polygon points="199,195 206,183 214,170 214,181 212,206 211,217 210,218 208,215 203,206 200,200" fill="#bd08aa" stroke="#bd08aa" stroke-width="1.5" stroke-linejoin="miter"/>
+  <polygon points="60,181 68,181 103,183 102,187 76,204 72,206 71,206 69,203 68,201 61,185 60,182" fill="#f9361b" stroke="#f9361b" stroke-width="1.5" stroke-linejoin="miter"/>
+  <polygon points="46,221 50,208 56,189 57,186 59,183 72,208 71,210 46,223" fill="#fa5d0d" stroke="#fa5d0d" stroke-width="1.5" stroke-linejoin="miter"/>
+  <polygon points="101,185 102,184 107,184 104,186 103,186" fill="#f93a13" stroke="#f93a13" stroke-width="1.5" stroke-linejoin="miter"/>
+  <polygon points="100,208 108,184 147,184 144,186 133,193 101,213 100,213" fill="#f9520d" stroke="#f9520d" stroke-width="1.5" stroke-linejoin="miter"/>
+  <polygon points="100,215 139,190 147,185 149,184 151,188 155,198 159,209 160,212 160,215" fill="#fa2f11" stroke="#fa2f11" stroke-width="1.5" stroke-linejoin="miter"/>
+  <polygon points="151,184 158,186 175,191 195,197 194,198 173,210 164,215 162,215 159,207 151,185" fill="#f70139" stroke="#f70139" stroke-width="1.5" stroke-linejoin="miter"/>
+  <polygon points="72,209 75,206 101,189 106,186 107,186 107,188 106,191 97,215 83,247 82,248 81,247 77,232 74,220 72,211" fill="#f8710e" stroke="#f8710e" stroke-width="1.5" stroke-linejoin="miter"/>
+  <polygon points="201,192 202,190 203,189 206,192 206,193 204,194 203,194" fill="#c406b2" stroke="#c406b2" stroke-width="1.5" stroke-linejoin="miter"/>
+  <polygon points="164,216 169,213 190,201 196,198 196,199 194,205 178,249 177,249 172,238 164,219" fill="#f92f12" stroke="#f92f12" stroke-width="1.5" stroke-linejoin="miter"/>
+  <polygon points="180,247 183,238 193,210 196,202 198,200 204,211 210,223 206,227 200,232 183,246 180,248" fill="#f70331" stroke="#f70331" stroke-width="1.5" stroke-linejoin="miter"/>
+  <polygon points="105,211 108,209 113,206 115,205 116,205 116,208 115,211 109,214 108,214" fill="#f33312" stroke="#f33312" stroke-width="1.5" stroke-linejoin="miter"/>
+  <polygon points="47,223 48,222 65,212 67,211 68,211 70,212 72,214 80,246 80,249 77,247 48,225 47,224" fill="#f84107" stroke="#f84107" stroke-width="1.5" stroke-linejoin="miter"/>
+</svg>

@@ -4,7 +4,14 @@ import ProjectCard from "@/components/ProjectCard";
 import Contact from "@/components/Contact";
 import { projects } from "@/lib/projects";
 
-export const metadata: Metadata = { title: "All Projects | Alipato" };
+export const metadata: Metadata = {
+  title: "All Projects | Alipato",
+  icons: {
+    icon: "/images/logo/alipato_logo.svg",
+    shortcut: "/images/logo/alipato_logo.svg",
+    apple: "/apple-touch-icon.png",
+  },
+};
 
 export default function ProjectsPage() {
   return (
@@ -13,7 +20,9 @@ export default function ProjectsPage() {
       <main className="pt-40 pb-24 px-6 md:px-12 border-b border-line/50">
         <div className="max-w-7xl mx-auto">
           <div className="flex items-end justify-between mb-16">
-            <h1 className="text-4xl md:text-7xl font-medium tracking-tighter">All Projects</h1>
+            <h1 className="text-4xl md:text-7xl font-medium tracking-tighter">
+              All Projects
+            </h1>
             <span className="text-sm font-light text-muted hidden md:block">
               ({String(projects.length).padStart(2, "0")} Projects)
             </span>
