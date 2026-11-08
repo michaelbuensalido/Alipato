@@ -22,10 +22,10 @@ export default function Navbar() {
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src="/images/logo/logo.svg"
-            alt="Cendralis"
+            alt="Alipato"
             className="h-10 md:h-12 w-auto object-contain transition-opacity duration-300 group-hover:opacity-90"
           />
-          <span className="sr-only">Cendralis</span>
+          <span className="sr-only">Alipato</span>
         </a>
 
         <div className="hidden md:flex items-center gap-8">

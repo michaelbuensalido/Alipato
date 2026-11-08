@@ -74,13 +74,13 @@ export default function Contact() {
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src="/images/logo/logo.svg"
-              alt="Cendralis"
+              alt="Alipato"
               className="h-10 md:h-12 w-auto object-contain transition-opacity duration-300 group-hover:opacity-90"
             />
-            <span className="sr-only">Cendralis</span>
+            <span className="sr-only">Alipato</span>
           </a>
           <p className="text-xs font-light text-muted max-w-xs leading-relaxed">
-            Cendralis is a digital growth and IT solutions partner building web,
+            Alipato is a digital growth and IT solutions partner building web,
             SEO/AEO, AI agents and automation for SMBs.
           </p>
         </div>
@@ -121,7 +121,7 @@ export default function Contact() {
         </div>
 
         <div className="col-span-1 md:col-span-4 mt-8 flex flex-col md:flex-row justify-between items-start md:items-center text-xs font-light text-muted/70 gap-4">
-          <p>© 2026 Cendralis. All rights reserved.</p>
+          <p>© 2026 Alipato. All rights reserved.</p>
           <div className="flex gap-6">
             <a href="#" className="hover:text-fg/80 transition-colors">
               Privacy Policy

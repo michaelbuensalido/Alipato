@@ -4,7 +4,7 @@ import ProjectCard from "@/components/ProjectCard";
 import Contact from "@/components/Contact";
 import { projects } from "@/lib/projects";
 
-export const metadata: Metadata = { title: "All Projects | Cendralis" };
+export const metadata: Metadata = { title: "All Projects | Alipato" };
 
 export default function ProjectsPage() {
   return (

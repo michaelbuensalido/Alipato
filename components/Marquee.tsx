@@ -3,7 +3,7 @@ const g1 = "text-accent";
 const g2 = "text-flame";
 
 const items = [
-  { text: "Cendralis", gradient: g1 },
+  { text: "Alipato", gradient: g1 },
   { text: "Digital Growth", gradient: "" },
   { text: "IT Solutions", gradient: g2 },
   { text: "Local SEO & AEO", gradient: "" },
