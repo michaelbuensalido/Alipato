@@ -23,7 +23,7 @@ export const projects = [
     arrowHover: "group-hover:text-accent",
   },
   {
-    title: "Kroma Studio",
+    title: "Linea Architects",
     category: "Portfolio Website",
     image: "/images/interior.png",
     wrapper: "",
@@ -33,7 +33,7 @@ export const projects = [
     arrowHover: "group-hover:text-accent",
   },
   {
-    title: "Vanguard Logistics",
+    title: "Electria",
     category: "Business Website",
     image: "/images/electric.png",
     wrapper: "md:mt-24",

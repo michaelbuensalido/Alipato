@@ -27,11 +27,18 @@ const steps = [
 
 export default function Process() {
   return (
-    <section id="process" className="py-24 px-6 md:px-12 border-b border-line/50 scroll-mt-16">
+    <section
+      id="process"
+      className="py-24 px-6 md:px-12 border-b border-line/50 scroll-mt-16"
+    >
       <div className="max-w-7xl mx-auto">
         <div className="flex items-end justify-between mb-16">
-          <h2 className="text-3xl md:text-5xl font-medium tracking-tight">How We Work</h2>
-          <span className="text-sm font-light text-muted hidden md:block">(04 Steps)</span>
+          <h2 className="text-3xl md:text-5xl font-medium tracking-tight">
+            How We Work
+          </h2>
+          <span className="text-sm font-light text-muted hidden md:block">
+            (04 Steps)
+          </span>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -42,9 +49,13 @@ export default function Process() {
             >
               <span className="text-sm font-light text-accent">{s.step}</span>
               <div>
-                <h3 className="text-xl font-medium tracking-tight mb-2">{s.title}</h3>
-                <p className="text-xs font-light text-accent mb-4">{s.time}</p>
-                <p className="text-sm font-light text-muted leading-relaxed">{s.text}</p>
+                <h3 className="text-xl font-medium tracking-tight mb-2">
+                  {s.title}
+                </h3>
+
+                <p className="text-sm font-light text-muted leading-relaxed">
+                  {s.text}
+                </p>
               </div>
             </div>
           ))}
