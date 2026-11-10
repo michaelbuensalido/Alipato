@@ -1,6 +1,47 @@
+"use client";
+
+import { useState } from "react";
 import Icon from "./Icon";
 
 export default function Contact() {
+  const [email, setEmail] = useState("");
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    const cleanEmail = email.trim();
+    if (!cleanEmail || !cleanEmail.includes("@")) {
+      setStatus("error");
+      setErrorMessage("Please enter a valid email address.");
+      return;
+    }
+
+    setStatus("loading");
+    setErrorMessage("");
+
+    try {
+      const res = await fetch("/api/audit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: cleanEmail }),
+      });
+
+      const data = await res.json();
+
+      if (res.ok && data.success) {
+        setStatus("success");
+        setEmail("");
+      } else {
+        setStatus("error");
+        setErrorMessage(data.error || "Failed to submit. Please contact us directly.");
+      }
+    } catch {
+      setStatus("error");
+      setErrorMessage("Something went wrong. Please reach out via WhatsApp or email directly.");
+    }
+  };
+
   return (
     <section
       id="contact"
@@ -49,19 +90,53 @@ export default function Contact() {
           <p className="text-sm font-light text-muted mb-4">
             Or leave your email for a 30-minute audit of your site and operations:
           </p>
-          <div className="relative flex items-center border-b border-line pb-2 focus-within:border-accent transition-colors duration-300">
-            <input
-              type="email"
-              placeholder="Email address or business website"
-              className="w-full bg-transparent outline-none text-sm font-light placeholder:text-muted/70 text-fg"
-            />
-            <button
-              aria-label="Submit"
-              className="absolute right-0 text-muted hover:text-accent transition-colors"
-            >
-              <Icon icon="solar:arrow-right-linear" size={20} />
-            </button>
-          </div>
+
+          {status === "success" ? (
+            <div className="p-4 rounded border border-accent/40 bg-accent/10 text-fg text-sm flex items-center justify-between gap-3 animate-[fadeIn_0.3s_ease-in-out]">
+              <div className="flex items-center gap-2">
+                <Icon icon="solar:check-circle-linear" size={20} className="text-accent shrink-0" />
+                <span>Thank you! We received your email and will reach out within 24 hours.</span>
+              </div>
+              <button
+                type="button"
+                onClick={() => setStatus("idle")}
+                className="text-xs text-muted hover:text-accent underline shrink-0 cursor-pointer"
+              >
+                Send another
+              </button>
+            </div>
+          ) : (
+            <form onSubmit={handleSubmit}>
+              <div className="relative flex items-center border-b border-line pb-2 focus-within:border-accent transition-colors duration-300">
+                <input
+                  type="email"
+                  required
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  disabled={status === "loading"}
+                  placeholder="Email address or business website"
+                  className="w-full bg-transparent outline-none text-sm font-light placeholder:text-muted/70 text-fg pr-8 disabled:opacity-50"
+                />
+                <button
+                  type="submit"
+                  disabled={status === "loading"}
+                  aria-label="Submit audit request"
+                  className="absolute right-0 text-muted hover:text-accent transition-colors disabled:opacity-50 cursor-pointer"
+                >
+                  {status === "loading" ? (
+                    <Icon icon="solar:refresh-linear" size={20} className="animate-spin text-accent" />
+                  ) : (
+                    <Icon icon="solar:arrow-right-linear" size={20} />
+                  )}
+                </button>
+              </div>
+              {status === "error" && (
+                <p className="text-xs text-flame mt-2 animate-[fadeIn_0.3s_ease-in-out]">
+                  {errorMessage}
+                </p>
+              )}
+            </form>
+          )}
         </div>
       </div>
 
