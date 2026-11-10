@@ -52,7 +52,7 @@ export default function Contact() {
           Ready to automate?
           <br />
           <a
-            href="mailto:michaelbuensalido15@gmail.com"
+            href="mailto:alipatosolutions@gmail.com"
             className="text-accent hover:opacity-80 transition-opacity duration-300 underline decoration-accent/50 underline-offset-8"
           >
             Book a free audit.
@@ -78,11 +78,11 @@ export default function Contact() {
             0995 743 1885
           </a>
           <a
-            href="mailto:michaelbuensalido15@gmail.com"
+            href="mailto:alipatosolutions@gmail.com"
             className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-line text-sm font-medium text-fg hover:border-accent hover:text-accent transition-colors duration-300"
           >
             <Icon icon="solar:letter-linear" size={18} />
-            michaelbuensalido15@gmail.com
+            alipatosolutions@gmail.com
           </a>
         </div>
 
@@ -165,11 +165,11 @@ export default function Contact() {
             Direct Contact
           </span>
           <a
-            href="mailto:michaelbuensalido15@gmail.com"
+            href="mailto:alipatosolutions@gmail.com"
             className="text-sm font-light text-fg/80 hover:text-accent transition-colors flex items-center gap-2 break-all"
           >
             <Icon icon="solar:letter-linear" size={16} className="text-accent shrink-0" />
-            michaelbuensalido15@gmail.com
+            alipatosolutions@gmail.com
           </a>
           <a
             href="tel:+639957431885"
