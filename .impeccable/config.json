@@ -11,6 +11,15 @@
         ],
         "createdAt": "2026-11-15T08:34:21.464Z",
         "reason": "Claude: bakeoff.html is internal comparison chrome, and Inter is Alipato's existing brand font from layout.tsx"
+      },
+      {
+        "rule": "design-system-font",
+        "value": "theme(\"fontfamily.display\")",
+        "files": [
+          "app/globals.css"
+        ],
+        "createdAt": "2026-11-15T09:42:41.501Z",
+        "reason": "Claude: Tailwind theme() reference resolving to Archivo (var(--font-archivo)), which DESIGN.md documents as the display face"
       }
     ]
   }
