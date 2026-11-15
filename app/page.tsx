@@ -12,14 +12,16 @@ export default function Home() {
   return (
     <>
       <Navbar />
-      <Hero />
-      <Services />
-      <Process />
-      <Pricing />
-      <Work />
-      <Agency />
-      <Marquee />
-      <Contact />
+      <main className="flex flex-grow flex-col">
+        <Hero />
+        <Services />
+        <Process />
+        <Pricing />
+        <Work />
+        <Agency />
+        <Marquee />
+        <Contact />
+      </main>
     </>
   );
 }

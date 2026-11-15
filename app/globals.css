@@ -2,13 +2,72 @@
 @tailwind components;
 @tailwind utilities;
 
-@keyframes marquee {
-  0% { transform: translateX(0%); }
-  100% { transform: translateX(-50%); }
-}
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(-10px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
-html { scroll-behavior: smooth; }
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 6rem;
+    color-scheme: dark;
+    scrollbar-color: theme("colors.line") theme("colors.canvas");
+  }
+  body {
+    caret-color: theme("colors.accent");
+  }
+  :focus-visible {
+    outline: 2px solid theme("colors.accent");
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+  ::-webkit-scrollbar { width: 10px; height: 10px; }
+  ::-webkit-scrollbar-track { background: theme("colors.canvas"); }
+  ::-webkit-scrollbar-thumb {
+    background: theme("colors.line");
+    border-radius: 999px;
+    border: 2px solid theme("colors.canvas");
+  }
+  ::-webkit-scrollbar-thumb:hover { background: theme("colors.muted"); }
+}
+
+@layer utilities {
+  /* Archivo at its condensed width: the display voice. */
+  .font-condensed {
+    font-family: theme("fontFamily.display");
+    font-stretch: 64%;
+    font-variation-settings: "wdth" 64;
+  }
+  .text-outline {
+    color: transparent;
+    -webkit-text-stroke: 1.5px theme("colors.fg / 92%");
+  }
+  .text-outline-accent {
+    color: transparent;
+    -webkit-text-stroke: 1.5px theme("colors.accent");
+  }
+  .text-molten {
+    color: transparent;
+    background-image: linear-gradient(
+      92deg,
+      theme("colors.accent") 10%,
+      theme("colors.blaze") 55%,
+      theme("colors.flame") 95%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+  }
+  .container-inline {
+    container-type: inline-size;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

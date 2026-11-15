@@ -118,175 +118,125 @@ const enterpriseTiers: Tier[] = [
   },
 ];
 
+function TierCard({ t, compact = false }: { t: Tier; compact?: boolean }) {
+  return (
+    <article
+      className={`group relative flex flex-col justify-between overflow-hidden rounded-[18px] p-7 transition-colors duration-300 md:p-10 ${
+        t.featured
+          ? "bg-surface shadow-[inset_0_0_0_1px_theme(colors.accent)]"
+          : "bg-surface/50 shadow-[inset_0_0_0_1px_theme(colors.line)] hover:bg-surface"
+      }`}
+    >
+      {t.featured && (
+        <span
+          aria-hidden="true"
+          className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full bg-[radial-gradient(circle,rgb(255_94_26/0.22),transparent_65%)]"
+        />
+      )}
+      <div className="relative">
+        <h3
+          className={`font-condensed text-balance font-semibold uppercase leading-[0.92] text-fg ${
+            compact ? "text-4xl md:text-[2.75rem]" : "text-4xl md:text-5xl"
+          }`}
+        >
+          {t.name}
+        </h3>
+        <p className="mt-3 text-sm text-accent">{t.subtitle}</p>
+        {t.badge && (
+          <span
+            className={`mt-5 inline-block whitespace-nowrap rounded-full px-3 py-1 text-xs font-medium ${
+              t.featured
+                ? "bg-accent text-canvas"
+                : "text-fg/80 shadow-[inset_0_0_0_1px_theme(colors.line)]"
+            }`}
+          >
+            {t.badge}
+          </span>
+        )}
+        <p className="mb-7 mt-5 border-b border-line pb-7 text-sm font-light leading-relaxed text-muted">
+          {t.bestFor}
+        </p>
+
+        <ul className="mb-10 space-y-3">
+          {t.features.map((f) => (
+            <li key={f} className="flex items-start gap-3 text-sm font-light leading-relaxed text-fg/85">
+              <Icon
+                icon="solar:check-circle-linear"
+                size={18}
+                className="mt-0.5 shrink-0 text-accent"
+              />
+              <span>{f}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div className="relative">
+        <p className="mb-4 text-xs text-muted">
+          <span className="uppercase tracking-[0.16em] text-accent">{t.tier}</span>
+          <span aria-hidden="true"> · </span>
+          {t.turnaround}
+        </p>
+        <a
+          href="/#contact"
+          className={`group/cta inline-flex h-12 w-full items-center justify-between rounded-full px-6 text-[15px] font-medium transition duration-150 ease-out active:scale-[.99] ${
+            t.featured
+              ? "bg-accent text-canvas hover:brightness-110"
+              : "text-fg shadow-[inset_0_0_0_1px_theme(colors.line)] hover:bg-accent hover:text-canvas hover:shadow-none"
+          }`}
+        >
+          <span>{t.cta}</span>
+          <Icon
+            icon="solar:arrow-right-up-linear"
+            size={17}
+            className="transition-transform duration-150 ease-out group-hover/cta:-translate-y-0.5 group-hover/cta:translate-x-0.5"
+          />
+        </a>
+      </div>
+    </article>
+  );
+}
+
 export default function Pricing() {
   return (
     <section
       id="pricing"
-      className="scroll-mt-16 py-24 px-6 md:px-12 border-b border-line/50 bg-canvas"
+      className="bg-canvas px-5 py-24 sm:px-8 md:py-32 lg:px-[6.25vw]"
     >
-      <div className="max-w-7xl mx-auto">
-        {/* Header */}
-        <div className="flex items-end justify-between mb-16">
-          <div>
-            <h2 className="text-3xl md:text-5xl font-medium tracking-tight mb-4">
-              Service Packages
-            </h2>
-            <p className="text-base font-light text-muted max-w-xl">
+      <div className="mx-auto max-w-[1440px]">
+        <div className="mb-16 grid grid-cols-1 items-end gap-8 md:mb-20 lg:grid-cols-12">
+          <h2 className="font-condensed text-[15vw] font-semibold uppercase leading-[0.84] tracking-[-0.01em] md:text-[10vw] lg:col-span-8 lg:text-[8.5rem]">
+            Service <span className="text-outline">Packages</span>
+          </h2>
+          <div className="lg:col-span-4 lg:pb-3">
+            <span className="mb-4 hidden text-sm text-muted md:block">(06 Tiers)</span>
+            <p className="max-w-xl text-base font-light leading-relaxed text-muted">
               Modular packages built on reusable blueprints—so your business
               gets full-stack digital infrastructure and AI automation deployed
               in days, not months.
             </p>
           </div>
-          <span className="text-sm font-light text-muted hidden md:block">
-            (06 Tiers)
-          </span>
         </div>
 
         {/* Core 4-Stage Value Ladder */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 gap-5 md:grid-cols-2 md:gap-6">
           {coreTiers.map((t) => (
-            <div
-              key={t.tier}
-              className={`group relative rounded-sm p-8 md:p-10 flex flex-col justify-between border transition-colors duration-300 ${
-                t.featured
-                  ? "border-accent bg-surface"
-                  : "border-line bg-surface/40 hover:border-accent/40 hover:bg-surface"
-              }`}
-            >
-              <div>
-                <div className="flex items-center justify-between gap-4 mb-6">
-                  <span className="text-xs font-light text-accent uppercase tracking-widest">
-                    {t.tier}
-                  </span>
-                  {t.badge && (
-                    <span
-                      className={`text-xs font-medium px-3 py-1 rounded-full ${
-                        t.featured
-                          ? "bg-accent text-canvas"
-                          : "border border-accent/30 text-accent"
-                      }`}
-                    >
-                      {t.badge}
-                    </span>
-                  )}
-                </div>
-
-                <h3 className="text-2xl md:text-3xl font-medium tracking-tight mb-1">
-                  {t.name}
-                </h3>
-                <p className="text-sm font-light text-accent mb-4">
-                  {t.subtitle}
-                </p>
-                <p className="text-sm font-light text-muted leading-relaxed pb-6 mb-6 border-b border-line">
-                  {t.bestFor}
-                </p>
-
-                <ul className="space-y-3 mb-8">
-                  {t.features.map((f) => (
-                    <li
-                      key={f}
-                      className="flex items-start gap-3 text-sm font-light text-fg/80"
-                    >
-                      <Icon
-                        icon="solar:check-circle-linear"
-                        size={18}
-                        className="text-accent shrink-0 mt-0.5"
-                      />
-                      <span>{f}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              <div>
-                <p className="text-xs font-light text-muted mb-4">
-                  {t.turnaround}
-                </p>
-                <a
-                  href="/#contact"
-                  className={`w-full inline-flex items-center justify-between px-6 py-3.5 rounded-full text-sm font-medium transition-colors duration-300 ${
-                    t.featured
-                      ? "bg-accent text-canvas hover:bg-fg"
-                      : "border border-line text-fg hover:border-accent hover:bg-accent hover:text-canvas"
-                  }`}
-                >
-                  <span>{t.cta}</span>
-                  <Icon icon="solar:arrow-right-up-linear" size={16} />
-                </a>
-              </div>
-            </div>
+            <TierCard key={t.tier} t={t} />
           ))}
         </div>
 
         {/* High-Ticket / Enterprise Packages */}
-        <div className="mt-12">
-          <div className="flex items-center justify-between mb-6">
-            <span className="text-xs font-light text-muted uppercase tracking-widest">
+        <div className="mt-20">
+          <div className="mb-6 flex flex-col justify-between gap-2 border-t border-line pt-6 sm:flex-row sm:items-center">
+            <span className="font-condensed text-2xl font-semibold uppercase text-fg md:text-3xl">
               Custom Apps &amp; Advisory
             </span>
-            <span className="text-xs font-light text-muted">
-              50% upfront · 50% on launch
-            </span>
+            <span className="text-sm text-muted">50% upfront · 50% on launch</span>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 gap-5 md:gap-6 lg:grid-cols-2">
             {enterpriseTiers.map((t) => (
-              <div
-                key={t.tier}
-                className="border border-line rounded-sm p-8 md:p-10 flex flex-col justify-between hover:border-accent/40 hover:bg-surface transition-colors duration-300"
-              >
-                <div>
-                  <div className="flex items-center justify-between gap-4 mb-4">
-                    <span className="text-xs font-light text-accent uppercase tracking-widest">
-                      {t.tier}
-                    </span>
-                    {t.badge && (
-                      <span className="text-xs font-light border border-line text-muted px-3 py-1 rounded-full">
-                        {t.badge}
-                      </span>
-                    )}
-                  </div>
-
-                  <h3 className="text-xl md:text-2xl font-medium tracking-tight mb-1">
-                    {t.name}
-                  </h3>
-                  <p className="text-sm font-light text-accent mb-4">
-                    {t.subtitle}
-                  </p>
-                  <p className="text-sm font-light text-muted leading-relaxed pb-6 mb-6 border-b border-line">
-                    {t.bestFor}
-                  </p>
-
-                  <ul className="space-y-2.5 mb-8">
-                    {t.features.map((f) => (
-                      <li
-                        key={f}
-                        className="flex items-start gap-3 text-sm font-light text-fg/80"
-                      >
-                        <Icon
-                          icon="solar:check-circle-linear"
-                          size={18}
-                          className="text-accent shrink-0 mt-0.5"
-                        />
-                        <span>{f}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
-                <div>
-                  <p className="text-xs font-light text-muted mb-4">
-                    {t.turnaround}
-                  </p>
-                  <a
-                    href="/#contact"
-                    className="w-full inline-flex items-center justify-between px-6 py-3.5 rounded-full border border-line text-sm font-medium hover:border-accent hover:bg-accent hover:text-canvas transition-colors duration-300"
-                  >
-                    <span>{t.cta}</span>
-                    <Icon icon="solar:arrow-right-up-linear" size={16} />
-                  </a>
-                </div>
-              </div>
+              <TierCard key={t.tier} t={t} compact />
             ))}
           </div>
         </div>

@@ -29,37 +29,40 @@ export default function Process() {
   return (
     <section
       id="process"
-      className="py-24 px-6 md:px-12 border-b border-line/50 scroll-mt-16"
+      className="border-y border-line/60 bg-surface px-5 py-24 sm:px-8 md:py-32 lg:px-[6.25vw]"
     >
-      <div className="max-w-7xl mx-auto">
-        <div className="flex items-end justify-between mb-16">
-          <h2 className="text-3xl md:text-5xl font-medium tracking-tight">
-            How We Work
+      <div className="mx-auto max-w-[1440px]">
+        <div className="mb-16 flex items-end justify-between gap-6 md:mb-24">
+          <h2 className="font-condensed text-[15vw] font-semibold uppercase leading-[0.84] tracking-[-0.01em] md:text-[10vw] lg:text-[8.5rem]">
+            How We <span className="text-outline">Work</span>
           </h2>
-          <span className="text-sm font-light text-muted hidden md:block">
-            (04 Steps)
-          </span>
+          <span className="hidden pb-3 text-sm text-muted md:block">(04 Steps)</span>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <ol className="relative grid grid-cols-1 gap-12 md:grid-cols-2 md:gap-x-10 md:gap-y-16 lg:grid-cols-4 lg:gap-8">
           {steps.map((s) => (
-            <div
-              key={s.step}
-              className="group border border-line rounded-sm p-8 flex flex-col gap-6 hover:border-accent/40 hover:bg-surface transition-colors duration-500"
-            >
-              <span className="text-sm font-light text-accent">{s.step}</span>
-              <div>
-                <h3 className="text-xl font-medium tracking-tight mb-2">
-                  {s.title}
-                </h3>
-
-                <p className="text-sm font-light text-muted leading-relaxed">
-                  {s.text}
-                </p>
+            <li key={s.step} className="group relative">
+              <span
+                aria-hidden="true"
+                className="font-condensed text-outline block text-[7.5rem] font-semibold leading-none transition-colors duration-500 group-hover:text-accent lg:text-[8rem]"
+              >
+                {s.step}
+              </span>
+              {/* Pipeline segment: the four steps read as one molten line. */}
+              <div aria-hidden="true" className="mt-5 flex items-center gap-3">
+                <span className="h-2.5 w-2.5 shrink-0 rounded-full bg-accent" />
+                <span className="h-px flex-1 bg-gradient-to-r from-accent/80 via-blaze/50 to-flame/20" />
               </div>
-            </div>
+              <h3 className="font-condensed mt-7 text-3xl font-semibold uppercase leading-[0.95] text-fg md:text-[2.15rem]">
+                <span className="sr-only">Step {s.step}: </span>
+                {s.title}
+              </h3>
+              <p className="mt-4 max-w-[38ch] text-base font-light leading-relaxed text-muted">
+                {s.text}
+              </p>
+            </li>
           ))}
-        </div>
+        </ol>
       </div>
     </section>
   );

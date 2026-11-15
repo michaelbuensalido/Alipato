@@ -1,77 +1,93 @@
 import Icon from "./Icon";
+import MoltenSphere from "./MoltenSphere";
+
+/*
+ * Desktop (lg+) is a fixed 1440×900 composition scaled to the stage width with
+ * container query units (1cqw = 14.4px at 1440). Below lg the same layers flow
+ * vertically and the sphere centres itself behind the headline.
+ */
+
+const headline =
+  "font-condensed whitespace-nowrap text-[20vw] font-semibold uppercase leading-[0.86] tracking-[-0.012em] md:text-[16vw] lg:text-[11.11cqw]";
 
 export default function Hero() {
   return (
-    <main className="flex-grow pt-32 md:pt-48 pb-24 px-6 md:px-12 flex flex-col justify-end min-h-screen border-b border-line/50 relative overflow-hidden">
-      {/* Ambient Radial Ember Glow */}
-      <div
-        aria-hidden="true"
-        className="absolute top-16 right-[-10%] md:top-1/4 md:right-1/4 w-[320px] h-[320px] md:w-[520px] md:h-[520px] rounded-full bg-gradient-to-tr from-accent/20 via-flame/15 to-violet/10 blur-3xl pointer-events-none"
-      />
+    <section id="top" className="relative overflow-hidden border-b border-line/60 bg-canvas">
+      <div className="container-inline relative isolate mx-auto flex min-h-[100svh] flex-col px-5 pb-10 pt-32 sm:px-8 md:min-h-0 md:pb-14 md:pt-36 lg:block lg:aspect-[1440/900] lg:min-h-0 lg:w-[min(100%,max(160svh,1024px))] lg:p-0">
+        <MoltenSphere />
 
-      {/* Abstract Geometric Background Element (Visible on Mobile & Desktop) */}
-      <div
-        aria-hidden="true"
-        className="absolute top-20 -right-16 sm:right-0 md:top-1/4 md:right-1/4 w-[310px] h-[310px] sm:w-[380px] sm:h-[380px] md:w-[500px] md:h-[500px] opacity-45 md:opacity-35 pointer-events-none text-accent drop-shadow-[0_0_20px_rgba(255,94,26,0.55)] animate-[spin_60s_linear_infinite] mix-blend-screen"
-      >
-        <svg
-          viewBox="0 0 200 200"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="0.6"
+        {/* Headline: a solid copy under the sphere and an outline copy over it. */}
+        <div
+          data-sphere-anchor
+          className="relative lg:absolute lg:left-[6.25cqw] lg:top-[14.86cqw]"
         >
-          <circle cx="100" cy="100" r="90" />
-          <circle cx="100" cy="100" r="70" />
-          <circle cx="100" cy="100" r="50" strokeDasharray="2 4" />
-          <circle cx="100" cy="100" r="30" className="text-flame" stroke="currentColor" strokeOpacity="0.6" />
-          <polygon points="100 10 178 55 178 145 100 190 22 145 22 55" />
-          <polygon points="100 30 161 65 161 135 100 170 39 135 39 65" />
-          <line x1="10" y1="100" x2="190" y2="100" />
-          <line x1="100" y1="10" x2="100" y2="190" />
-          <line x1="36.36" y1="36.36" x2="163.64" y2="163.64" />
-          <line x1="36.36" y1="163.64" x2="163.64" y2="36.36" />
-        </svg>
-      </div>
-
-      {/* Secondary Counter-Rotating Crimson Outer Ring */}
-      <div
-        aria-hidden="true"
-        className="absolute top-12 -right-24 sm:-right-8 md:top-[20%] md:right-[22%] w-[370px] h-[370px] sm:w-[440px] sm:h-[440px] md:w-[580px] md:h-[580px] opacity-25 pointer-events-none text-flame animate-[spin_90s_linear_infinite_reverse]"
-      >
-        <svg viewBox="0 0 200 200" fill="none" stroke="currentColor" strokeWidth="0.4">
-          <circle cx="100" cy="100" r="96" strokeDasharray="1 6" />
-          <circle cx="100" cy="100" r="82" strokeDasharray="8 12" />
-        </svg>
-      </div>
-
-      <div className="max-w-7xl mx-auto w-full relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end">
-          <div className="lg:col-span-9">
-            <h1 className="text-5xl md:text-7xl lg:text-8xl font-medium tracking-tighter leading-[0.9] uppercase">
-              Digital Growth,
-              <br />
-              Engineered
-              <br />
-              <span className="text-accent">For Scale</span>
-            </h1>
+          <h1 className={`${headline} relative z-[2] animate-rise`}>
+            <span className="block">
+              <span className="text-fg">Digital</span>{" "}
+              <span className="block text-outline lg:inline">Growth,</span>
+            </span>
+            <span className="block text-fg">Engineered</span>
+            <span className="block">
+              <span className="text-molten">For Scale</span>
+            </span>
+          </h1>
+          <div aria-hidden="true" className={`${headline} pointer-events-none absolute inset-0 z-[4] animate-rise`}>
+            <span className="block">
+              <span className="text-outline">Digital</span>{" "}
+              <span className="block text-outline lg:inline">Growth,</span>
+            </span>
+            <span className="block text-fg">Engineered</span>
+            <span className="block">
+              <span className="text-outline-accent">For Scale</span>
+            </span>
           </div>
-          <div className="lg:col-span-3 flex flex-col gap-6 pb-2 lg:pb-4">
-            <p className="text-base md:text-lg font-light text-muted leading-relaxed">
-              A digital growth and IT solutions partner building automated client
-              acquisition and operations pipelines for SMEs.
-            </p>
+        </div>
+
+        <div
+          className="relative z-[6] mt-auto max-w-md pt-16 animate-rise [animation-delay:.15s] md:mt-14 md:pt-0 lg:absolute lg:right-[4.86cqw] lg:top-[39.86cqw] lg:mt-0 lg:w-[26.67cqw] lg:max-w-none lg:pt-0"
+        >
+          <p className="max-w-[340px] text-base leading-[1.55] text-muted lg:text-[clamp(15px,1.18cqw,19px)] lg:max-w-[23.6cqw]">
+            A digital growth and IT solutions partner building automated client
+            acquisition and operations pipelines for SMEs.
+          </p>
+          <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3 lg:gap-x-5 min-[1400px]:flex-nowrap">
+            <a
+              href="#contact"
+              className="group inline-flex h-[46px] items-center gap-2.5 whitespace-nowrap rounded-full bg-accent pl-[22px] pr-5 text-[15px] font-medium text-canvas transition duration-150 ease-out hover:-translate-y-px hover:brightness-110 active:translate-y-px active:scale-[.985]"
+            >
+              Book a Free Audit
+              <Icon
+                icon="solar:arrow-right-up-linear"
+                size={17}
+                className="transition-transform duration-150 ease-out group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+              />
+            </a>
             <a
               href="#services"
-              className="inline-flex items-center gap-3 text-sm font-medium hover:text-accent transition-colors duration-300 group w-fit"
+              className="group relative inline-flex h-[46px] items-center gap-2 whitespace-nowrap text-[15px] font-medium text-fg"
             >
-              Explore our services
-              <span className="w-8 h-8 rounded-full border border-line flex items-center justify-center group-hover:bg-accent group-hover:border-accent group-hover:text-canvas transition-all duration-300">
-                <Icon icon="solar:arrow-down-linear" size={16} />
+              <span className="border-b border-fg/35 pb-0.5 transition-colors duration-150 group-hover:border-accent">
+                Explore our services
               </span>
+              <Icon
+                icon="solar:arrow-down-linear"
+                size={17}
+                className="transition-transform duration-150 ease-out group-hover:translate-y-0.5"
+              />
             </a>
           </div>
         </div>
+
+        <div
+          aria-hidden="true"
+          className="relative z-[6] mt-12 hidden flex-wrap gap-x-12 gap-y-2 border-t border-fg/10 pt-4 text-xs uppercase tracking-[0.14em] text-fg/45 md:flex lg:absolute lg:bottom-[3.61cqw] lg:left-[6.67cqw] lg:right-[4.86cqw] lg:mt-0 lg:gap-x-[3.9cqw]"
+        >
+          <span>Client acquisition</span>
+          <span>Operations pipelines</span>
+          <span>IT solutions</span>
+          <span className="lg:ml-auto">Built for SMEs</span>
+        </div>
       </div>
-    </main>
+    </section>
   );
 }

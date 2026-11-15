@@ -1,4 +1,3 @@
-const base = "text-5xl md:text-7xl font-medium tracking-tighter mx-8 uppercase";
 const g1 = "text-accent";
 const g2 = "text-flame";
 
@@ -11,15 +10,31 @@ const items = [
   { text: "Digital Consulting", gradient: "" },
 ];
 
-export default function Marquee() {
+function Row({ hidden = false }: { hidden?: boolean }) {
   return (
-    <div className="py-12 border-b border-line/50 overflow-hidden relative flex items-center bg-canvas">
-      <div className="flex whitespace-nowrap animate-[marquee_20s_linear_infinite] opacity-50">
-        {items.map((item, i) => (
-          <span key={i} className={`${base} ${item.gradient}`}>
+    <div aria-hidden={hidden || undefined} className="flex shrink-0 items-center">
+      {items.map((item, i) => (
+        <span key={i} className="flex items-center">
+          <span
+            className={`font-condensed px-6 text-[18vw] font-semibold uppercase leading-none md:px-10 md:text-[9rem] ${
+              item.gradient || "text-outline"
+            }`}
+          >
             {item.text}
           </span>
-        ))}
+          <span aria-hidden="true" className="h-3 w-3 rounded-full bg-accent/70 md:h-4 md:w-4" />
+        </span>
+      ))}
+    </div>
+  );
+}
+
+export default function Marquee() {
+  return (
+    <div className="relative flex overflow-hidden border-y border-line/60 bg-canvas py-10 md:py-14">
+      <div className="flex animate-marquee whitespace-nowrap motion-reduce:animate-none">
+        <Row />
+        <Row hidden />
       </div>
     </div>
   );

@@ -1,11 +1,19 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Archivo, Inter } from "next/font/google";
 import "./globals.css";
 
 const inter = Inter({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600"],
   variable: "--font-inter",
+  display: "swap",
+});
+
+// Display face: Archivo's width axis gives the condensed uppercase headlines.
+const archivo = Archivo({
+  subsets: ["latin"],
+  axes: ["wdth"],
+  variable: "--font-archivo",
   display: "swap",
 });
 
@@ -59,7 +67,7 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${inter.variable} bg-canvas text-fg font-sans antialiased selection:bg-accent selection:text-canvas flex flex-col min-h-screen`}
+        className={`${inter.variable} ${archivo.variable} bg-canvas text-fg font-sans antialiased selection:bg-accent selection:text-canvas flex flex-col min-h-screen`}
       >
         {children}
       </body>

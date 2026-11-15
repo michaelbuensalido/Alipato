@@ -45,163 +45,178 @@ export default function Contact() {
   return (
     <section
       id="contact"
-      className="pt-32 pb-12 px-6 md:px-12 flex flex-col justify-between flex-grow relative overflow-hidden"
+      className="relative flex flex-grow flex-col justify-between overflow-hidden bg-canvas px-5 pb-10 pt-28 sm:px-8 md:pt-36 lg:px-[6.25vw]"
     >
-      <div className="max-w-7xl mx-auto w-full mb-24 text-center md:text-left relative z-10">
-        <h2 className="text-4xl md:text-6xl lg:text-8xl font-medium tracking-tighter mb-8 leading-tight">
-          Ready to automate?
+      {/* Ember heat rising from below the footer line. */}
+      <span
+        aria-hidden="true"
+        className="pointer-events-none absolute -bottom-64 left-1/2 h-[560px] w-[1100px] -translate-x-1/2 rounded-full bg-[radial-gradient(closest-side,rgb(255_94_26/0.16),rgb(242_19_104/0.05)_55%,transparent)]"
+      />
+
+      <div className="relative z-10 mx-auto mb-24 w-full max-w-[1440px]">
+        <h2 className="font-condensed mb-12 text-[16vw] font-semibold uppercase leading-[0.86] tracking-[-0.01em] md:text-[11vw] lg:text-[10.5rem]">
+          <span className="text-outline">Ready to automate?</span>
           <br />
           <a
             href="mailto:alipatosolutions@gmail.com"
-            className="text-accent hover:opacity-80 transition-opacity duration-300 underline decoration-accent/50 underline-offset-8"
+            className="text-accent decoration-accent/50 decoration-2 underline-offset-[0.12em] transition-opacity duration-300 hover:underline hover:opacity-90"
           >
             Book a free audit.
           </a>
         </h2>
 
-        {/* Direct Contact Buttons */}
-        <div className="flex flex-wrap items-center justify-center md:justify-start gap-4 mb-12">
-          <a
-            href="https://wa.me/639957431885"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-accent text-canvas text-sm font-medium hover:bg-fg transition-colors duration-300"
-          >
-            <Icon icon="solar:chat-round-dots-linear" size={18} />
-            Chat on WhatsApp
-          </a>
-          <a
-            href="tel:+639957431885"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-line text-sm font-medium text-fg hover:border-accent hover:text-accent transition-colors duration-300"
-          >
-            <Icon icon="solar:phone-calling-linear" size={18} />
-            0995 743 1885
-          </a>
-          <a
-            href="mailto:alipatosolutions@gmail.com"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-line text-sm font-medium text-fg hover:border-accent hover:text-accent transition-colors duration-300"
-          >
-            <Icon icon="solar:letter-linear" size={18} />
-            alipatosolutions@gmail.com
-          </a>
-        </div>
+        <div className="grid grid-cols-1 gap-12 lg:grid-cols-12">
+          {/* Direct Contact Buttons */}
+          <div className="flex flex-wrap items-center gap-3 lg:col-span-7">
+            <a
+              href="https://wa.me/639957431885"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex h-12 items-center gap-2 rounded-full bg-accent px-6 text-[15px] font-medium text-canvas transition duration-150 ease-out hover:-translate-y-px hover:brightness-110 active:translate-y-px"
+            >
+              <Icon icon="solar:chat-round-dots-linear" size={18} />
+              Chat on WhatsApp
+            </a>
+            <a
+              href="tel:+639957431885"
+              className="inline-flex h-12 items-center gap-2 rounded-full px-6 text-[15px] font-medium text-fg shadow-[inset_0_0_0_1px_theme(colors.line)] transition duration-150 hover:text-accent hover:shadow-[inset_0_0_0_1px_theme(colors.accent)]"
+            >
+              <Icon icon="solar:phone-calling-linear" size={18} />
+              0995 743 1885
+            </a>
+            <a
+              href="mailto:alipatosolutions@gmail.com"
+              className="inline-flex h-12 items-center gap-2 rounded-full px-6 text-[15px] font-medium text-fg shadow-[inset_0_0_0_1px_theme(colors.line)] transition duration-150 hover:text-accent hover:shadow-[inset_0_0_0_1px_theme(colors.accent)]"
+            >
+              <Icon icon="solar:letter-linear" size={18} />
+              alipatosolutions@gmail.com
+            </a>
+          </div>
 
-        <div className="mt-8 max-w-md mx-auto md:mx-0">
-          <p className="text-sm font-light text-muted mb-4">
-            Or leave your email for a 30-minute audit of your site and operations:
-          </p>
+          <div className="w-full max-w-md lg:col-span-5 lg:justify-self-end">
+            <label htmlFor="audit-email" className="mb-4 block text-sm font-light text-muted">
+              Or leave your email for a 30-minute audit of your site and operations:
+            </label>
 
-          {status === "success" ? (
-            <div className="p-4 rounded border border-accent/40 bg-accent/10 text-fg text-sm flex items-center justify-between gap-3 animate-[fadeIn_0.3s_ease-in-out]">
-              <div className="flex items-center gap-2">
-                <Icon icon="solar:check-circle-linear" size={20} className="text-accent shrink-0" />
-                <span>Thank you! We received your email and will reach out within 24 hours.</span>
-              </div>
-              <button
-                type="button"
-                onClick={() => setStatus("idle")}
-                className="text-xs text-muted hover:text-accent underline shrink-0 cursor-pointer"
+            {status === "success" ? (
+              <div
+                role="status"
+                className="flex animate-[fadeIn_0.3s_ease-in-out] items-center justify-between gap-3 rounded-[14px] bg-accent/10 p-4 text-sm text-fg shadow-[inset_0_0_0_1px_rgb(255_94_26/0.4)]"
               >
-                Send another
-              </button>
-            </div>
-          ) : (
-            <form onSubmit={handleSubmit}>
-              <div className="relative flex items-center border-b border-line pb-2 focus-within:border-accent transition-colors duration-300">
-                <input
-                  type="email"
-                  required
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  disabled={status === "loading"}
-                  placeholder="Email address or business website"
-                  className="w-full bg-transparent outline-none text-sm font-light placeholder:text-muted/70 text-fg pr-8 disabled:opacity-50"
-                />
+                <div className="flex items-center gap-2">
+                  <Icon icon="solar:check-circle-linear" size={20} className="shrink-0 text-accent" />
+                  <span>Thank you! We received your email and will reach out within 24 hours.</span>
+                </div>
                 <button
-                  type="submit"
-                  disabled={status === "loading"}
-                  aria-label="Submit audit request"
-                  className="absolute right-0 text-muted hover:text-accent transition-colors disabled:opacity-50 cursor-pointer"
+                  type="button"
+                  onClick={() => setStatus("idle")}
+                  className="shrink-0 cursor-pointer text-xs text-muted underline hover:text-accent"
                 >
-                  {status === "loading" ? (
-                    <Icon icon="solar:refresh-linear" size={20} className="animate-spin text-accent" />
-                  ) : (
-                    <Icon icon="solar:arrow-right-linear" size={20} />
-                  )}
+                  Send another
                 </button>
               </div>
-              {status === "error" && (
-                <p className="text-xs text-flame mt-2 animate-[fadeIn_0.3s_ease-in-out]">
-                  {errorMessage}
-                </p>
-              )}
-            </form>
-          )}
+            ) : (
+              <form onSubmit={handleSubmit}>
+                <div className="relative flex items-center border-b border-line pb-3 transition-colors duration-300 focus-within:border-accent">
+                  <input
+                    id="audit-email"
+                    type="email"
+                    required
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    disabled={status === "loading"}
+                    placeholder="Email address or business website"
+                    aria-invalid={status === "error" || undefined}
+                    aria-describedby={status === "error" ? "audit-error" : undefined}
+                    className="w-full bg-transparent pr-12 text-base font-light text-fg outline-none placeholder:text-muted/80 disabled:opacity-50"
+                  />
+                  <button
+                    type="submit"
+                    disabled={status === "loading"}
+                    aria-label="Submit audit request"
+                    className="absolute right-0 flex h-10 w-10 cursor-pointer items-center justify-center rounded-full bg-accent text-canvas transition duration-150 hover:brightness-110 disabled:opacity-50"
+                  >
+                    {status === "loading" ? (
+                      <Icon icon="solar:refresh-linear" size={18} className="animate-spin" />
+                    ) : (
+                      <Icon icon="solar:arrow-right-linear" size={18} />
+                    )}
+                  </button>
+                </div>
+                {status === "error" && (
+                  <p
+                    id="audit-error"
+                    role="alert"
+                    className="mt-2 animate-[fadeIn_0.3s_ease-in-out] text-xs text-flame"
+                  >
+                    {errorMessage}
+                  </p>
+                )}
+              </form>
+            )}
+          </div>
         </div>
       </div>
 
-      <footer className="max-w-7xl mx-auto w-full pt-12 border-t border-line/50 grid grid-cols-1 md:grid-cols-4 gap-8 relative z-10">
+      <footer className="relative z-10 mx-auto grid w-full max-w-[1440px] grid-cols-1 gap-10 border-t border-line pt-12 md:grid-cols-4 md:gap-8">
         <div className="col-span-1 md:col-span-2">
-          <a
-            href="/"
-            className="inline-block mb-4 group"
-          >
+          <a href="/" className="group mb-4 inline-block">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src="/images/logo/logo.svg"
               alt="Alipato"
-              className="h-10 md:h-12 w-auto object-contain transition-opacity duration-300 group-hover:opacity-90"
+              className="h-10 w-auto object-contain transition-opacity duration-300 group-hover:opacity-90 md:h-12"
             />
             <span className="sr-only">Alipato</span>
           </a>
-          <p className="text-xs font-light text-muted max-w-xs leading-relaxed">
+          <p className="max-w-xs text-sm font-light leading-relaxed text-muted">
             Alipato is a digital growth and IT solutions partner building web,
             SEO/AEO, AI agents and automation for SMBs.
           </p>
         </div>
 
         <div className="flex flex-col gap-3">
-          <span className="text-xs font-medium text-muted tracking-wider uppercase mb-2">
+          <span className="mb-2 text-xs uppercase tracking-[0.16em] text-muted">
             Direct Contact
           </span>
           <a
             href="mailto:alipatosolutions@gmail.com"
-            className="text-sm font-light text-fg/80 hover:text-accent transition-colors flex items-center gap-2 break-all"
+            className="flex items-center gap-2 break-all text-sm font-light text-fg/85 transition-colors hover:text-accent"
           >
-            <Icon icon="solar:letter-linear" size={16} className="text-accent shrink-0" />
+            <Icon icon="solar:letter-linear" size={16} className="shrink-0 text-accent" />
             alipatosolutions@gmail.com
           </a>
           <a
             href="tel:+639957431885"
-            className="text-sm font-light text-fg/80 hover:text-accent transition-colors flex items-center gap-2"
+            className="flex items-center gap-2 text-sm font-light text-fg/85 transition-colors hover:text-accent"
           >
-            <Icon icon="solar:phone-linear" size={16} className="text-accent shrink-0" />
+            <Icon icon="solar:phone-linear" size={16} className="shrink-0 text-accent" />
             +63 995 743 1885
           </a>
         </div>
 
         <div className="flex flex-col gap-3">
-          <span className="text-xs font-medium text-muted tracking-wider uppercase mb-2">
+          <span className="mb-2 text-xs uppercase tracking-[0.16em] text-muted">
             Instant Messaging
           </span>
           <a
             href="https://wa.me/639957431885"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-sm font-light text-fg/80 hover:text-accent transition-colors flex items-center gap-2"
+            className="flex items-center gap-2 text-sm font-light text-fg/85 transition-colors hover:text-accent"
           >
-            <Icon icon="solar:chat-round-dots-linear" size={16} className="text-accent shrink-0" />
+            <Icon icon="solar:chat-round-dots-linear" size={16} className="shrink-0 text-accent" />
             WhatsApp (+63 995 743 1885)
           </a>
         </div>
 
-        <div className="col-span-1 md:col-span-4 mt-8 flex flex-col md:flex-row justify-between items-start md:items-center text-xs font-light text-muted/70 gap-4">
+        <div className="col-span-1 mt-6 flex flex-col items-start justify-between gap-4 text-xs font-light text-muted md:col-span-4 md:flex-row md:items-center">
           <p>© 2026 Alipato. All rights reserved.</p>
           <div className="flex gap-6">
-            <a href="#" className="hover:text-fg/80 transition-colors">
+            <a href="#" className="transition-colors hover:text-fg">
               Privacy Policy
             </a>
-            <a href="#" className="hover:text-fg/80 transition-colors">
+            <a href="#" className="transition-colors hover:text-fg">
               Terms of Service
             </a>
           </div>

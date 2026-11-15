@@ -10,8 +10,6 @@ const services = [
       "Supabase",
     ],
     meta: "Sites live in under 7 days · Apps in 3–4 weeks",
-    iconBox: "group-hover:text-accent group-hover:border-accent/30",
-    tag: "border-accent/20 text-accent",
     svg: (
       <>
         <rect x="3" y="3" width="12" height="12" transform="rotate(45 9 9)" />
@@ -31,8 +29,6 @@ const services = [
       "AI citation tracking",
     ],
     meta: "One-time setup or monthly retainer",
-    iconBox: "group-hover:text-flame group-hover:border-flame/30",
-    tag: "border-flame/30 text-flame",
     svg: (
       <>
         <circle cx="12" cy="12" r="10" />
@@ -53,8 +49,6 @@ const services = [
       "Google Sheets / CRM",
     ],
     meta: "Agent deployed in under 90 minutes",
-    iconBox: "group-hover:text-violet group-hover:border-violet/30",
-    tag: "border-violet/30 text-violet",
     svg: (
       <>
         <polygon points="12 2 21 7 21 17 12 22 3 17 3 7" />
@@ -74,9 +68,6 @@ const services = [
       "A productized AI Workflow & Digital Audit for growing businesses with disjointed tools and manual bottlenecks. We interview your team and deliver a clear Digital Transformation Roadmap you can act on.",
     tags: ["1-day audit", "15-page roadmap", "Fractional CTO"],
     meta: "Fixed scope, no open-ended hourly billing",
-    iconBox: "group-hover:text-flame group-hover:border-flame/30",
-    tag: "border-flame/30 text-flame",
-    border: "border-b",
     svg: (
       <>
         <path d="M2 12C2 12 7 4 12 4C17 4 22 12 22 12C22 12 17 20 12 20C7 20 2 12 2 12Z" />
@@ -93,70 +84,57 @@ export default function Services() {
   return (
     <section
       id="services"
-      className="py-24 px-6 md:px-12 border-b border-line/50 bg-canvas"
+      className="bg-canvas px-5 py-24 sm:px-8 md:py-32 lg:px-[6.25vw]"
     >
-      <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
-          <div className="lg:col-span-4">
-            <div className="sticky top-32">
-              <h2 className="text-3xl md:text-5xl font-medium tracking-tight mb-6">
-                Services
-              </h2>
-            </div>
-          </div>
+      <div className="mx-auto max-w-[1440px]">
+        <h2 className="font-condensed text-outline mb-14 text-[22vw] font-semibold uppercase leading-[0.82] tracking-[-0.01em] md:mb-20 md:text-[15vw] lg:text-[11rem]">
+          Services
+        </h2>
 
-          <div className="lg:col-span-8 flex flex-col w-full">
-            {services.map((s, i) => (
-              <div
-                key={s.title}
-                className={`group border-t border-line py-8 md:py-12 ${s.border ?? ""}`}
-              >
-                <div className="flex items-start gap-6 md:gap-8">
-                  <div
-                    className={`hidden sm:flex shrink-0 w-14 h-14 rounded-full border border-line items-center justify-center text-muted/70 ${s.iconBox} group-hover:scale-110 transition-all duration-500`}
+        <ul className="border-b border-line">
+          {services.map((s) => (
+            <li
+              key={s.title}
+              className="group grid grid-cols-1 gap-6 border-t border-line py-10 md:py-14 lg:grid-cols-12 lg:gap-10"
+            >
+              <div className="flex items-start gap-5 lg:col-span-5">
+                <span className="mt-1 flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-line text-muted transition-colors duration-300 group-hover:border-accent/50 group-hover:text-accent md:h-14 md:w-14">
+                  <svg
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="0.9"
+                    aria-hidden="true"
                   >
-                    <svg
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="0.75"
-                    >
-                      {s.svg}
-                    </svg>
-                  </div>
-                  <div>
-                    <span className="text-xs font-light text-muted/70 tracking-widest">
-                      0{i + 1}
-                    </span>
-                    <h3 className="text-2xl md:text-4xl font-medium tracking-tight text-fg/80 group-hover:text-fg transition-colors duration-300 mb-4">
-                      {s.title}
-                    </h3>
-                    <div className="hidden group-hover:block animate-[fadeIn_0.3s_ease-in-out]">
-                      <p className="text-base text-muted font-light max-w-xl">
-                        {s.description}
-                      </p>
-                      <div className="flex flex-wrap gap-2 mt-6">
-                        {s.tags.map((t) => (
-                          <span
-                            key={t}
-                            className={`text-xs font-light border rounded-full px-3 py-1 ${s.tag}`}
-                          >
-                            {t}
-                          </span>
-                        ))}
-                      </div>
-                      <p className="text-xs font-light text-muted mt-4">
-                        {s.meta}
-                      </p>
-                    </div>
-                  </div>
-                </div>
+                    {s.svg}
+                  </svg>
+                </span>
+                <h3 className="font-condensed text-balance text-4xl font-semibold uppercase leading-[0.92] text-fg md:text-5xl lg:text-6xl">
+                  {s.title}
+                </h3>
               </div>
-            ))}
-          </div>
-        </div>
+
+              <div className="md:pl-[4.75rem] lg:col-span-7 lg:pl-0 lg:pt-2">
+                <p className="max-w-[60ch] text-base font-light leading-relaxed text-muted md:text-lg">
+                  {s.description}
+                </p>
+                <ul className="mt-6 flex flex-wrap gap-2">
+                  {s.tags.map((t) => (
+                    <li
+                      key={t}
+                      className="rounded-full border border-line px-3 py-1 text-xs text-fg/80 transition-colors duration-300 group-hover:border-accent/30"
+                    >
+                      {t}
+                    </li>
+                  ))}
+                </ul>
+                <p className="mt-5 text-sm text-accent">{s.meta}</p>
+              </div>
+            </li>
+          ))}
+        </ul>
       </div>
     </section>
   );

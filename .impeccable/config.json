@@ -1,0 +1,17 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "overused-font",
+        "value": "inter",
+        "files": [
+          "hero-bakeoff/bakeoff.html"
+        ],
+        "createdAt": "2026-11-15T08:34:21.464Z",
+        "reason": "Claude: bakeoff.html is internal comparison chrome, and Inter is Alipato's existing brand font from layout.tsx"
+      }
+    ]
+  }
+}
