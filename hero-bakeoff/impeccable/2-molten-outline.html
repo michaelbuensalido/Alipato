@@ -1,0 +1,278 @@
+<!doctype html>
+<!--
+  Alipato hero / 2 — Molten Outline
+  Display + UI face: Archivo (variable, wght 500–700). A grotesk with flat, engineered
+  caps that hold up as hairline outlines (-webkit-text-stroke) as well as solid fills;
+  Inter's caps go soft and generic at 150px. Archivo stays as the body face for one voice.
+  Tokens map to tailwind.config.ts: canvas, surface, line, fg, muted, accent, flame.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Alipato Molten Outline</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --canvas: #040305;       /* canvas pushed to near-pure black */
+    --surface: #0E0B10;
+    --line: #221C27;
+    --fg: #F8F5FA;
+    --muted: #A9A0B5;
+    --accent: #FF5E1A;
+    --flame: #F21368;
+    --s: 0.5;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: var(--canvas); color: var(--fg); overflow-x: hidden; }
+  body { font-family: "Archivo", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+  ::selection { background: var(--accent); color: #0A0503; }
+  a { color: inherit; text-decoration: none; }
+  a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+  .viewport { position: relative; width: 100%; height: calc(900px * var(--s)); overflow: hidden; }
+  .stage { position: absolute; left: 0; top: 0; width: 1440px; height: 900px; transform: scale(var(--s)); transform-origin: 0 0; background: var(--canvas); overflow: hidden; isolation: isolate; }
+
+  /* nav: one floating bar */
+  .nav { position: absolute; z-index: 20; left: 24px; right: 24px; top: 20px; height: 68px; padding: 0 12px 0 22px; display: flex; align-items: center; justify-content: space-between;
+    background: rgba(14,11,16,.86); border: 1px solid var(--line); border-radius: 18px; }
+  .logo img { height: 44px; width: auto; display: block; }
+  .links { position: absolute; left: 50%; transform: translateX(-50%); display: flex; gap: 34px; }
+  .links a { font-size: 14px; font-weight: 400; color: rgba(248,245,250,.72); transition: color .25s ease; }
+  .links a:hover { color: var(--fg); }
+
+  .btn { display: inline-flex; align-items: center; gap: 10px; height: 46px; padding: 0 20px; border-radius: 12px; font-size: 15px; font-weight: 600; letter-spacing: -0.005em;
+    transition: background-color .25s ease, color .25s ease, transform .25s cubic-bezier(.2,.8,.2,1); }
+  .btn svg { width: 17px; height: 17px; transition: transform .35s cubic-bezier(.2,.8,.2,1); }
+  .btn-accent { background: var(--accent); color: #0A0503; }
+  .btn-accent:hover { background: #FF7436; }
+  .btn-accent:hover svg { transform: translate(2px, -2px); }
+  .btn-white { background: var(--fg); color: #0A0503; }
+  .btn-white:hover { background: #fff; }
+  .btn-white:hover svg { transform: translateY(2px); }
+  .btn:active { transform: translateY(1px); }
+  .nav .btn { height: 44px; font-size: 14px; }
+
+  /* the flowing contour lines */
+  .contours { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
+  .contours path { fill: none; stroke-width: 1; vector-effect: non-scaling-stroke; }
+  .contours .w { stroke: rgba(248,245,250,.2); }
+  .contours .o { stroke: rgba(255,94,26,.42); stroke-dasharray: 3 7; animation: flow 18s linear infinite; }
+  @keyframes flow { to { stroke-dashoffset: -200; } }
+
+  /* the headline, set twice: fills behind the molten sphere, hairlines in front of it */
+  .hl { position: absolute; left: 70px; top: 176px; margin: 0; font-weight: 600; font-size: 154px; line-height: .86; letter-spacing: -0.035em; text-transform: uppercase; white-space: nowrap; font-stretch: 96%; }
+  .hl span { display: block; }
+  .hl-back { z-index: 2; color: var(--fg); }
+  .hl-back .ol { color: transparent; }
+  .hl-back .acc { color: var(--accent); }
+  .hl-front { z-index: 4; color: transparent; -webkit-text-stroke: 1.3px rgba(248,245,250,.92); pointer-events: none; }
+  .hl-front .acc { -webkit-text-stroke-color: var(--accent); }
+  #back { position: absolute; inset: 0; z-index: 3; pointer-events: none; }
+  #front { position: absolute; inset: 0; z-index: 5; pointer-events: none; }
+
+  /* right column */
+  .side { position: absolute; z-index: 6; left: 1094px; width: 290px; top: 498px; }
+  .side p { margin: 0; font-size: 17px; line-height: 1.55; font-weight: 400; color: var(--muted); }
+  .side .ctas { margin-top: 32px; display: flex; flex-direction: column; align-items: flex-start; gap: 12px; }
+
+  /* small micro labels on the frame */
+  .micro { position: absolute; z-index: 6; font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: rgba(169,160,181,.92); font-weight: 500; }
+  .micro b { color: var(--accent); font-weight: 600; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .contours .o { animation: none; }
+    .btn, .btn svg { transition: none; }
+  }
+</style>
+</head>
+<body>
+<div class="viewport">
+  <div class="stage">
+    <svg class="contours" viewBox="0 0 1440 900" preserveAspectRatio="none" aria-hidden="true">
+      <path class="w" d="M-20 742 C 160 640, 330 800, 520 770 S 860 610, 1010 700 S 1240 880, 1460 760"/>
+      <path class="w" d="M1010 -10 C 1050 110, 1180 120, 1250 220 S 1160 400, 1290 450 S 1440 400, 1462 360"/>
+      <path class="w" d="M1260 120 C 1300 70, 1390 90, 1384 160 S 1290 230, 1262 190 S 1240 140, 1260 120 Z"/>
+      <path class="w" d="M-10 150 C 60 120, 120 200, 60 260 S -40 300, -10 380"/>
+      <path class="o" d="M-20 820 C 260 760, 420 880, 700 820 S 1100 700, 1460 830"/>
+      <path class="o" d="M1080 470 C 1030 400, 1060 320, 1150 300 S 1330 330, 1400 250"/>
+    </svg>
+
+    <nav class="nav" aria-label="Primary">
+      <a class="logo" href="#"><img src="../assets/logo.svg" alt="Alipato"></a>
+      <div class="links">
+        <a href="#services">Services</a>
+        <a href="#process">Process</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#work">Work</a>
+        <a href="#agency">About</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <a class="btn btn-accent" href="#contact">Book a Free Audit
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+    </nav>
+
+    <h1 class="hl hl-back">
+      <span>Digital</span>
+      <span>Grow<span class="ol" style="display:inline">th,</span></span>
+      <span><span class="ol" style="display:inline">Engi</span>neered</span>
+      <span class="acc">For Scale</span>
+    </h1>
+    <canvas id="back" aria-hidden="true"></canvas>
+    <div class="hl hl-front" aria-hidden="true">
+      <span>Digital</span>
+      <span>Growth,</span>
+      <span>Engineered</span>
+      <span class="acc">For Scale</span>
+    </div>
+    <canvas id="front" aria-hidden="true"></canvas>
+
+    <div class="side">
+      <p>A digital growth and IT solutions partner building automated client acquisition and operations pipelines for SMEs.</p>
+      <div class="ctas">
+        <a class="btn btn-accent" href="#contact">Book a Free Audit
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+        <a class="btn btn-white" href="#services">Explore our services
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg></a>
+      </div>
+    </div>
+
+    <div class="micro" style="left:72px;top:842px">Acquisition <b>/</b> Operations <b>/</b> Automation</div>
+  </div>
+</div>
+
+<script>
+(() => {
+  const W = 1440, H = 900;
+  const CX = 738, CY = 452, R = 252;
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const root = document.documentElement;
+  const backC = document.getElementById('back'), frontC = document.getElementById('front');
+  let ratio = 1;
+
+  function fit() {
+    const s = root.clientWidth / 1440;
+    root.style.setProperty('--s', s);
+    ratio = Math.min(2, Math.max(1, s * (window.devicePixelRatio || 1)));
+    for (const c of [backC, frontC]) { c.width = Math.round(W * ratio); c.height = Math.round(H * ratio); }
+    if (reduce) draw(4.7);
+  }
+
+  const rotY = (p, a) => { const c = Math.cos(a), s = Math.sin(a); return [c * p[0] + s * p[2], p[1], -s * p[0] + c * p[2]]; };
+  const rotX = (p, a) => { const c = Math.cos(a), s = Math.sin(a); return [p[0], c * p[1] - s * p[2], s * p[1] + c * p[2]]; };
+  const rotZ = (p, a) => { const c = Math.cos(a), s = Math.sin(a); return [c * p[0] - s * p[1], s * p[0] + c * p[1], p[2]]; };
+  const F = 5;
+  const proj = p => { const k = F / (F - p[2]); return [CX + p[0] * R * k, CY - p[1] * R * k]; };
+  const norm = v => { const l = Math.hypot(v[0], v[1], v[2]) || 1; return [v[0] / l, v[1] / l, v[2] / l]; };
+  const L = norm([-0.55, 0.7, 0.65]);
+  const mix = (a, b, t) => a.map((v, i) => v + (b[i] - v) * t);
+  const ORANGE = [255, 94, 26], CRIMSON = [242, 19, 104], HOT = [255, 196, 150];
+
+  const NLAT = 20, NLON = 40, NU = 200, NV = 3;
+
+  function draw(t) {
+    const quads = [];
+    const spin = t * 0.14, tilt = -0.32;
+
+    // molten sphere: a lat/long wire shell whose radius ripples like a cooling pour
+    const grid = [];
+    for (let i = 0; i <= NLAT; i++) {
+      const row = [], th = -Math.PI / 2 + i / NLAT * Math.PI;
+      for (let j = 0; j <= NLON; j++) {
+        const ph = j / NLON * Math.PI * 2;
+        const r = 1 + 0.03 * Math.sin(4 * ph + 3 * th + t * 0.9) + 0.022 * Math.sin(5 * th - t * 0.7) * Math.cos(2 * ph + t * 0.3);
+        let p = [r * Math.cos(th) * Math.cos(ph), r * Math.sin(th), r * Math.cos(th) * Math.sin(ph)];
+        p = rotX(rotY(p, spin), tilt);
+        row.push(p);
+      }
+      grid.push(row);
+    }
+    for (let i = 0; i < NLAT; i++) for (let j = 0; j < NLON; j++) {
+      const a = grid[i][j], b = grid[i][j + 1], c = grid[i + 1][j + 1], d = grid[i + 1][j];
+      const n = norm([(a[0] + b[0] + c[0] + d[0]), (a[1] + b[1] + c[1] + d[1]), (a[2] + b[2] + c[2] + d[2])]);
+      const z = (a[2] + b[2] + c[2] + d[2]) / 4;
+      if (n[2] < -0.2) continue;   // fully hidden behind the near hemisphere
+      quads.push({ z, pts: [a, b, c, d], n, v: i / NLAT, kind: "s" });
+    }
+
+    // the ribbon: a twisted band orbiting the sphere and cutting through the type
+    const band = [];
+    for (let i = 0; i <= NU; i++) {
+      const u = i / NU * Math.PI * 2;
+      const c = [1.72 * Math.cos(u), 0.16 * Math.sin(2 * u + t * 0.6), 1.72 * Math.sin(u)];
+      const tw = u * 1.5 + t * 0.35;
+      const radial = [Math.cos(u), 0, Math.sin(u)];
+      const off = [radial[0] * Math.sin(tw), Math.cos(tw), radial[2] * Math.sin(tw)];
+      const row = [];
+      for (let k = 0; k <= NV; k++) {
+        const w = (k / NV - 0.5) * 0.34;
+        let p = [c[0] + off[0] * w, c[1] + off[1] * w, c[2] + off[2] * w];
+        p = rotX(rotZ(rotY(p, -t * 0.09 + 0.6), 0.36), -0.22);
+        row.push(p);
+      }
+      band.push(row);
+    }
+    for (let i = 0; i < NU; i++) for (let k = 0; k < NV; k++) {
+      const a = band[i][k], b = band[i + 1][k], c = band[i + 1][k + 1], d = band[i][k + 1];
+      const e1 = [b[0] - a[0], b[1] - a[1], b[2] - a[2]], e2 = [d[0] - a[0], d[1] - a[1], d[2] - a[2]];
+      let n = norm([e1[1] * e2[2] - e1[2] * e2[1], e1[2] * e2[0] - e1[0] * e2[2], e1[0] * e2[1] - e1[1] * e2[0]]);
+      if (n[2] < 0) n = n.map(x => -x);
+      quads.push({ z: (a[2] + b[2] + c[2] + d[2]) / 4, pts: [a, b, c, d], n, v: i / NU, k, kind: 'r' });
+    }
+    quads.sort((p, q) => p.z - q.z);
+
+    const bctx = backC.getContext('2d'), fctx = frontC.getContext('2d');
+    for (const ctx of [bctx, fctx]) { ctx.setTransform(ratio, 0, 0, ratio, 0, 0); ctx.clearRect(0, 0, W, H); ctx.lineJoin = 'round'; }
+
+    // ember underglow behind the sphere
+    const g = bctx.createRadialGradient(CX + 40, CY + 60, R * 0.6, CX + 40, CY + 60, R * 1.9);
+    g.addColorStop(0, 'rgba(242,19,104,.16)'); g.addColorStop(.5, 'rgba(255,94,26,.07)'); g.addColorStop(1, 'rgba(255,94,26,0)');
+    bctx.fillStyle = g; bctx.fillRect(0, 0, W, H);
+
+    for (const q of quads) {
+      const P = q.pts.map(proj);
+      const lam = Math.max(0, q.n[0] * L[0] + q.n[1] * L[1] + q.n[2] * L[2]);
+      const rim = Math.pow(1 - Math.abs(q.n[2]), 2.4);
+      const depth = Math.min(1, Math.max(0, (q.z + 1.8) / 3.4));
+      const draws = [bctx];
+      if (q.kind === 'r' && q.z > 1.15) draws.push(fctx);     // nearest stretch of ribbon rides over the hairlines
+      // liquid-metal body: near black, warmed by a key light and a hot rim
+      const hue = mix(ORANGE, CRIMSON, q.kind === "s" ? Math.pow(1 - q.v, 1.7) : (0.5 + 0.5 * Math.sin(q.v * Math.PI * 4)));
+      const spec = Math.pow(lam, 12);
+      let body = mix([5, 3, 6], hue, 0.03 + lam * 0.09 + rim * 0.2);
+      body = mix(body, HOT, spec * 0.22);
+      const lineA = (0.22 + 0.78 * depth) * (q.kind === 's' ? 0.9 : 1);
+      const lineC = mix(hue, HOT, spec * 0.6 + rim * 0.15);
+      for (const ctx of draws) {
+        ctx.beginPath();
+        ctx.moveTo(P[0][0], P[0][1]); for (let m = 1; m < 4; m++) ctx.lineTo(P[m][0], P[m][1]); ctx.closePath();
+        ctx.fillStyle = `rgb(${body[0] | 0},${body[1] | 0},${body[2] | 0})`;
+        ctx.fill();
+        ctx.strokeStyle = `rgba(${lineC[0] | 0},${lineC[1] | 0},${lineC[2] | 0},${lineA})`;
+        ctx.lineWidth = q.kind === 'r' ? (q.k === 0 ? 1.6 : 0.8) : 1.05;
+        if (q.kind === 'r') {   // ribbon: long rails plus a light rung every few steps
+          ctx.beginPath(); ctx.moveTo(P[0][0], P[0][1]); ctx.lineTo(P[1][0], P[1][1]);
+          if (q.k === NV - 1) { ctx.moveTo(P[3][0], P[3][1]); ctx.lineTo(P[2][0], P[2][1]); }
+          if (Math.round(q.v * NU) % 3 === 0) { ctx.moveTo(P[0][0], P[0][1]); ctx.lineTo(P[3][0], P[3][1]); }
+          ctx.stroke();
+        } else ctx.stroke();
+      }
+    }
+  }
+
+  let raf = 0, running = true;
+  const loop = ms => { draw(ms / 1000 + 2.2); if (running) raf = requestAnimationFrame(loop); };
+  document.addEventListener('visibilitychange', () => {
+    if (reduce) return;
+    running = !document.hidden; cancelAnimationFrame(raf); if (running) raf = requestAnimationFrame(loop);
+  });
+  addEventListener('resize', fit);
+  document.fonts && document.fonts.ready.then(() => {});
+  fit();
+  if (!reduce) raf = requestAnimationFrame(loop);
+})();
+</script>
+</body>
+</html>

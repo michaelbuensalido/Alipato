@@ -1,0 +1,312 @@
+<!doctype html>
+<!--
+  Alipato hero, version 3: Chiaroscuro Still (taste-skill build)
+  Type: Inter Tight at weight 300 for the large sentence-case headline: the tighter cut of the
+  site's own Inter, so the brand voice carries over while the light weight gives the quiet,
+  film-title feel the brief asks for. Inter (300/400/500) for UI and the card.
+  The visual: a wireframe sphere drawn on canvas and lit per wire segment. Each segment's
+  brightness = venetian-blind mask (diagonal bands in screen space) x beam envelope x Lambert
+  term against a light from upper left. The same blind mask lights the back wall, and the
+  sphere's cast shadow is cut out of the wall's light, so object and room share one beam.
+  Canvas deepened to a warm black (#0B0907); muted is a warm grey, no violet.
+-->
+<html lang="en" data-type="software">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Alipato Chiaroscuro Still</title>
+<meta name="description" content="A digital growth and IT solutions partner building automated client acquisition and operations pipelines for SMEs.">
+<meta name="theme-color" content="#0B0907">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@200;300&family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --canvas:#0B0907; --surface:#16120F; --line:#2B241F; --fg:#F5F1EC; --muted:#A8A097;
+    --accent:#FF5E1A; --flame:#F21368;
+    --m-in:150ms; --m-out:120ms; --m-press:90ms; --ease:cubic-bezier(.22,1,.36,1);
+    font-family:"Inter",ui-sans-serif,system-ui,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%;background:#060504;color:var(--fg);overflow:hidden}
+  body{display:flex;align-items:center;justify-content:center;-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+  .frame{position:relative;overflow:hidden;flex:none}
+  .stage{position:absolute;left:0;top:0;width:1440px;height:900px;transform-origin:0 0;background:var(--canvas);overflow:hidden}
+  canvas{position:absolute;pointer-events:none}
+  #room{left:0;top:0;width:1440px;height:900px}
+  #obj{left:500px;top:-10px;width:800px;height:800px}
+  .shade{position:absolute;inset:0;pointer-events:none;
+    background:
+      linear-gradient(180deg, rgba(5,4,3,0) 55%, rgba(5,4,3,.72) 100%),
+      radial-gradient(130% 110% at 62% 34%, transparent 40%, rgba(4,3,2,.7) 82%, rgba(3,2,2,.92) 100%)}
+  .grain{position:absolute;inset:-60px;pointer-events:none;opacity:.10;mix-blend-mode:overlay;background-size:220px 220px;animation:grain .9s steps(5) infinite}
+  @keyframes grain{0%{transform:translate(0,0)}20%{transform:translate(-14px,9px)}40%{transform:translate(11px,-17px)}60%{transform:translate(-7px,21px)}80%{transform:translate(19px,4px)}100%{transform:translate(0,0)}}
+
+  /* glass nav */
+  .nav{position:absolute;left:28px;right:28px;top:24px;height:72px;padding:0 12px 0 22px;border-radius:20px;z-index:10;
+    display:flex;align-items:center;justify-content:space-between;
+    background:rgba(24,19,16,.38);backdrop-filter:blur(18px) saturate(120%);-webkit-backdrop-filter:blur(18px) saturate(120%);
+    box-shadow:inset 0 0 0 1px rgba(255,255,255,.08),inset 0 1px 0 rgba(255,255,255,.06)}
+  .logo img{display:block;height:44px;width:auto}
+  .links{display:flex;gap:32px;position:absolute;left:50%;transform:translateX(-50%)}
+  .links a{position:relative;font-size:14px;font-weight:400;color:rgba(245,241,236,.72);padding:10px 0;transition:color var(--m-out)}
+  .links a::after{content:"";position:absolute;left:0;right:0;bottom:5px;height:1px;background:currentColor;transform:scaleX(0);transform-origin:left;transition:transform var(--m-out) var(--ease)}
+  .links a:hover,.links a:focus-visible{color:var(--fg);transition-duration:var(--m-in)}
+  .links a:hover::after,.links a:focus-visible::after{transform:scaleX(1);transition-duration:var(--m-in)}
+
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;height:48px;padding:0 20px 0 22px;border-radius:999px;
+    font:500 14.5px/1 "Inter",sans-serif;white-space:nowrap;background:var(--accent);color:#170904;
+    transition:transform var(--m-out) var(--ease),background var(--m-out)}
+  .btn svg{width:16px;height:16px;transition:transform var(--m-in) var(--ease)}
+  @media (hover:hover) and (pointer:fine){
+    .btn:hover{transform:translateY(-1px);background:#EC5A1D;transition-duration:var(--m-in)}
+    .btn:hover svg{transform:translate(2px,-2px)}
+  }
+  .btn:active{transform:translateY(1px) scale(.985);transition-duration:var(--m-press)}
+  :focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+
+  /* headline, lower left */
+  .copy{position:absolute;left:72px;bottom:72px;z-index:6}
+  .eyebrow{display:flex;align-items:center;gap:12px;font-size:13px;color:rgba(245,241,236,.62)}
+  .eyebrow .pill{font-size:12px;padding:6px 12px;border-radius:999px;color:#FFD9C4;background:rgba(255,94,26,.12);box-shadow:inset 0 0 0 1px rgba(255,94,26,.32)}
+  h1{margin-top:26px;font:300 100px/0.98 "Inter Tight",sans-serif;letter-spacing:-.045em;color:var(--fg)}
+  h1 em{font-style:normal;color:#FF7A3D}
+  .tlink{display:inline-flex;align-items:center;gap:10px;margin-top:34px;height:44px;font-size:15px;color:var(--fg);position:relative}
+  .tlink::after{content:"";position:absolute;left:0;right:26px;bottom:9px;height:1px;background:rgba(245,241,236,.32);transition:background var(--m-out)}
+  .tlink svg{width:16px;height:16px;transition:transform var(--m-in) var(--ease)}
+  .tlink:hover::after{background:var(--accent)}
+  .tlink:hover svg{transform:translateY(2px)}
+  .tlink:active{transform:scale(.985)}
+
+  /* floating audit card, lower right */
+  .card{position:absolute;right:72px;bottom:72px;width:340px;padding:22px 22px 22px;border-radius:24px;z-index:6;
+    background:rgba(26,21,18,.42);backdrop-filter:blur(22px) saturate(125%);-webkit-backdrop-filter:blur(22px) saturate(125%);
+    box-shadow:inset 0 0 0 1px rgba(255,255,255,.09),inset 0 1px 0 rgba(255,255,255,.08),0 30px 60px -20px rgba(0,0,0,.6)}
+  .card .top{display:flex;align-items:center;justify-content:space-between}
+  .card .label{display:inline-flex;align-items:center;gap:8px;font-size:12.5px;font-weight:500;color:#FFD9C4;padding:6px 12px 6px 10px;border-radius:999px;background:rgba(255,94,26,.12);box-shadow:inset 0 0 0 1px rgba(255,94,26,.32)}
+  .card .label i{width:6px;height:6px;border-radius:50%;background:var(--accent);display:block}
+  .card .idx{font:400 11px/1 "JetBrains Mono",monospace;letter-spacing:.08em;color:rgba(245,241,236,.55)}
+  .card p{margin-top:18px;font-size:15.5px;line-height:1.55;font-weight:300;color:#D9D1C9}
+  .card .rule{height:1px;background:rgba(255,255,255,.08);margin:20px 0 18px}
+  .card .btn{width:100%;justify-content:space-between;padding:0 18px 0 22px}
+
+  .mark{position:absolute;right:76px;top:136px;z-index:6;font:400 11px/1.7 "JetBrains Mono",monospace;letter-spacing:.08em;color:rgba(245,241,236,.5);text-align:right;text-transform:uppercase}
+
+  [data-enter]{opacity:0;transform:translateY(14px);animation:enter 1.1s var(--ease) forwards;animation-delay:var(--dl,0s)}
+  .reveal{opacity:0;animation:fade 2.2s ease-out forwards}
+  @keyframes enter{to{opacity:1;transform:none}}
+  @keyframes fade{to{opacity:1}}
+  @media (prefers-reduced-motion:reduce){
+    *{animation:none!important;transition:none!important}
+    [data-enter],.reveal{opacity:1;transform:none}
+  }
+</style>
+</head>
+<body>
+<div class="frame" id="frame">
+<div class="stage" id="stage">
+  <canvas id="room" class="reveal" aria-hidden="true"></canvas>
+  <canvas id="obj" class="reveal" aria-hidden="true"></canvas>
+  <div class="shade" aria-hidden="true"></div>
+  <div class="grain" id="grain" aria-hidden="true"></div>
+
+  <header class="nav">
+    <a class="logo" href="#top" aria-label="Alipato home"><img src="../assets/logo.svg" alt="Alipato" height="44"></a>
+    <nav class="links" aria-label="Primary">
+      <a href="#services">Services</a><a href="#process">Process</a><a href="#pricing">Pricing</a>
+      <a href="#work">Work</a><a href="#agency">About</a><a href="#contact">Contact</a>
+    </nav>
+    <a class="btn" href="#contact">Book a Free Audit
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
+    </a>
+  </header>
+
+  <p class="mark" aria-hidden="true">Still 03<br>Ember / wire / light</p>
+
+  <main class="copy" id="top" data-enter>
+    <p class="eyebrow"><span class="pill">Digital growth &amp; IT solutions</span></p>
+    <h1>Digital growth,<br>engineered <em>for scale</em></h1>
+    <a class="tlink" href="#services">Explore our services
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg>
+    </a>
+  </main>
+
+  <aside class="card" data-enter style="--dl:.25s" aria-label="Free audit">
+    <div class="top"><span class="label"><i></i>Free Audit</span><span class="idx">01</span></div>
+    <p>A digital growth and IT solutions partner building automated client acquisition and operations pipelines for SMEs.</p>
+    <div class="rule"></div>
+    <a class="btn" href="#contact">Book a Free Audit
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
+    </a>
+  </aside>
+</div>
+</div>
+
+<script>
+(() => {
+  const frame = document.getElementById('frame'), stage = document.getElementById('stage');
+  function fit(){ const s = Math.min(innerWidth / 1440, innerHeight / 900);
+    stage.style.transform = `scale(${s})`; frame.style.width = 1440 * s + 'px'; frame.style.height = 900 * s + 'px'; }
+  addEventListener('resize', fit); fit();
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const DPR = Math.min(2, Math.max(1, devicePixelRatio || 1));
+  const setup = (c, w, h) => { c.width = w * DPR; c.height = h * DPR; const x = c.getContext('2d'); x.setTransform(DPR,0,0,DPR,0,0); return x; };
+
+  // ---------- the beam: one window, venetian blinds, light from upper left ----------
+  const ANG = 33 * Math.PI / 180, PER = 86, DUTY = .5;
+  const smooth = (a, b, x) => { const t = Math.max(0, Math.min(1, (x - a) / (b - a))); return t * t * (3 - 2 * t); };
+  function beam(sx, sy){ // the window's patch of light, strongest upper-centre, falling off to the edges
+    const dx = (sx - 820) / 760, dy = (sy - 300) / 520;
+    return Math.max(0, 1 - Math.pow(dx * dx + dy * dy, .85));
+  }
+  const OBJ = {x: 500, y: -10, s: 800};
+  const C = [900, 390], R = 252;          // sphere centre and radius in stage px
+  const SH = [C[0] + 120, C[1] + 86];      // its cast shadow on the wall
+
+  // all the slats of light as one path, in stage px shifted by (ox, oy)
+  function slats(ox, oy){
+    const P = new Path2D(), c = Math.cos(ANG), sn = Math.sin(ANG);
+    for (let k = -30; k <= 30; k++){
+      const y0 = k * PER + PER * .05, y1 = k * PER + PER * DUTY;
+      const pt = (u, v) => [720 + u * c - v * sn - ox, 450 + u * sn + v * c - oy];
+      const a = pt(-1800, y0), b = pt(1800, y0), d = pt(1800, y1), e = pt(-1800, y1);
+      P.moveTo(a[0], a[1]); P.lineTo(b[0], b[1]); P.lineTo(d[0], d[1]); P.lineTo(e[0], e[1]); P.closePath();
+    }
+    return P;
+  }
+  // ---------- room ----------
+  (function room(){
+    const W = 1440, H = 900, ctx = setup(document.getElementById('room'), W, H);
+    let g = ctx.createLinearGradient(0, 0, W, H);
+    g.addColorStop(0, '#15100C'); g.addColorStop(.6, '#0D0A08'); g.addColorStop(1, '#070605');
+    ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+    // light layer, built offscreen: slats first, then weighted by the window's falloff
+    const off = document.createElement('canvas'); off.width = W * DPR; off.height = H * DPR;
+    const o = off.getContext('2d'); o.setTransform(DPR,0,0,DPR,0,0);
+    o.filter = 'blur(4px)'; o.fillStyle = 'rgb(255,186,140)'; o.fill(slats(0, 0)); o.filter = 'none';
+    // the window's patch: an ellipse laid along the beam, centred behind the sphere
+    o.globalCompositeOperation = 'destination-in';
+    o.save(); o.translate(820, 330); o.rotate(ANG - .2); o.scale(1.55, 1);
+    g = o.createRadialGradient(0, 0, 0, 0, 0, 470);
+    g.addColorStop(0, 'rgba(0,0,0,.30)'); g.addColorStop(.5, 'rgba(0,0,0,.17)'); g.addColorStop(.85, 'rgba(0,0,0,.04)'); g.addColorStop(1, 'rgba(0,0,0,0)');
+    o.fillStyle = g; o.fillRect(-1200, -1200, 2400, 2400); o.restore();
+    // the sphere's shadow on the wall
+    o.globalCompositeOperation = 'destination-out'; o.filter = 'blur(26px)';
+    o.beginPath(); o.ellipse(SH[0], SH[1], R * 1.02, R * .98, -.2, 0, 7); o.fillStyle = 'rgba(0,0,0,.85)'; o.fill();
+    o.filter = 'none';
+    ctx.globalCompositeOperation = 'lighter'; ctx.drawImage(off, 0, 0, W, H);
+    ctx.globalCompositeOperation = 'source-over';
+  })();
+  // the grid of slats rotated at ANG about the centre: align the sphere's mask with it
+  const cA = Math.cos(ANG), sA = Math.sin(ANG);
+  function mask(sx, sy){
+    const y = -(sx - 720) * sA + (sy - 450) * cA;           // coordinate across the slats
+    const f = ((y / PER) % 1 + 1) % 1;
+    return smooth(.03, .09, f) * (1 - smooth(DUTY - .06, DUTY, f));
+  }
+
+  // ---------- sphere ----------
+  const ctx = setup(document.getElementById('obj'), OBJ.s, OBJ.s);
+  const lines = [];
+  const add = (pts, k) => lines.push({pts, ...k});
+  const SHELL = {w: 1.35, gain: 1, shell: true};
+  for (let i = 1; i < 14; i++){ const ph = -Math.PI / 2 + i * Math.PI / 14, r = Math.cos(ph), y = Math.sin(ph), pts = [];
+    for (let k = 0; k <= 150; k++){ const t = k / 150 * Math.PI * 2; pts.push([r * Math.cos(t), y, r * Math.sin(t)]); } add(pts, SHELL); }
+  for (let j = 0; j < 14; j++){ const a = j / 14 * Math.PI, c = Math.cos(a), s = Math.sin(a), pts = [];
+    for (let k = 0; k <= 150; k++){ const t = k / 150 * Math.PI * 2; pts.push([Math.cos(t) * c, Math.sin(t), Math.cos(t) * s]); } add(pts, SHELL); }
+  // nested hexagons (old mark) on the equator
+  [[1, 0], [.72, Math.PI / 6]].forEach(([r, off]) => { const pts = [];
+    for (let k = 0; k < 6; k++) for (let q = 0; q < 18; q++){ const a = off + k / 6 * Math.PI * 2, b = off + (k + 1) / 6 * Math.PI * 2, u = q / 18;
+      pts.push([(Math.cos(a) * (1 - u) + Math.cos(b) * u) * r, 0, (Math.sin(a) * (1 - u) + Math.sin(b) * u) * r]); }
+    pts.push(pts[0]); add(pts, {w: 1.5, gain: 1.1}); });
+  // geodesic core and spokes
+  const p = (1 + Math.sqrt(5)) / 2, ri = .44;
+  const V = [[-1,p,0],[1,p,0],[-1,-p,0],[1,-p,0],[0,-1,p],[0,1,p],[0,-1,-p],[0,1,-p],[p,0,-1],[p,0,1],[-p,0,-1],[-p,0,1]].map(v => { const n = Math.hypot(...v); return v.map(c => c / n * ri); });
+  for (let a = 0; a < 12; a++) for (let b = a + 1; b < 12; b++){
+    if (Math.hypot(V[a][0]-V[b][0], V[a][1]-V[b][1], V[a][2]-V[b][2]) < ri * 1.1){ const pts = []; for (let q = 0; q <= 12; q++) pts.push(V[a].map((v, i) => v + (V[b][i] - v) * q / 12)); add(pts, {w: 1.1, gain: .9}); }
+  }
+  V.forEach(v => { const pts = []; for (let q = 0; q <= 14; q++){ const s = 1 + (1 / ri - 1) * q / 14; pts.push(v.map(c => c * s)); } add(pts, {w: .8, gain: .6}); });
+  // a thin orbit ring, dashed
+  { const pts = []; for (let k = 0; k <= 240; k++){ const t = k / 240 * Math.PI * 2; pts.push([Math.cos(t) * 1.2, 0, Math.sin(t) * 1.2]); } add(pts, {w: 1, gain: .8, dash: [2, 3], orbit: true}); }
+
+  const Ld = (() => { const v = [-.72, -.58, .5], n = Math.hypot(...v); return v.map(c => c / n); })();
+  const D = 4.6, NB = 18;
+  const COLS = Array.from({length: NB}, (_, i) => { const b = (i + .5) / NB;
+    const dim = [52, 36, 28], mid = [255, 94, 26], hi = [255, 222, 190];
+    const c = b < .45 ? dim.map((v, k) => v + (mid[k] - v) * (b / .45)) : mid.map((v, k) => v + (hi[k] - v) * ((b - .45) / .55));
+    return `rgba(${c[0] | 0},${c[1] | 0},${c[2] | 0},${(.32 + b * .68).toFixed(3)})`; });
+  function rot(v, ay, ax, az){
+    let [x, y, z] = v, c, s;
+    if (az){ c = Math.cos(az); s = Math.sin(az); [x, y] = [x * c - y * s, x * s + y * c]; }
+    c = Math.cos(ay); s = Math.sin(ay); [x, z] = [x * c + z * s, -x * s + z * c];
+    c = Math.cos(ax); s = Math.sin(ax); [y, z] = [y * c - z * s, y * s + z * c];
+    return [x, y, z];
+  }
+  const lc = [C[0] - OBJ.x, C[1] - OBJ.y];
+  // the sphere's matte body, lit only where the slats fall on it (prerendered once: light and form are fixed)
+  const bodyC = document.createElement('canvas'); bodyC.width = bodyC.height = OBJ.s * DPR;
+  (function(){ const b = bodyC.getContext('2d'); b.setTransform(DPR,0,0,DPR,0,0);
+    const hx = lc[0] + Ld[0] * R * .55, hy = lc[1] + Ld[1] * R * .55;
+    const g = b.createRadialGradient(hx, hy, 0, lc[0] + R * .08, lc[1] + R * .08, R * 1.08);
+    g.addColorStop(0, 'rgba(255,200,160,.55)'); g.addColorStop(.35, 'rgba(255,120,60,.22)'); g.addColorStop(.75, 'rgba(120,50,20,.05)'); g.addColorStop(1, 'rgba(0,0,0,0)');
+    b.fillStyle = g; b.beginPath(); b.arc(lc[0], lc[1], R, 0, 7); b.fill();
+    b.globalCompositeOperation = 'destination-in'; b.filter = 'blur(1.5px)'; b.fillStyle = '#000'; b.fill(slats(OBJ.x, OBJ.y)); b.filter = 'none';
+    // a rim so the ball's edge holds in the dark half
+    b.globalCompositeOperation = 'source-over';
+    b.strokeStyle = 'rgba(255,140,80,.10)'; b.lineWidth = 1.2; b.beginPath(); b.arc(lc[0], lc[1], R * 1.003, 0, 7); b.stroke();
+  })();
+  function draw(t){
+    ctx.clearRect(0, 0, OBJ.s, OBJ.s);
+    // a faint volume so the cage reads as a held object
+    let g = ctx.createRadialGradient(lc[0] - R * .38, lc[1] - R * .42, R * .05, lc[0], lc[1], R * 1.02);
+    g.addColorStop(0, 'rgba(255,170,120,.10)'); g.addColorStop(.55, 'rgba(60,36,24,.10)'); g.addColorStop(1, 'rgba(0,0,0,0)');
+    ctx.fillStyle = g; ctx.beginPath(); ctx.arc(lc[0], lc[1], R * 1.02, 0, 7); ctx.fill();
+    // the ember at the core
+    g = ctx.createRadialGradient(lc[0], lc[1], 0, lc[0], lc[1], R * .5);
+    g.addColorStop(0, 'rgba(255,140,70,.55)'); g.addColorStop(.2, 'rgba(255,94,26,.22)'); g.addColorStop(1, 'rgba(255,94,26,0)');
+    ctx.fillStyle = g; ctx.beginPath(); ctx.arc(lc[0], lc[1], R * .5, 0, 7); ctx.fill();
+    ctx.globalCompositeOperation = 'lighter'; ctx.drawImage(bodyC, 0, 0, OBJ.s, OBJ.s); ctx.globalCompositeOperation = 'source-over';
+
+    const ay = .6 + t * .045, ax = -.3, az = .12;
+    const paths = Array.from({length: NB}, () => new Path2D());
+    for (const L of lines){
+      let prev = null;
+      const oay = L.orbit ? -t * .06 + .4 : ay, oax = L.orbit ? -.42 : ax, oaz = L.orbit ? -.18 : az;
+      for (let k = 0; k < L.pts.length; k++){
+        const r = rot(L.pts[k], oay, oax, oaz), s = D / (D - r[2]);
+        const cur = [lc[0] + r[0] * R * s, lc[1] + r[1] * R * s, r];
+        if (prev && (!L.dash || k % (L.dash[0] + L.dash[1]) < L.dash[0])){
+          const m = [0, 1, 2].map(i => (prev[2][i] + cur[2][i]) / 2), ml = Math.hypot(...m) || 1;
+          const n = m.map(v => v / ml);
+          const lam = Math.max(0, n[0] * Ld[0] + n[1] * Ld[1] + n[2] * Ld[2]);
+          const sx = (prev[0] + cur[0]) / 2 + OBJ.x, sy = (prev[1] + cur[1]) / 2 + OBJ.y;
+          const lit = mask(sx, sy) * beam(sx, sy) * (.25 + .75 * lam) * L.gain;
+          const depth = m[2] < 0 ? .5 : 1;
+          let b = (.05 + 1.15 * lit) * depth;
+          const bi = Math.max(0, Math.min(NB - 1, b * NB | 0));
+          paths[bi].moveTo(prev[0], prev[1]); paths[bi].lineTo(cur[0], cur[1]);
+        }
+        prev = cur;
+      }
+    }
+    ctx.lineCap = 'round';
+    paths.forEach((pa, i) => { ctx.lineWidth = 1 + i / NB * .7; ctx.strokeStyle = COLS[i]; ctx.stroke(pa); });
+  }
+
+  // ---------- film grain ----------
+  (function grain(){
+    const c = document.createElement('canvas'); c.width = c.height = 220; const x = c.getContext('2d'), d = x.createImageData(220, 220);
+    for (let i = 0; i < d.data.length; i += 4){ const v = Math.random() * 255 | 0; d.data[i] = d.data[i + 1] = d.data[i + 2] = v; d.data[i + 3] = 255; }
+    x.putImageData(d, 0, 0); document.getElementById('grain').style.backgroundImage = `url(${c.toDataURL()})`;
+  })();
+
+  if (reduce){ draw(0); return; }
+  let on = true; document.addEventListener('visibilitychange', () => { on = !document.hidden; if (on) requestAnimationFrame(loop); });
+  const t0 = performance.now();
+  function loop(now){ if (!on) return; draw((now - t0) / 1000); requestAnimationFrame(loop); }
+  requestAnimationFrame(loop);
+})();
+</script>
+</body>
+</html>

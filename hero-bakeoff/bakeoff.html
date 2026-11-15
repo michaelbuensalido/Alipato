@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Alipato Hero Bake-off</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #08060B; --panel: #110D17; --line: #2A2139; --fg: #F8F5FA;
+    --muted: #8E84A3; --accent: #FF5E1A;
+  }
+  * { box-sizing: border-box; margin: 0; }
+  html, body { height: 100%; }
+  body {
+    background: var(--bg); color: var(--fg);
+    font: 14px/1.4 Inter, system-ui, sans-serif;
+    display: flex; flex-direction: column; overflow: hidden;
+  }
+  header {
+    display: flex; align-items: center; gap: 24px;
+    padding: 0 20px; height: 56px; flex: none;
+    border-bottom: 1px solid var(--line); background: var(--panel);
+  }
+  .brand { font-weight: 600; letter-spacing: -0.01em; white-space: nowrap; }
+  .brand span { color: var(--muted); font-weight: 400; }
+  nav { display: flex; gap: 4px; }
+  nav button {
+    appearance: none; border: 1px solid transparent; background: none; color: var(--muted);
+    font: 500 13px Inter, sans-serif; padding: 8px 14px; border-radius: 999px; cursor: pointer;
+    display: inline-flex; align-items: center; gap: 8px; transition: color .2s, background .2s, border-color .2s;
+  }
+  nav button kbd {
+    font: 500 11px "JetBrains Mono", monospace; color: var(--muted);
+    border: 1px solid var(--line); border-radius: 4px; padding: 3px 7px;
+  }
+  nav button:hover { color: var(--fg); }
+  nav button[aria-selected="true"] { color: var(--fg); background: #1B1524; border-color: var(--line); }
+  nav button[aria-selected="true"] kbd { color: var(--accent); border-color: rgba(255,94,26,.45); }
+  .hint { margin-left: auto; color: var(--muted); font-size: 12px; white-space: nowrap; }
+  main { flex: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--line); min-height: 0; }
+  section { background: var(--bg); display: flex; flex-direction: column; min-width: 0; }
+  .label {
+    display: flex; align-items: center; justify-content: space-between; gap: 12px;
+    height: 40px; padding: 0 16px; flex: none; border-bottom: 1px solid var(--line);
+    font: 500 11px "JetBrains Mono", monospace; letter-spacing: .08em; text-transform: uppercase; color: var(--muted);
+  }
+  .label strong { color: var(--fg); font-weight: 500; }
+  .label strong::before { content: ""; display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); margin-right: 8px; vertical-align: 1px; }
+  .label a { color: var(--muted); text-decoration: none; }
+  .label a:hover { color: var(--accent); }
+  .frame { flex: 1; display: flex; align-items: center; justify-content: center; padding: 16px; min-height: 0; }
+  .frame-inner { width: 100%; aspect-ratio: 1440 / 900; max-height: 100%; position: relative; border: 1px solid var(--line); border-radius: 6px; overflow: hidden; background: #000; }
+  iframe { width: 100%; height: 100%; border: 0; display: block; }
+</style>
+</head>
+<body>
+<header>
+  <div class="brand">Alipato <span>/ Hero bake-off</span></div>
+  <nav role="tablist" aria-label="Aesthetics"></nav>
+  <div class="hint">Press 1–3 to switch</div>
+</header>
+<main>
+  <section>
+    <div class="label"><strong>Impeccable</strong><a id="open-imp" target="_blank">Open full ↗</a></div>
+    <div class="frame"><div class="frame-inner"><iframe id="imp" title="Impeccable version"></iframe></div></div>
+  </section>
+  <section>
+    <div class="label"><strong>Taste-skill</strong><a id="open-taste" target="_blank">Open full ↗</a></div>
+    <div class="frame"><div class="frame-inner"><iframe id="taste" title="Taste-skill version"></iframe></div></div>
+  </section>
+</main>
+<script>
+  const versions = [
+    { file: "1-ember-lab.html", name: "Ember Lab" },
+    { file: "2-molten-outline.html", name: "Molten Outline" },
+    { file: "3-chiaroscuro-still.html", name: "Chiaroscuro Still" },
+  ];
+  const nav = document.querySelector("nav");
+  const imp = document.getElementById("imp"), taste = document.getElementById("taste");
+  const openImp = document.getElementById("open-imp"), openTaste = document.getElementById("open-taste");
+  let current = -1;
+
+  versions.forEach((v, i) => {
+    const b = document.createElement("button");
+    b.setAttribute("role", "tab");
+    b.innerHTML = `<kbd>${i + 1}</kbd>${v.name}`;
+    b.onclick = () => show(i);
+    nav.appendChild(b);
+  });
+
+  function show(i) {
+    if (i === current) return;
+    current = i;
+    const f = versions[i].file;
+    imp.src = "impeccable/" + f; taste.src = "taste/" + f;
+    openImp.href = "impeccable/" + f; openTaste.href = "taste/" + f;
+    [...nav.children].forEach((b, j) => b.setAttribute("aria-selected", j === i));
+    try { localStorage.setItem("bakeoff-tab", i); } catch (e) {}
+    history.replaceState(null, "", "#" + (i + 1));
+  }
+
+  // Keys: iframes steal focus on click, so listen inside them too (same origin).
+  function onKey(e) {
+    if (e.metaKey || e.ctrlKey || e.altKey) return;
+    const n = parseInt(e.key, 10);
+    if (n >= 1 && n <= versions.length) show(n - 1);
+  }
+  document.addEventListener("keydown", onKey);
+  [imp, taste].forEach(fr => fr.addEventListener("load", () => {
+    try { fr.contentWindow.document.addEventListener("keydown", onKey); } catch (e) {}
+  }));
+
+  let start = parseInt(location.hash.slice(1), 10) - 1;
+  if (!(start >= 0 && start < versions.length)) {
+    try { start = parseInt(localStorage.getItem("bakeoff-tab"), 10); } catch (e) {}
+  }
+  show(start >= 0 && start < versions.length ? start : 0);
+</script>
+</body>
+</html>

@@ -1,0 +1,312 @@
+<!doctype html>
+<!--
+  Alipato hero, version 1: Ember Lab (taste-skill build)
+  Kind: software/service hybrid (digital growth agency), tech treatment: one effect = the lamp sphere.
+  Type: Geist (light 300 / regular 400) replaces Inter for the display line. It is a geometric grotesk
+  with open apertures that keeps its shape under a soft glow, where Inter's tighter counters fill in.
+  Geist Mono sets the chalk glyphs and micro labels so the "math" reads as instrument marks, not copy.
+  Colour: canvas deepened to a warm black (#090706) so the single orange light reads as the only source.
+  Muted moved from lavender to a warm grey (#A79D96) so no violet appears anywhere.
+  Tokens map 1:1 to tailwind.config.ts names (canvas, surface, line, fg, muted, accent, flame).
+-->
+<html lang="en" data-type="software">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Alipato Ember Lab</title>
+<meta name="description" content="A digital growth and IT solutions partner building automated client acquisition and operations pipelines for SMEs.">
+<meta name="theme-color" content="#090706">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500&family=Geist+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --canvas:#090706; --surface:#14100D; --line:#2A221D; --fg:#F8F5F2; --muted:#A79D96;
+    --accent:#FF5E1A; --flame:#F21368; --glow:255,94,26;
+    --m-in:150ms; --m-out:120ms; --m-press:90ms; --ease:cubic-bezier(.22,1,.36,1);
+    font-family:"Geist",ui-sans-serif,system-ui,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%;background:#000;color:var(--fg);overflow:hidden}
+  body{display:flex;align-items:center;justify-content:center;-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+  .frame{position:relative;overflow:hidden;flex:none}
+  .stage{position:absolute;left:0;top:0;width:1440px;height:900px;transform-origin:0 0;background:#000}
+
+  /* the room panel */
+  .room{position:absolute;inset:14px;border-radius:28px;overflow:hidden;background:var(--canvas);
+    box-shadow:inset 0 0 0 1px rgba(255,255,255,.05)}
+  .room canvas{position:absolute;pointer-events:none}
+  #grid{inset:0;width:1412px;height:872px}
+  .halo{position:absolute;inset:0;pointer-events:none;
+    background:
+      radial-gradient(520px 420px at 706px 272px, rgba(var(--glow),.30), rgba(var(--glow),.10) 45%, transparent 75%),
+      radial-gradient(640px 170px at 706px 800px, rgba(var(--glow),.13), transparent 70%);
+    animation:breathe 6s ease-in-out infinite}
+  .vignette{position:absolute;inset:0;pointer-events:none;
+    background:radial-gradient(120% 95% at 50% 36%, transparent 48%, rgba(0,0,0,.55) 78%, rgba(0,0,0,.85) 100%)}
+  @keyframes breathe{0%,100%{opacity:1}50%{opacity:.86}}
+  .cord{position:absolute;left:705.5px;top:0;width:1px;height:88px;
+    background:linear-gradient(rgba(255,255,255,.05),rgba(255,180,140,.55));pointer-events:none}
+  .cap{position:absolute;left:697px;top:84px;width:18px;height:8px;border-radius:3px 3px 1px 1px;
+    background:linear-gradient(#3a2a20,#1a120d);box-shadow:0 0 0 1px rgba(255,170,120,.25);pointer-events:none}
+  #lamp{left:326px;top:-98px;width:760px;height:760px}
+
+  /* chalk glyphs */
+  .glyphs{position:absolute;inset:0;pointer-events:none;font-family:"Geist Mono",ui-monospace,monospace;color:#FFE3D3}
+  .g{position:absolute;white-space:nowrap;animation:drift var(--d,18s) ease-in-out infinite alternate}
+  .g.box{border:1px solid currentColor;padding:2px 10px 4px;border-radius:2px}
+  @keyframes drift{from{transform:translate3d(0,0,0)}to{transform:translate3d(var(--x,6px),var(--y,-14px),0)}}
+
+  /* nav */
+  .nav{position:absolute;left:0;right:0;top:0;height:104px;padding:0 36px;display:flex;align-items:center;justify-content:space-between;z-index:5}
+  .logo img{display:block;height:44px;width:auto}
+  .tabs{display:flex;gap:2px;padding:5px;border-radius:999px;background:rgba(20,15,12,.62);
+    box-shadow:inset 0 0 0 1px rgba(255,255,255,.07);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+  .tabs a{font-size:14px;line-height:1;padding:11px 16px;border-radius:999px;color:rgba(248,245,242,.72);
+    transition:background var(--m-out),color var(--m-out)}
+  .tabs a:hover,.tabs a:focus-visible{background:rgba(255,255,255,.07);color:var(--fg);transition-duration:var(--m-in)}
+
+  .btn{display:inline-flex;align-items:center;gap:12px;height:48px;border-radius:999px;font:500 15px/1 "Geist",sans-serif;
+    transition:transform var(--m-out) var(--ease),background var(--m-out),box-shadow var(--m-out);white-space:nowrap}
+  .btn--primary{padding:0 6px 0 22px;background:var(--fg);color:#120c08}
+  .btn--primary .chip{width:36px;height:36px;border-radius:999px;background:var(--accent);color:#fff;display:grid;place-items:center;
+    box-shadow:0 0 18px rgba(var(--glow),.55)}
+  .btn--ghost{padding:0 20px 0 22px;color:var(--fg);box-shadow:inset 0 0 0 1px rgba(255,255,255,.22)}
+  .btn svg{width:17px;height:17px}
+  @media (hover:hover) and (pointer:fine){
+    .btn:hover{transform:translateY(-1px);transition-duration:var(--m-in)}
+    .btn--primary:hover{background:#E9E1DA}
+    .btn--ghost:hover{background:rgba(255,255,255,.06);box-shadow:inset 0 0 0 1px rgba(255,255,255,.36)}
+    .btn:hover .chip svg{transform:translate(1px,-1px)}
+  }
+  .btn:active{transform:translateY(1px) scale(.985);transition-duration:var(--m-press)}
+  .chip svg{transition:transform var(--m-in) var(--ease)}
+  :focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+
+  /* copy */
+  .copy{position:absolute;left:0;right:0;top:482px;display:flex;flex-direction:column;align-items:center;text-align:center;z-index:4}
+  .eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:13px;color:rgba(248,245,242,.7);letter-spacing:.01em}
+  .eyebrow .tag{font-family:"Geist Mono",monospace;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#FFD2BA;
+    padding:5px 9px;border-radius:999px;background:rgba(var(--glow),.12);box-shadow:inset 0 0 0 1px rgba(var(--glow),.35)}
+  h1{margin-top:18px;font-weight:300;font-size:78px;line-height:1.02;letter-spacing:-.035em;color:#FFF4EC;
+    text-shadow:0 0 22px rgba(var(--glow),.42),0 0 70px rgba(var(--glow),.22)}
+  h1 .hot{color:#FFB08A;text-shadow:0 0 18px rgba(var(--glow),.75),0 0 60px rgba(var(--glow),.45)}
+  .sub{margin-top:20px;max-width:540px;font-size:17px;line-height:1.55;font-weight:300;color:var(--muted)}
+  .ctas{margin-top:28px;display:flex;gap:12px}
+
+  .foot{position:absolute;left:36px;right:36px;bottom:28px;display:flex;justify-content:space-between;
+    font-family:"Geist Mono",monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:rgba(248,245,242,.38);z-index:4}
+  .foot b{color:var(--accent);font-weight:400}
+
+  /* entrance, once on load */
+  [data-enter] > *{opacity:0;transform:translateY(14px);animation:enter .9s var(--ease) forwards}
+  [data-enter] > *:nth-child(2){animation-delay:.08s}
+  [data-enter] > *:nth-child(3){animation-delay:.18s}
+  [data-enter] > *:nth-child(4){animation-delay:.28s}
+  .lampin{opacity:0;animation:lampin 1.6s ease-out .05s forwards}
+  @keyframes enter{to{opacity:1;transform:none}}
+  @keyframes lampin{0%{opacity:0}35%{opacity:.6}45%{opacity:.25}100%{opacity:1}}
+
+  @media (prefers-reduced-motion:reduce){
+    *,*::before,*::after{animation:none!important;transition:none!important}
+    [data-enter] > *,.lampin{opacity:1;transform:none}
+  }
+</style>
+</head>
+<body>
+<div class="frame" id="frame">
+<div class="stage" id="stage">
+  <div class="room">
+    <canvas id="grid" aria-hidden="true"></canvas>
+    <div class="halo lampin" aria-hidden="true"></div>
+
+    <div class="glyphs" aria-hidden="true">
+      <span class="g" style="left:118px;top:214px;font-size:26px;opacity:.14;--d:21s;--y:-12px">lead → call → close</span>
+      <span class="g box" style="left:250px;top:610px;font-size:34px;opacity:.12;--d:17s;--x:-8px">×3</span>
+      <span class="g" style="left:168px;top:452px;font-size:44px;opacity:.10;filter:blur(1.2px);--d:24s">+1</span>
+      <span class="g" style="left:1146px;top:196px;font-size:72px;opacity:.07;filter:blur(2px);--d:26s;--y:10px">%</span>
+      <span class="g box" style="left:1030px;top:356px;font-size:22px;opacity:.13;--d:19s">n + 1</span>
+      <span class="g" style="left:1148px;top:560px;font-size:30px;opacity:.13;--d:22s;--x:-10px">Δ lead / day</span>
+      <span class="g" style="left:1218px;top:668px;font-size:40px;opacity:.09;filter:blur(1px);--d:18s">×3</span>
+      <span class="g" style="left:262px;top:332px;font-size:20px;opacity:.11;--d:20s;--y:8px">f(x) → auto</span>
+      <span class="g" style="left:96px;top:730px;font-size:18px;opacity:.10;--d:23s">call ⟶ +1</span>
+    </div>
+
+    <div class="cord lampin" aria-hidden="true"></div>
+    <div class="cap lampin" aria-hidden="true"></div>
+    <canvas id="lamp" class="lampin" aria-hidden="true"></canvas>
+    <div class="vignette" aria-hidden="true"></div>
+
+    <header class="nav">
+      <a class="logo" href="#top" aria-label="Alipato home"><img src="../assets/logo.svg" alt="Alipato" height="44"></a>
+      <nav class="tabs" aria-label="Primary">
+        <a href="#services">Services</a><a href="#process">Process</a><a href="#pricing">Pricing</a>
+        <a href="#work">Work</a><a href="#agency">About</a><a href="#contact">Contact</a>
+      </nav>
+      <a class="btn btn--primary" href="#contact">Book a Free Audit
+        <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
+      </a>
+    </header>
+
+    <main class="copy" id="top" data-enter>
+      <p class="eyebrow"><span class="tag">Growth lab</span>Digital growth &amp; IT solutions</p>
+      <h1>Digital Growth,<br>Engineered <span class="hot">For Scale</span></h1>
+      <p class="sub">A digital growth and IT solutions partner building automated client acquisition and operations pipelines for SMEs.</p>
+      <div class="ctas">
+        <a class="btn btn--primary" href="#contact">Book a Free Audit
+          <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
+        </a>
+        <a class="btn btn--ghost" href="#services">Explore our services
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg>
+        </a>
+      </div>
+    </main>
+
+    <div class="foot" aria-hidden="true"><span><b>●</b>&nbsp; Night shift / 01</span><span>Acquisition · Operations · Pipelines</span></div>
+  </div>
+</div>
+</div>
+
+<script>
+(() => {
+  // ---------- stage fit: 1440x900 composition scaled into any viewport ----------
+  const frame = document.getElementById('frame'), stage = document.getElementById('stage');
+  function fit(){
+    const s = Math.min(innerWidth / 1440, innerHeight / 900);
+    stage.style.transform = `scale(${s})`;
+    frame.style.width = 1440 * s + 'px'; frame.style.height = 900 * s + 'px';
+  }
+  addEventListener('resize', fit); fit();
+
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const DPR = Math.min(2, Math.max(1, devicePixelRatio || 1));
+  function setup(c){ const w = c.clientWidth, h = c.clientHeight; c.width = w * DPR; c.height = h * DPR;
+    const x = c.getContext('2d'); x.setTransform(DPR,0,0,DPR,0,0); return {x, w, h}; }
+
+  // ---------- the room: a 3D grid box lit by one point light (the lamp) ----------
+  (function room(){
+    const {x: ctx, w, h} = setup(document.getElementById('grid'));
+    const f = 700, cx = w / 2, cy = 282;
+    const W = 1000, H = 640, Z0 = 420, Z1 = 2400;
+    const L = [0, -10, 1500];                     // lamp position, matches the sphere on screen
+    const P = p => [cx + f * p[0] / p[2], cy + f * p[1] / p[2]];
+    const buckets = Array.from({length: 24}, () => new Path2D());
+    function line(a, b, n = 48){
+      for (let i = 0; i < n; i++){
+        const t0 = i / n, t1 = (i + 1) / n;
+        const p0 = a.map((v, k) => v + (b[k] - v) * t0), p1 = a.map((v, k) => v + (b[k] - v) * t1);
+        const m = p0.map((v, k) => (v + p1[k]) / 2);
+        const d = [m[0]-L[0], m[1]-L[1], m[2]-L[2]], dist = Math.hypot(...d);
+        let I = 1 / (1 + (dist / 640) ** 2.7);
+        I *= .62 + .38 * Math.max(0, d[1] / dist);  // the shade throws light downward
+        const bi = Math.min(23, Math.floor(I * 24));
+        const s0 = P(p0), s1 = P(p1);
+        buckets[bi].moveTo(s0[0], s0[1]); buckets[bi].lineTo(s1[0], s1[1]);
+      }
+    }
+    const gx = 200, gz = 190;
+    for (let X = -W; X <= W; X += gx){ line([X, H, Z0], [X, H, Z1]); line([X, -H, Z0], [X, -H, Z1]); line([X, -H, Z1], [X, H, Z1], 24); }
+    for (let Y = -H; Y <= H; Y += 160){ line([-W, Y, Z0], [-W, Y, Z1]); line([W, Y, Z0], [W, Y, Z1]); line([-W, Y, Z1], [W, Y, Z1], 24); }
+    for (let Z = Z0 + 80; Z <= Z1; Z += gz){
+      line([-W, H, Z], [W, H, Z], 30); line([-W, -H, Z], [W, -H, Z], 30);
+      line([-W, -H, Z], [-W, H, Z], 20); line([W, -H, Z], [W, H, Z], 20);
+    }
+    ctx.lineWidth = 1;
+    buckets.forEach((p, i) => {
+      const I = (i + .5) / 24;
+      ctx.strokeStyle = `rgba(255,${150 + I * 70 | 0},${110 + I * 60 | 0},${(.018 + I * .62).toFixed(3)})`;
+      ctx.stroke(p);
+    });
+    // floor pool of light under the lamp
+    const g = ctx.createRadialGradient(cx, 760, 10, cx, 760, 520);
+    g.addColorStop(0, 'rgba(255,110,40,.10)'); g.addColorStop(1, 'rgba(255,110,40,0)');
+    ctx.fillStyle = g; ctx.fillRect(0, 0, w, h);
+  })();
+
+  // ---------- the lamp: wireframe sphere, nested geodesic core, spokes, orbit rings ----------
+  const cvs = document.getElementById('lamp');
+  const {x: ctx, w, h} = setup(cvs);
+  const C = [w / 2, h / 2], R = 188, D = 4.2;
+  const lines = [];   // {pts, col, a0, a1, lw, dash, ring}
+  const ring = (r, n, plane, opts) => { const pts = []; for (let k = 0; k <= n; k++){ const t = k / n * Math.PI * 2; pts.push(plane(Math.cos(t) * r, Math.sin(t) * r)); } lines.push({pts, ...opts}); };
+  const SHELL = {col: [255, 132, 72], a0: .05, a1: .62, lw: 1};
+  for (let i = 1; i < 12; i++){ const phi = -Math.PI / 2 + i * Math.PI / 12, r = Math.cos(phi), y = Math.sin(phi);
+    ring(r, 120, (a, b) => [a, y, b], SHELL); }
+  for (let j = 0; j < 12; j++){ const t = j / 12 * Math.PI, c = Math.cos(t), s = Math.sin(t);
+    ring(1, 120, (a, b) => [a * c, b, a * s], SHELL); }
+  // two nested hexagons on the equator (the old logo geometry, now in 3D)
+  [[1.0, 0, 6], [.74, Math.PI / 6, 6]].forEach(([r, off]) => { const pts = []; for (let k = 0; k <= 6; k++){ const t = off + k / 6 * Math.PI * 2; pts.push([Math.cos(t) * r, 0, Math.sin(t) * r]); }
+    const dense = []; for (let k = 0; k < 6; k++) for (let q = 0; q < 16; q++){ const a = pts[k], b = pts[k + 1], u = q / 16; dense.push(a.map((v, i) => v + (b[i] - v) * u)); } dense.push(pts[6]);
+    lines.push({pts: dense, col: [255, 196, 150], a0: .12, a1: .85, lw: 1.2}); });
+  // geodesic core: icosahedron
+  const p = (1 + Math.sqrt(5)) / 2, ri = .46;
+  const V = [[-1,p,0],[1,p,0],[-1,-p,0],[1,-p,0],[0,-1,p],[0,1,p],[0,-1,-p],[0,1,-p],[p,0,-1],[p,0,1],[-p,0,-1],[-p,0,1]]
+    .map(v => { const n = Math.hypot(...v); return v.map(c => c / n * ri); });
+  for (let a = 0; a < 12; a++) for (let b = a + 1; b < 12; b++){
+    const d = Math.hypot(V[a][0]-V[b][0], V[a][1]-V[b][1], V[a][2]-V[b][2]);
+    if (d < ri * 1.1){ const pts = []; for (let q = 0; q <= 10; q++) pts.push(V[a].map((v, i) => v + (V[b][i] - v) * q / 10)); lines.push({pts, col: [255, 214, 180], a0: .25, a1: .95, lw: 1.1}); }
+  }
+  // radial spokes from the core to the shell
+  V.forEach(v => { const n = v.map(c => c / ri); const pts = []; for (let q = 0; q <= 12; q++){ const s = ri + (1 - ri) * q / 12; pts.push(n.map(c => c * s)); } lines.push({pts, col: [255, 120, 60], a0: .05, a1: .5, lw: .8, dash: [1, 1]}); });
+  // orbit rings: dashed orange, counter-rotating crimson
+  const orbitA = [], orbitB = [];
+  ring(1.26, 180, (a, b) => [a, 0, b], {col: [255, 150, 90], a0: .2, a1: .9, lw: 1.1, dash: [3, 3], orbit: 1}); orbitA.push(lines.length - 1);
+  ring(1.42, 220, (a, b) => [a, 0, b], {col: [242, 19, 104], a0: .3, a1: 1, lw: 1.4, dash: [1, 4], orbit: 2}); orbitB.push(lines.length - 1);
+  ring(1.34, 200, (a, b) => [a, 0, b], {col: [242, 40, 110], a0: .14, a1: .6, lw: 1, dash: [10, 8], orbit: 2});
+
+  function rot(v, ay, ax, az){
+    let [x, y, z] = v;
+    if (az){ const c = Math.cos(az), s = Math.sin(az); [x, y] = [x * c - y * s, x * s + y * c]; }
+    let c = Math.cos(ay), s = Math.sin(ay); [x, z] = [x * c + z * s, -x * s + z * c];
+    c = Math.cos(ax); s = Math.sin(ax); [y, z] = [y * c - z * s, y * s + z * c];
+    return [x, y, z];
+  }
+  const NB = 10;
+  function frame_(t){
+    ctx.clearRect(0, 0, w, h);
+    ctx.globalCompositeOperation = 'lighter';
+    // the lit core: the lamp's filament
+    const flick = 1 + .03 * Math.sin(t * 2.3) + .02 * Math.sin(t * 5.1);
+    let g = ctx.createRadialGradient(C[0], C[1], 0, C[0], C[1], R * 1.05);
+    g.addColorStop(0, `rgba(255,236,214,${.95 * flick})`); g.addColorStop(.12, 'rgba(255,170,110,.75)');
+    g.addColorStop(.38, 'rgba(255,94,26,.30)'); g.addColorStop(.75, 'rgba(255,94,26,.07)'); g.addColorStop(1, 'rgba(255,94,26,0)');
+    ctx.fillStyle = g; ctx.beginPath(); ctx.arc(C[0], C[1], R * 1.05, 0, 7); ctx.fill();
+
+    const spin = t * .12, tilt = -.38;
+    for (const L of lines){
+      let ay = spin, ax = tilt, az = 0;
+      if (L.orbit === 1){ ay = t * .2; ax = -.3; az = .2; }
+      if (L.orbit === 2){ ay = -t * .09; ax = -.4; az = -.24; }
+      const paths = Array.from({length: NB}, () => new Path2D());
+      let prev = null;
+      for (let k = 0; k < L.pts.length; k++){
+        const r = rot(L.pts[k], ay, ax, az), s = D / (D - r[2]);
+        const sp = [C[0] + r[0] * R * s, C[1] + r[1] * R * s, r[2]];
+        if (prev && (!L.dash || (k % (L.dash[0] + L.dash[1])) < L.dash[0])){
+          const zr = Math.max(-1.45, Math.min(1.45, (prev[2] + sp[2]) / 2));
+          const b = Math.min(NB - 1, Math.floor((zr + 1.45) / 2.9 * NB));
+          paths[b].moveTo(prev[0], prev[1]); paths[b].lineTo(sp[0], sp[1]);
+        }
+        prev = sp;
+      }
+      ctx.lineWidth = L.lw;
+      paths.forEach((pa, b) => { const u = (b + .5) / NB, a = L.a0 + (L.a1 - L.a0) * u * u;
+        ctx.strokeStyle = `rgba(${L.col[0]},${L.col[1]},${L.col[2]},${a.toFixed(3)})`; ctx.stroke(pa); });
+    }
+    // hot centre point
+    g = ctx.createRadialGradient(C[0], C[1], 0, C[0], C[1], 26);
+    g.addColorStop(0, 'rgba(255,250,240,.95)'); g.addColorStop(1, 'rgba(255,200,150,0)');
+    ctx.fillStyle = g; ctx.beginPath(); ctx.arc(C[0], C[1], 26, 0, 7); ctx.fill();
+    ctx.globalCompositeOperation = 'source-over';
+  }
+  if (reduce){ frame_(4); return; }
+  let visible = true;
+  document.addEventListener('visibilitychange', () => { visible = !document.hidden; if (visible) requestAnimationFrame(loop); });
+  const t0 = performance.now();
+  function loop(now){ if (!visible) return; frame_(4 + (now - t0) / 1000); requestAnimationFrame(loop); }
+  requestAnimationFrame(loop);
+})();
+</script>
+</body>
+</html>

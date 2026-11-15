@@ -1,0 +1,78 @@
+    id: "roasted-day",
+    title: "Roasted the Day You Order",
+    image: "images/Screenshot 2026-11-14 013256.png",
+    category: "VAST QUIET CINEMATIC",
+    vibe: "moody chiaroscuro × quiet luxury",
+    tags: [
+      "low-key film lighting",
+      "venetian blind shadows",
+      "full-bleed photo hero",
+      "light grotesk headline",
+      "floating product card",
+      "sage pill accents",
+      "glass nav bar"
+    ],
+    brief:
+      "A single raking beam of window light turns the roaster into a film still, letting a thin sans headline and one floating product card do all the selling.",
+    prompt:
+      "cinematic close-up of a hand holding a brass scoop of green coffee beans over a drum roaster, hard sunlight through venetian blinds casting diagonal stripe shadows, deep olive-black shadows, warm highlights, shallow depth of field, 35mm film grain, muted desaturated palette, negative space on the left for headline --ar 4:3 --style raw",
+    source: ""
+  },
+    id: "fxology-no-time-limit",
+    title: "Green Room",
+    image: "images/Screenshot 2026-11-15 160831.png",
+    category: "DARK TECH GLOW",
+    vibe: "neon terminal glow × chalkboard math",
+    tags: [
+      "glowing mint headline",
+      "floating math glyphs",
+      "dark olive spotlight vignette",
+      "white pill CTA with green arrow chip",
+      "receding 3D grid room",
+      "pill-tab nav bar"
+    ],
+    brief:
+      "A soft green spotlight falls into a dark grid room full of drifting numbers and equations, and the glowing headline floats in the middle like a sign over a trading floor at night.",
+    prompt:
+      "dark atmospheric 3D render of [SUBJECT: an empty abstract room made of faint receding grid lines], soft mint-green volumetric spotlight falling from above into the center, scattered translucent chalk-white math glyphs and numbers (equations, square roots, fractions, boxed digits) floating at different depths with depth-of-field blur, tiny glowing green particle sparks, deep olive-black shadows, heavy vignette at the edges, calm empty center reserved for a headline, no people, no logos, cinematic low-key lighting, subtle film grain --ar 16:10 --style raw",
+    design: {
+      aesthetic:
+        "Night-shift trading lab. Dark, focused and a little mysterious; one green light source makes the product feel precise and high-stakes without looking like a casino.",
+      layout:
+        "Full-viewport hero inside one large rounded dark container on a pure black page. Top nav: logo left, a pill-tab group of text links (active tab filled), one outlined 'Login' pill; right side has a language selector, a white 'Start a challenge' pill with a small green square arrow chip, and an outlined secondary pill. Centered stack: tiny eyebrow line with an inline tag chip, a two-line headline in a light-to-regular geometric grotesk with a soft green outer glow, a row of four tiny icon + label proof points, then the same primary/secondary pill pair. Bottom corners: social icons left, 'Scroll to explore ↓' right. Floating math glyphs sit around the edges at low opacity and never cross the headline.",
+      color:
+        "Near-black olive (#0B0F0B range) background with a single mint/lime green (#7CF59A range) used for the glow, arrow chips and small icons. Type in off-white fading to pale mint where the glow hits. Secondary buttons are transparent with a thin white outline. No second accent hue.",
+      guardrails:
+        "One light source only; no rainbow gradients, purple neon or busy candlestick charts. Glow stays soft (large blur, low spread) and only on the headline. Floating glyphs stay under 20% opacity and out of the text area. Keep body text readable, never green-on-green. Avoid hype copy like 'to the moon', rocket emojis and fake profit screenshots."
+    },
+    source: ""
+  },
+    id: "clue-never-lose-secrets",
+    title: "Iridescent Secrets",
+    image: "images/Screenshot 2026-11-15 160949.png",
+    category: "DARK TECH GLOW",
+    vibe: "holographic fluid × outline grotesk",
+    tags: [
+      "iridescent gradient-fill caps",
+      "outline-to-fill headline type",
+      "liquid blob line art",
+      "holographic stat panel",
+      "logo strip social proof",
+      "mint pill CTA"
+    ],
+    brief:
+      "A huge all-caps headline melts from mint-to-lavender gradient into thin outlines where a holographic liquid shape passes through it, so a dry secrets API feels fluid and a little magical.",
+    prompt:
+      "abstract 3D render of [SUBJECT: a flowing liquid ribbon shape] made of iridescent holographic chrome, smooth melting organic curves, color shifting from mint green through sky blue to soft lavender and pale pink, glossy highlights with gentle grain, isolated on a pure black background, thin white contour lines tracing loose blob outlines around it, high contrast, soft glow edges, minimal composition with large empty black areas for text, studio lighting --ar 16:10 --style raw",
+    design: {
+      aesthetic:
+        "Developer-tool cool with a soft, holographic twist. Pure black, sharp type and one liquid iridescent form make infrastructure feel calm and premium rather than technical and cold.",
+      layout:
+        "Black page with a floating rounded dark nav bar (logo left, six centered text links, white 'Sign in' pill right). Hero split: left two-thirds is a three-line all-caps condensed-width grotesk headline at very large size, letters filled with a mint-to-lavender gradient that switch to thin outlines wherever the liquid shape overlaps; right third holds a short sans paragraph and two pills (mint 'Get started', white 'Talk with us'). Thin white blob contour lines loop across the whole hero. Below: a one-line caption and a monochrome customer logo strip, then a wide rounded stat panel with a pale holographic gradient fill and three big numbers with small captions.",
+      color:
+        "Pure black background, white UI text. Iridescent gradient (mint #9BF5B0 → sky #8EC9FF → lavender #C7B3FF → pale pink) used only in the headline fill, the liquid shape and the stat panel. Primary button solid mint with black text; secondary white with black text. Logos in flat white.",
+      guardrails:
+        "The gradient lives in three places only; never on buttons, nav or body text. No glassmorphism cards, no generic purple-to-blue hero gradient, no glowing grid floors. Outline-letter effect must keep the headline readable at a glance. Stats must be real numbers with plain captions, not 'Trusted by millions'. No lock or shield icons as the hero."
+    },
+    source: ""
+  }

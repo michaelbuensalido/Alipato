@@ -1,0 +1,349 @@
+<!doctype html>
+<!--
+  Alipato hero / 1 — Ember Lab
+  Display + UI face: Geologica (300/400/500). A light geometric grotesk with soft,
+  slightly squared terminals; at 300 weight it takes a glow the way a lit sign does,
+  where Inter at display size reads as UI text. One family keeps the room quiet.
+  Tokens map to tailwind.config.ts: canvas, surface, line, fg, muted, accent, flame.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Alipato Ember Lab</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geologica:wght@200;300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --canvas: #08070A;      /* canvas, deepened toward neutral black */
+    --room: #0C0A0E;
+    --surface: #16111F;
+    --line: #2A2139;
+    --fg: #F8F5FA;
+    --fg-lit: #FFEDE3;      /* fg warmed where the lamp hits */
+    --muted: #B3A9BC;
+    --accent: #FF5E1A;
+    --accent-soft: #FF8A4F;
+    --flame: #F21368;
+    --s: 0.5;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: #000; color: var(--fg); overflow-x: hidden; }
+  body { font-family: "Geologica", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+  ::selection { background: var(--accent); color: #120804; }
+  a { color: inherit; text-decoration: none; }
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--accent-soft); outline-offset: 3px; }
+
+  .viewport { position: relative; width: 100%; height: calc(900px * var(--s)); overflow: hidden; background: #000; }
+  .stage { position: absolute; left: 0; top: 0; width: 1440px; height: 900px; transform: scale(var(--s)); transform-origin: 0 0; background: #000; }
+
+  /* the room: one rounded container on a black page */
+  .room { position: absolute; inset: 14px; border-radius: 28px; overflow: hidden; background: var(--room); isolation: isolate; }
+  .room canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+  #grid { z-index: 0; }
+  #lamp { z-index: 2; pointer-events: none; }
+  .vignette { position: absolute; inset: 0; z-index: 3; pointer-events: none;
+    background:
+      radial-gradient(ellipse 62% 70% at 50% 34%, transparent 40%, rgba(0,0,0,.55) 78%, rgba(0,0,0,.85) 100%),
+      linear-gradient(to bottom, rgba(0,0,0,0) 70%, rgba(0,0,0,.45)); }
+
+  /* chalk glyphs drifting in the room */
+  .glyphs { position: absolute; inset: 0; z-index: 1; pointer-events: none; font-weight: 200; color: #E9DCD3; }
+  .g { position: absolute; line-height: 1; letter-spacing: -0.02em; animation: drift var(--d, 22s) ease-in-out infinite alternate; }
+  .g.box { border: 1.5px solid currentColor; padding: .08em .22em .12em; border-radius: 2px; }
+  .g.blur { filter: blur(2.5px); }
+  .g svg { display: inline-block; vertical-align: middle; width: .9em; height: .9em; margin: 0 .12em; }
+  @keyframes drift { from { transform: translate3d(0,0,0) rotate(var(--r0, 0deg)); } to { transform: translate3d(var(--dx, 10px), var(--dy, -14px), 0) rotate(var(--r1, 2deg)); } }
+
+  /* nav */
+  .nav { position: absolute; z-index: 10; left: 34px; right: 34px; top: 30px; height: 52px; display: flex; align-items: center; justify-content: space-between; }
+  .logo img { height: 44px; width: auto; display: block; }
+  .tabs { position: absolute; left: 50%; transform: translateX(-50%); display: flex; gap: 2px; padding: 4px; border-radius: 999px;
+    background: rgba(255,255,255,.035); border: 1px solid rgba(255,255,255,.07); backdrop-filter: blur(10px); }
+  .tabs a { font-size: 14px; font-weight: 300; color: rgba(248,245,250,.72); padding: 9px 16px; border-radius: 999px; transition: background-color .25s ease, color .25s ease; }
+  .tabs a:hover { color: var(--fg); background: rgba(255,255,255,.06); }
+
+  .btn-primary { display: inline-flex; align-items: center; gap: 12px; height: 46px; padding: 0 5px 0 20px; border-radius: 999px;
+    background: var(--fg); color: #140C08; font-size: 15px; font-weight: 500; letter-spacing: -0.01em;
+    box-shadow: 0 8px 24px -8px rgba(0,0,0,.6); transition: background-color .3s ease, transform .3s cubic-bezier(.2,.8,.2,1); }
+  .btn-primary .chip { width: 36px; height: 36px; border-radius: 999px; background: var(--accent); color: #fff; display: grid; place-items: center; transition: transform .35s cubic-bezier(.2,.8,.2,1); }
+  .btn-primary svg { width: 18px; height: 18px; }
+  .btn-primary:hover { background: #fff; }
+  .btn-primary:hover .chip { transform: rotate(45deg); }
+  .btn-primary:active { transform: translateY(1px); }
+  .nav .btn-primary { height: 44px; font-size: 14px; padding-left: 18px; }
+  .nav .btn-primary .chip { width: 34px; height: 34px; }
+
+  .btn-ghost { display: inline-flex; align-items: center; gap: 10px; height: 46px; padding: 0 22px; border-radius: 999px;
+    border: 1px solid rgba(255,237,227,.28); color: var(--fg); font-size: 15px; font-weight: 400; transition: border-color .3s ease, background-color .3s ease; }
+  .btn-ghost svg { width: 16px; height: 16px; transition: transform .35s cubic-bezier(.2,.8,.2,1); }
+  .btn-ghost:hover { border-color: rgba(255,237,227,.6); background: rgba(255,255,255,.04); }
+  .btn-ghost:hover svg { transform: translateY(3px); }
+
+  /* centered copy stack */
+  .copy { position: absolute; z-index: 5; left: 0; right: 0; top: 498px; display: flex; flex-direction: column; align-items: center; text-align: center; }
+  .tag { display: inline-flex; align-items: center; gap: 8px; height: 30px; padding: 0 12px 0 6px; border-radius: 999px; font-size: 13px; font-weight: 300; color: rgba(255,237,227,.8);
+    background: rgba(12,9,10,.55); border: 1px solid rgba(255,138,79,.22); backdrop-filter: blur(6px); }
+  .tag .dot { width: 18px; height: 18px; border-radius: 999px; display: grid; place-items: center; background: rgba(255,94,26,.16); }
+  .tag .dot i { width: 6px; height: 6px; border-radius: 999px; background: var(--accent); }
+  .tag svg { width: 13px; height: 13px; opacity: .6; }
+  h1 { margin: 20px 0 0; font-weight: 300; font-size: 74px; line-height: 1.02; letter-spacing: -0.035em; color: var(--fg-lit);
+    text-shadow: 0 0 18px rgba(255,138,79,.38), 0 0 54px rgba(255,94,26,.28), 0 0 120px rgba(255,94,26,.16); }
+  h1 .hot { color: #FFB58C; text-shadow: 0 0 16px rgba(255,94,26,.65), 0 0 50px rgba(255,94,26,.42), 0 0 120px rgba(242,19,104,.18); }
+  .sub { margin: 18px 0 0; max-width: 540px; font-size: 17px; line-height: 1.55; font-weight: 300; color: var(--muted); }
+  .ctas { margin-top: 26px; display: flex; gap: 12px; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .g { animation: none; }
+    .btn-primary, .btn-primary .chip, .btn-ghost svg { transition: none; }
+  }
+</style>
+</head>
+<body>
+<div class="viewport" id="viewport">
+  <div class="stage" id="stage">
+    <section class="room" aria-label="Alipato">
+      <canvas id="grid" aria-hidden="true"></canvas>
+
+      <div class="glyphs" aria-hidden="true">
+        <span class="g" style="left:118px;top:300px;font-size:44px;opacity:.13;--dx:14px;--dy:-10px;--d:26s">lead<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h16M14 6l6 6-6 6"/></svg>call</span>
+        <span class="g box blur" style="left:210px;top:432px;font-size:40px;opacity:.12;--dx:-8px;--dy:12px;--d:30s">×3</span>
+        <span class="g" style="left:236px;top:560px;font-size:56px;opacity:.11;--dx:10px;--dy:-16px;--d:24s">+1</span>
+        <span class="g blur" style="left:70px;top:640px;font-size:34px;opacity:.09;--dx:12px;--dy:8px;--d:34s">n + 1</span>
+        <span class="g" style="left:230px;top:170px;font-size:28px;opacity:.10;--dx:-10px;--dy:10px;--d:28s">Σ leads</span>
+        <span class="g" style="right:136px;top:268px;font-size:96px;opacity:.07;--dx:-12px;--dy:14px;--d:36s;filter:blur(3px)">%</span>
+        <span class="g box" style="right:250px;top:420px;font-size:38px;opacity:.13;--dx:10px;--dy:-10px;--d:27s">12</span>
+        <span class="g" style="right:120px;top:520px;font-size:46px;opacity:.12;--dx:-14px;--dy:-8px;--d:25s">call<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h16M14 6l6 6-6 6"/></svg>close</span>
+        <span class="g blur" style="right:300px;top:640px;font-size:36px;opacity:.09;--dx:8px;--dy:10px;--d:31s">÷ 2</span>
+        <span class="g" style="right:250px;top:178px;font-size:30px;opacity:.10;--dx:10px;--dy:8px;--d:29s">√ ops</span>
+      </div>
+
+      <canvas id="lamp" aria-hidden="true"></canvas>
+      <div class="vignette" aria-hidden="true"></div>
+
+      <nav class="nav" aria-label="Primary">
+        <a class="logo" href="#"><img src="../assets/logo.svg" alt="Alipato"></a>
+        <div class="tabs">
+          <a href="#services">Services</a>
+          <a href="#process">Process</a>
+          <a href="#pricing">Pricing</a>
+          <a href="#work">Work</a>
+          <a href="#agency">About</a>
+          <a href="#contact">Contact</a>
+        </div>
+        <a class="btn-primary" href="#contact">Book a Free Audit
+          <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
+        </a>
+      </nav>
+
+      <div class="copy">
+        <span class="tag"><span class="dot"><i></i></span>Lead
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h16M14 6l6 6-6 6"/></svg>Call
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h16M14 6l6 6-6 6"/></svg>Close</span>
+        <h1>Digital Growth,<br>Engineered <span class="hot">For Scale</span></h1>
+        <p class="sub">A digital growth and IT solutions partner building automated client acquisition and operations pipelines for SMEs.</p>
+        <div class="ctas">
+          <a class="btn-primary" href="#contact">Book a Free Audit
+            <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
+          </a>
+          <a class="btn-ghost" href="#services">Explore our services
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg>
+          </a>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+
+<script>
+(() => {
+  const W = 1412, H = 872;               // room size (stage 1440x900 minus 14px inset)
+  const LAMP = { x: W / 2, y: 284, R: 190 };
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const root = document.documentElement;
+  const gridC = document.getElementById('grid');
+  const lampC = document.getElementById('lamp');
+  let scale = 1, ratio = 1;
+
+  function fit() {
+    scale = root.clientWidth / 1440;
+    root.style.setProperty('--s', scale);
+    ratio = Math.min(2, Math.max(1, scale * (window.devicePixelRatio || 1)));
+    for (const c of [gridC, lampC]) { c.width = Math.round(W * ratio); c.height = Math.round(H * ratio); }
+    drawRoom();
+    if (reduce) drawLamp(0.7);
+  }
+
+  /* ---------- the room: one-point perspective grid, lit by the lamp ---------- */
+  function drawRoom() {
+    const ctx = gridC.getContext('2d');
+    ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
+    ctx.clearRect(0, 0, W, H);
+    const VP = { x: W / 2, y: 330 }, KB = 0.36;
+    const at = (p, k) => ({ x: VP.x + k * (p.x - VP.x), y: VP.y + k * (p.y - VP.y) });
+    const depths = []; for (let j = 0; j < 40; j++) { const k = 1 / (1 + j * 0.34); if (k < KB) break; depths.push(k); } depths.push(KB);
+
+    const lit = ctx.createRadialGradient(LAMP.x, LAMP.y, 0, LAMP.x, LAMP.y + 140, 980);
+    lit.addColorStop(0, 'rgba(255,170,120,.62)');
+    lit.addColorStop(0.22, 'rgba(255,110,50,.36)');
+    lit.addColorStop(0.5, 'rgba(190,90,60,.15)');
+    lit.addColorStop(1, 'rgba(120,100,130,.06)');
+    ctx.strokeStyle = lit; ctx.lineWidth = 1;
+
+    const line = (a, b) => { ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); };
+    const corners = { tl: { x: 0, y: 0 }, tr: { x: W, y: 0 }, br: { x: W, y: H }, bl: { x: 0, y: H } };
+    const edges = [['bl', 'br', 96], ['tl', 'tr', 96], ['tl', 'bl', 96], ['tr', 'br', 96]];
+    ctx.beginPath();
+    for (const [a, b, step] of edges) {
+      const A = corners[a], B = corners[b];
+      const len = Math.hypot(B.x - A.x, B.y - A.y), n = Math.round(len / step);
+      for (let i = 0; i <= n; i++) {           // longitudinal lines toward the vanishing point
+        const p = { x: A.x + (B.x - A.x) * i / n, y: A.y + (B.y - A.y) * i / n };
+        line(p, at(p, KB));
+      }
+      for (const k of depths) line(at(A, k), at(B, k));   // transverse lines at each depth
+    }
+    // back wall grid
+    const bw = { l: at(corners.tl, KB).x, r: at(corners.tr, KB).x, t: at(corners.tl, KB).y, b: at(corners.bl, KB).y };
+    const cell = (bw.r - bw.l) / Math.round(W / 96);
+    for (let x = bw.l; x <= bw.r + .5; x += cell) line({ x, y: bw.t }, { x, y: bw.b });
+    for (let y = bw.t; y <= bw.b + .5; y += cell) line({ x: bw.l, y }, { x: bw.r, y });
+    ctx.stroke();
+
+    // the light pool on the floor under the lamp
+    const pool = ctx.createRadialGradient(LAMP.x, 760, 0, LAMP.x, 760, 520);
+    pool.addColorStop(0, 'rgba(255,94,26,.16)'); pool.addColorStop(1, 'rgba(255,94,26,0)');
+    ctx.save(); ctx.translate(0, 760); ctx.scale(1, 0.32); ctx.translate(0, -760);
+    ctx.fillStyle = pool; ctx.fillRect(0, 0, W, H * 3); ctx.restore();
+    // volumetric haze around the lamp
+    const haze = ctx.createRadialGradient(LAMP.x, LAMP.y, 0, LAMP.x, LAMP.y, 620);
+    haze.addColorStop(0, 'rgba(255,110,40,.20)'); haze.addColorStop(.45, 'rgba(255,80,30,.06)'); haze.addColorStop(1, 'rgba(255,80,30,0)');
+    ctx.fillStyle = haze; ctx.fillRect(0, 0, W, H);
+  }
+
+  /* ---------- the lamp: a wireframe sphere with an icosahedral cage and an ember core ---------- */
+  const PHI = (1 + Math.sqrt(5)) / 2;
+  const geo = [];   // {pts:[[x,y,z]...], kind}
+  for (let lat = -72; lat <= 72; lat += 18) {
+    const a = lat * Math.PI / 180, r = Math.cos(a), y = Math.sin(a), pts = [];
+    for (let i = 0; i <= 96; i++) { const t = i / 96 * Math.PI * 2; pts.push([r * Math.cos(t), y, r * Math.sin(t)]); }
+    geo.push({ pts, kind: lat === 0 ? 'equator' : 'lat' });
+  }
+  for (let m = 0; m < 18; m++) {
+    const t = m / 18 * Math.PI * 2, pts = [];
+    for (let i = 0; i <= 48; i++) { const a = -Math.PI / 2 + i / 48 * Math.PI; pts.push([Math.cos(a) * Math.cos(t), Math.sin(a), Math.cos(a) * Math.sin(t)]); }
+    geo.push({ pts, kind: 'lon' });
+  }
+  const iv = [[0,1,PHI],[0,-1,PHI],[0,1,-PHI],[0,-1,-PHI],[1,PHI,0],[-1,PHI,0],[1,-PHI,0],[-1,-PHI,0],[PHI,0,1],[-PHI,0,1],[PHI,0,-1],[-PHI,0,-1]]
+    .map(v => { const l = Math.hypot(...v); return v.map(c => c / l * 0.58); });
+  for (let i = 0; i < 12; i++) for (let j = i + 1; j < 12; j++) {
+    const d = Math.hypot(iv[i][0] - iv[j][0], iv[i][1] - iv[j][1], iv[i][2] - iv[j][2]);
+    if (d < 0.58 * 1.06) geo.push({ pts: [iv[i], iv[j]], kind: 'ico' });
+  }
+  for (const v of iv) geo.push({ pts: [[0, 0, 0], v.map(c => c * 0.55)], kind: 'spoke' });
+
+  function rot(p, ay, ax) {
+    let [x, y, z] = p, c = Math.cos(ay), s = Math.sin(ay);
+    const x1 = c * x + s * z, z1 = -s * x + c * z;
+    c = Math.cos(ax); s = Math.sin(ax);
+    return [x1, c * y - s * z1, s * y + c * z1];
+  }
+  const F = 4.2;
+  const proj = (p, R, cx, cy) => { const k = F / (F - p[2]); return [cx + p[0] * R * k, cy - p[1] * R * k, p[2]]; };
+
+  const STYLE = {
+    lat: { col: '255,122,60', w: 1.1, a: .9 }, lon: { col: '255,122,60', w: 1.0, a: .8 },
+    equator: { col: '255,170,120', w: 1.6, a: 1 }, ico: { col: '255,196,160', w: 1.25, a: .95 }, spoke: { col: '255,150,90', w: .8, a: .55 }
+  };
+
+  function drawLamp(t) {
+    const ctx = lampC.getContext('2d');
+    ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
+    ctx.clearRect(0, 0, W, H);
+    const { x: cx, y: cy, R } = LAMP;
+    const sway = reduce ? 0 : Math.sin(t * 0.45) * 0.012;
+    const ox = Math.sin(sway) * 260;            // a slow pendulum from the ceiling
+    const lx = cx + ox;
+
+    // cable and socket
+    ctx.strokeStyle = 'rgba(255,180,140,.32)'; ctx.lineWidth = 1.2;
+    ctx.beginPath(); ctx.moveTo(cx, -10); ctx.lineTo(lx, cy - R - 16); ctx.stroke();
+    ctx.fillStyle = '#1A1214'; ctx.strokeStyle = 'rgba(255,150,100,.5)';
+    ctx.beginPath(); ctx.roundRect(lx - 11, cy - R - 20, 22, 14, 3); ctx.fill(); ctx.stroke();
+
+    // bloom
+    const bloom = ctx.createRadialGradient(lx, cy, 0, lx, cy, R * 2.3);
+    bloom.addColorStop(0, 'rgba(255,120,50,.34)'); bloom.addColorStop(.35, 'rgba(255,94,26,.14)'); bloom.addColorStop(1, 'rgba(255,94,26,0)');
+    ctx.fillStyle = bloom; ctx.fillRect(0, 0, W, H);
+
+    ctx.globalCompositeOperation = 'lighter';
+    ctx.lineCap = 'round';
+    const ay = t * 0.16, ax = -0.32 + Math.sin(t * 0.2) * 0.04;
+    // two passes: soft glow, then crisp wire
+    for (const pass of [0, 1]) {
+      for (const g of geo) {
+        const st = STYLE[g.kind];
+        const ia = g.kind === 'ico' || g.kind === 'spoke' ? -ay * 1.6 : ay;   // the cage counter-rotates inside the shell
+        const P = g.pts.map(p => proj(rot(p, ia, ax), R, lx, cy));
+        for (let i = 0; i < P.length - 1; i++) {
+          const z = (P[i][2] + P[i + 1][2]) / 2;
+          const depth = Math.pow((z + 1) / 2, 1.4);            // back of the sphere recedes
+          const a = st.a * (0.1 + 0.9 * depth);
+          if (pass === 0) { ctx.strokeStyle = `rgba(255,94,26,${a * .16})`; ctx.lineWidth = st.w * 6; }
+          else { ctx.strokeStyle = `rgba(${st.col},${a})`; ctx.lineWidth = st.w * (0.7 + 0.5 * depth); }
+          ctx.beginPath(); ctx.moveTo(P[i][0], P[i][1]); ctx.lineTo(P[i + 1][0], P[i + 1][1]); ctx.stroke();
+        }
+      }
+    }
+    // icosahedron vertices as tiny solder points
+    for (const v of iv) {
+      const p = proj(rot(v, -ay * 1.6, ax), R, lx, cy), d = (p[2] + 1) / 2;
+      ctx.fillStyle = `rgba(255,220,190,${0.25 + 0.7 * d})`;
+      ctx.beginPath(); ctx.arc(p[0], p[1], 1.4 + 1.4 * d, 0, Math.PI * 2); ctx.fill();
+    }
+
+    // counter-rotating crimson orbit, dashed
+    const tilt = 1.18, n = 180;
+    for (let i = 0; i < n; i++) {
+      if (i % 3 === 2) continue;
+      const a0 = i / n * Math.PI * 2 - t * 0.22, a1 = (i + 1) / n * Math.PI * 2 - t * 0.22;
+      const r0 = rot([Math.cos(a0) * 1.34, 0, Math.sin(a0) * 1.34], 0.5, ax - tilt * 0.22);
+      const r1 = rot([Math.cos(a1) * 1.34, 0, Math.sin(a1) * 1.34], 0.5, ax - tilt * 0.22);
+      const p0 = proj(r0, R, lx, cy), p1 = proj(r1, R, lx, cy), d = ((p0[2] + p1[2]) / 2 + 1.34) / 2.68;
+      ctx.strokeStyle = `rgba(242,19,104,${0.12 + 0.6 * d})`; ctx.lineWidth = 1 + d;
+      ctx.beginPath(); ctx.moveTo(p0[0], p0[1]); ctx.lineTo(p1[0], p1[1]); ctx.stroke();
+    }
+
+    // the ember core
+    const flick = reduce ? 1 : 0.92 + Math.sin(t * 7.1) * 0.04 + Math.sin(t * 12.7) * 0.03;
+    const core = ctx.createRadialGradient(lx, cy, 0, lx, cy, 64 * flick);
+    core.addColorStop(0, 'rgba(255,250,240,1)'); core.addColorStop(.14, 'rgba(255,210,160,.95)');
+    core.addColorStop(.4, 'rgba(255,110,40,.45)'); core.addColorStop(1, 'rgba(255,94,26,0)');
+    ctx.fillStyle = core; ctx.beginPath(); ctx.arc(lx, cy, 64 * flick, 0, Math.PI * 2); ctx.fill();
+
+    // a few sparks rising off the lamp
+    for (let i = 0; i < 14; i++) {
+      const seed = i * 97.13, life = ((t * 0.08 + i / 14) % 1);
+      const sx = lx + Math.sin(seed) * R * 0.9 + Math.sin(t * .6 + seed) * 10;
+      const sy = cy + R * 0.2 - life * R * 1.5;
+      const a = Math.sin(life * Math.PI) * 0.7;
+      ctx.fillStyle = `rgba(255,190,140,${a})`;
+      ctx.beginPath(); ctx.arc(sx, sy, 1.1 + (i % 3) * .5, 0, Math.PI * 2); ctx.fill();
+    }
+    ctx.globalCompositeOperation = 'source-over';
+  }
+
+  let raf = 0, running = true;
+  function loop(ms) { drawLamp(ms / 1000); if (running) raf = requestAnimationFrame(loop); }
+  document.addEventListener('visibilitychange', () => {
+    if (reduce) return;
+    running = !document.hidden; cancelAnimationFrame(raf); if (running) raf = requestAnimationFrame(loop);
+  });
+  addEventListener('resize', fit);
+  fit();
+  if (!reduce) raf = requestAnimationFrame(loop);
+})();
+</script>
+</body>
+</html>
