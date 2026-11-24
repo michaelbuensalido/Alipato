@@ -187,11 +187,11 @@ export default function Contact() {
             alipatosolutions@gmail.com
           </a>
           <a
-            href="tel:+639957431885"
+            href="tel:+639634644192"
             className="flex items-center gap-2 text-sm font-light text-fg/85 transition-colors hover:text-accent"
           >
             <Icon icon="solar:phone-linear" size={16} className="shrink-0 text-accent" />
-            +63 995 743 1885
+            +63 963 464 4192
           </a>
         </div>
 
@@ -206,7 +206,7 @@ export default function Contact() {
             className="flex items-center gap-2 text-sm font-light text-fg/85 transition-colors hover:text-accent"
           >
             <Icon icon="solar:chat-round-dots-linear" size={16} className="shrink-0 text-accent" />
-            WhatsApp (+63 995 743 1885)
+            WhatsApp (+63 963 464 4192)
           </a>
         </div>
 

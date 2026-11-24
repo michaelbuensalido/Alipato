@@ -52,21 +52,25 @@ export default function Navbar() {
   }, [open]);
 
   return (
-    <header className="fixed inset-x-3 top-3 z-50 rounded-[18px] bg-surface/[.86] shadow-[inset_0_0_0_1px_rgba(255,255,255,.07),0_12px_32px_-12px_rgba(0,0,0,.6)] backdrop-blur-md sm:inset-x-6 lg:top-[22px]">
-      <div className="relative flex h-16 items-center justify-between pl-5 pr-3 lg:h-[72px] lg:pl-6 lg:pr-3.5">
+    <header
+      className={`fixed inset-x-3 top-3 z-50 mx-auto max-w-[1080px] bg-surface/[.86] shadow-[inset_0_0_0_1px_rgba(255,255,255,.07),0_12px_32px_-12px_rgba(0,0,0,.6)] backdrop-blur-md transition-[border-radius] duration-200 sm:inset-x-6 lg:top-5 ${
+        open ? "rounded-[28px]" : "rounded-full"
+      }`}
+    >
+      <div className="relative flex h-14 items-center justify-between pl-5 pr-2 lg:h-[60px] lg:pl-6 lg:pr-2">
         <a href="/" className="group flex items-center" onClick={() => setOpen(false)}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src="/images/logo/logo.svg"
             alt="Alipato"
-            className="h-9 w-auto object-contain transition-opacity duration-150 group-hover:opacity-90 lg:h-11"
+            className="h-8 w-auto object-contain transition-opacity duration-150 group-hover:opacity-90 lg:h-9"
           />
           <span className="sr-only">Alipato</span>
         </a>
 
         <nav
           aria-label="Primary"
-          className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-[34px] lg:flex"
+          className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-7 lg:flex"
         >
           {links.map((l) => {
             const isActive = active === l.href.slice(2);
@@ -93,7 +97,7 @@ export default function Navbar() {
         <div className="flex items-center gap-2">
           <a
             href="/#contact"
-            className="group hidden h-[46px] items-center gap-2.5 whitespace-nowrap rounded-full bg-accent pl-[22px] pr-5 text-[15px] font-medium text-canvas transition duration-150 ease-out hover:-translate-y-px hover:brightness-110 active:translate-y-px active:scale-[.985] sm:inline-flex"
+            className="group hidden h-11 items-center gap-2.5 whitespace-nowrap rounded-full bg-accent pl-5 pr-[18px] text-[15px] font-medium text-canvas transition duration-150 ease-out hover:-translate-y-px hover:brightness-110 active:translate-y-px active:scale-[.985] sm:inline-flex"
           >
             Book a Free Audit
             <Icon

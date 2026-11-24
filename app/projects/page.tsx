@@ -38,9 +38,9 @@ export default function ProjectsPage() {
               ({String(projects.length).padStart(2, "0")} Projects)
             </span>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-16">
-            {projects.map((p, i) => (
-              <ProjectCard key={p.title} project={p} index={i} />
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3 [&:hover>a:not(:hover)]:opacity-55">
+            {projects.map((p) => (
+              <ProjectCard key={p.title} project={p} />
             ))}
           </div>
         </div>

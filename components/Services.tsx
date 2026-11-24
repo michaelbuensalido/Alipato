@@ -1,140 +1,189 @@
-const services = [
+"use client";
+
+import { useState } from "react";
+import DeviceMockup from "./DeviceMockup";
+import Icon from "./Icon";
+import { screens, type ScreenId } from "./ServiceScreens";
+
+type Service = {
+  id: ScreenId;
+  title: string;
+  description: string;
+  tags: string[];
+  meta: string;
+  icon: string;
+  /** Card tint, taken from the logo's molten gradient. */
+  color: string;
+};
+
+const services: Service[] = [
   {
+    id: "web",
     title: "Web & Mobile Development",
     description:
-      "Sub-second HTML/Tailwind websites with spam-protected lead forms, plus cross-platform iOS & Android apps for brands that outgrow a mobile site: push notifications, loyalty programs, VIP bookings and staff tools.",
-    tags: [
-      "5-page custom site",
-      "Cloudflare / Vercel",
-      "Expo / FlutterFlow",
-      "Supabase",
-    ],
+      "Sub-second websites with spam-protected lead forms, plus cross-platform iOS & Android apps with push notifications, loyalty programs, VIP bookings and staff tools.",
+    tags: ["5-page custom site", "Cloudflare / Vercel", "Expo / FlutterFlow", "Supabase"],
     meta: "Sites live in under 7 days · Apps in 3–4 weeks",
-    svg: (
-      <>
-        <rect x="3" y="3" width="12" height="12" transform="rotate(45 9 9)" />
-        <rect x="9" y="9" width="12" height="12" transform="rotate(45 15 15)" />
-        <circle cx="12" cy="12" r="2" />
-      </>
-    ),
+    icon: "solar:monitor-smartphone-linear",
+    color: "#FF5E1A",
   },
   {
+    id: "seo",
     title: "Local SEO & AEO",
     description:
-      "Rank on the Google Map Pack and get cited by ChatGPT, Gemini, Perplexity and Google AI Overviews. We add the machine-readable context traditional websites lack, then keep it fresh every month.",
-    tags: [
-      "Google Business Profile",
-      "llms.txt",
-      "LocalBusiness JSON-LD",
-      "AI citation tracking",
-    ],
+      "Rank on the Google Map Pack and get cited by ChatGPT, Gemini, Perplexity and Google AI Overviews, with machine-readable context kept fresh every month.",
+    tags: ["Google Business Profile", "llms.txt", "LocalBusiness JSON-LD", "AI citation tracking"],
     meta: "One-time setup or monthly retainer",
-    svg: (
-      <>
-        <circle cx="12" cy="12" r="10" />
-        <ellipse cx="12" cy="12" rx="10" ry="3" />
-        <ellipse cx="12" cy="12" rx="3" ry="10" />
-        <line x1="2" y1="12" x2="22" y2="12" />
-      </>
-    ),
+    icon: "solar:map-point-linear",
+    color: "#FF3F3A",
   },
   {
+    id: "agents",
     title: "AI Agents & Automation",
     description:
-      "24/7 AI sales agents on Messenger, Instagram and WhatsApp that answer inquiries instantly, collect booking deposits via GCash, Maya, PayNow or Stripe, and sync every lead into your CRM, calendar and invoicing with zero data entry.",
-    tags: [
-      "Messenger / IG / WhatsApp",
-      "n8n / Make",
-      "PayMongo / Stripe",
-      "Google Sheets / CRM",
-    ],
+      "24/7 AI sales agents on Messenger, Instagram and WhatsApp that answer instantly, collect deposits via GCash, Maya, PayNow or Stripe, and sync every lead to your CRM.",
+    tags: ["Messenger / IG / WhatsApp", "n8n / Make", "PayMongo / Stripe", "Google Sheets / CRM"],
     meta: "Agent deployed in under 90 minutes",
-    svg: (
-      <>
-        <polygon points="12 2 21 7 21 17 12 22 3 17 3 7" />
-        <polygon points="12 6 17 9 17 15 12 18 7 15 7 9" />
-        <line x1="12" y1="2" x2="12" y2="6" />
-        <line x1="3" y1="7" x2="7" y2="9" />
-        <line x1="21" y1="7" x2="17" y2="9" />
-        <line x1="3" y1="17" x2="7" y2="15" />
-        <line x1="21" y1="17" x2="17" y2="15" />
-        <line x1="12" y1="22" x2="12" y2="18" />
-      </>
-    ),
+    icon: "solar:chat-round-dots-linear",
+    color: "#F21368",
   },
   {
+    id: "consulting",
     title: "Digital Consulting",
     description:
-      "A productized AI Workflow & Digital Audit for growing businesses with disjointed tools and manual bottlenecks. We interview your team and deliver a clear Digital Transformation Roadmap you can act on.",
+      "A productized AI Workflow & Digital Audit for growing businesses with disjointed tools. We interview your team and deliver a roadmap you can act on.",
     tags: ["1-day audit", "15-page roadmap", "Fractional CTO"],
     meta: "Fixed scope, no open-ended hourly billing",
-    svg: (
-      <>
-        <path d="M2 12C2 12 7 4 12 4C17 4 22 12 22 12C22 12 17 20 12 20C7 20 2 12 2 12Z" />
-        <circle cx="12" cy="12" r="5" />
-        <circle cx="12" cy="12" r="2" />
-        <line x1="12" y1="4" x2="12" y2="7" />
-        <line x1="12" y1="17" x2="12" y2="20" />
-      </>
-    ),
+    icon: "solar:document-text-linear",
+    color: "#9B23B6",
   },
 ];
 
+const STEP_X = 14; // px each card is indented from the one behind it
+const STEP_Y = 60; // px each card drops; equals the tab height so every tab stays readable
+
 export default function Services() {
+  const [active, setActive] = useState(0);
+  // Stack order back→front: the others keep their order, the active card moves to the front.
+  const order = services.map((_, i) => i).filter((i) => i !== active).concat(active);
+  const depth = services.length - 1;
+  const current = services[active];
+  const screen = screens[current.id];
+
   return (
     <section
       id="services"
-      className="bg-canvas px-5 py-24 sm:px-8 md:py-32 lg:px-[6.25vw]"
+      className="overflow-x-clip bg-canvas px-5 py-24 sm:px-8 md:py-32 lg:px-[6.25vw]"
     >
       <div className="mx-auto max-w-[1440px]">
-        <h2 className="font-condensed text-outline mb-14 text-[22vw] font-semibold uppercase leading-[0.82] tracking-[-0.01em] md:mb-20 md:text-[15vw] lg:text-[11rem]">
+        <h2 className="font-condensed text-outline mb-12 text-[22vw] font-semibold uppercase leading-[0.82] tracking-[-0.01em] md:mb-16 md:text-[15vw] lg:text-[11rem]">
           Services
         </h2>
 
-        <ul className="border-b border-line">
-          {services.map((s) => (
-            <li
-              key={s.title}
-              className="group grid grid-cols-1 gap-6 border-t border-line py-10 md:py-14 lg:grid-cols-12 lg:gap-10"
-            >
-              <div className="flex items-start gap-5 lg:col-span-5">
-                <span className="mt-1 flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-line text-muted transition-colors duration-300 group-hover:border-accent/50 group-hover:text-accent md:h-14 md:w-14">
-                  <svg
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="0.9"
-                    aria-hidden="true"
+        <div className="grid grid-cols-1 items-center gap-14 lg:grid-cols-12 lg:gap-12">
+          {/* Stacked service cards */}
+          <div
+            className="grid lg:col-span-5"
+            style={{ paddingBottom: depth * STEP_Y }}
+          >
+            {services.map((s, i) => {
+              const pos = order.indexOf(i);
+              const isActive = i === active;
+              const panelId = `service-panel-${s.id}`;
+              return (
+                <div
+                  key={s.id}
+                  className="col-start-1 row-start-1 transition-transform duration-500 ease-out"
+                  style={{
+                    transform: `translate(${pos * STEP_X}px, ${pos * STEP_Y}px)`,
+                    zIndex: pos,
+                    width: `calc(100% - ${depth * STEP_X}px)`,
+                  }}
+                >
+                  <article
+                    className={`flex h-full flex-col overflow-hidden rounded-[18px] transition-[transform,box-shadow] duration-300 ${
+                      isActive ? "" : "hover:-translate-y-1.5"
+                    }`}
+                    style={{
+                      background: `color-mix(in srgb, ${s.color} ${isActive ? 20 : 13}%, #110C0D)`,
+                      boxShadow: `inset 0 0 0 1px color-mix(in srgb, ${s.color} ${isActive ? 60 : 32}%, transparent), 0 -14px 30px -14px rgba(0,0,0,.85)${
+                        isActive ? `, 0 0 46px -12px ${s.color}` : ""
+                      }`,
+                    }}
                   >
-                    {s.svg}
-                  </svg>
-                </span>
-                <h3 className="font-condensed text-balance text-4xl font-semibold uppercase leading-[0.92] text-fg md:text-5xl lg:text-6xl">
-                  {s.title}
-                </h3>
-              </div>
-
-              <div className="md:pl-[4.75rem] lg:col-span-7 lg:pl-0 lg:pt-2">
-                <p className="max-w-[60ch] text-base font-light leading-relaxed text-muted md:text-lg">
-                  {s.description}
-                </p>
-                <ul className="mt-6 flex flex-wrap gap-2">
-                  {s.tags.map((t) => (
-                    <li
-                      key={t}
-                      className="rounded-full border border-line px-3 py-1 text-xs text-fg/80 transition-colors duration-300 group-hover:border-accent/30"
+                    <button
+                      type="button"
+                      onClick={() => setActive(i)}
+                      aria-expanded={isActive}
+                      aria-controls={panelId}
+                      className="flex w-full shrink-0 items-center gap-3.5 px-5 text-left"
+                      style={{ height: STEP_Y }}
                     >
-                      {t}
-                    </li>
-                  ))}
-                </ul>
-                <p className="mt-5 text-sm text-accent">{s.meta}</p>
-              </div>
-            </li>
-          ))}
-        </ul>
+                      <span
+                        className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full"
+                        style={{
+                          background: `color-mix(in srgb, ${s.color} 26%, transparent)`,
+                          color: s.color,
+                        }}
+                      >
+                        <Icon icon={s.icon} size={18} />
+                      </span>
+                      <span
+                        className={`font-condensed truncate text-[1.35rem] font-semibold uppercase tracking-[0.02em] transition-colors md:text-2xl ${
+                          isActive ? "text-fg" : "text-fg/70"
+                        }`}
+                      >
+                        {s.title}
+                      </span>
+                      <span className="ml-auto text-xs tabular-nums text-muted">
+                        {String(i + 1).padStart(2, "0")}
+                      </span>
+                    </button>
+
+                    <div
+                      id={panelId}
+                      inert={!isActive}
+                      className={`flex flex-1 flex-col px-5 pb-6 pt-1 transition-opacity duration-500 md:px-6 ${
+                        isActive ? "opacity-100" : "opacity-0"
+                      }`}
+                    >
+                      <p className="text-[15px] font-light leading-relaxed text-fg/80">
+                        {s.description}
+                      </p>
+                      <ul className="mt-5 flex flex-wrap gap-2">
+                        {s.tags.map((t) => (
+                          <li
+                            key={t}
+                            className="rounded-full bg-white/[.08] px-3 py-1.5 text-xs font-medium text-fg/90"
+                          >
+                            {t}
+                          </li>
+                        ))}
+                      </ul>
+                      <p className="mt-auto flex items-center gap-2 pt-6 text-sm text-fg/85">
+                        <Icon icon="solar:bolt-linear" size={16} style={{ color: s.color }} />
+                        {s.meta}
+                      </p>
+                    </div>
+                  </article>
+                </div>
+              );
+            })}
+          </div>
+
+          {/* Device mockup showing the active service */}
+          <div className="order-first lg:order-none lg:col-span-7">
+            <DeviceMockup
+              screenKey={current.id}
+              url={screen.url}
+              laptop={screen.laptop}
+              phone={screen.phone}
+            />
+            <p className="sr-only" aria-live="polite">
+              Showing an example of {current.title}
+            </p>
+          </div>
+        </div>
       </div>
     </section>
   );
