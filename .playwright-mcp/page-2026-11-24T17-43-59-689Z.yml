@@ -1,0 +1,415 @@
+- generic [active] [ref=f4e1]:
+  - generic [ref=f4e2]:
+    - banner [ref=f4e3]:
+      - generic [ref=f4e4]:
+        - link "Alipato Alipato" [ref=f4e5] [cursor=pointer]:
+          - /url: /
+          - img "Alipato" [ref=f4e6]
+          - generic [ref=f4e7]: Alipato
+        - navigation "Primary" [ref=f4e8]:
+          - link "Services" [ref=f4e9] [cursor=pointer]:
+            - /url: /#services
+          - link "Process" [ref=f4e10] [cursor=pointer]:
+            - /url: /#process
+          - link "Pricing" [ref=f4e11] [cursor=pointer]:
+            - /url: /#pricing
+          - link "Work" [ref=f4e12] [cursor=pointer]:
+            - /url: /#work
+          - link "About" [ref=f4e13] [cursor=pointer]:
+            - /url: /#agency
+          - link "Contact" [ref=f4e14] [cursor=pointer]:
+            - /url: /#contact
+        - link "Book a Free Audit" [ref=f4e16] [cursor=pointer]:
+          - /url: /#contact
+    - main [ref=f4e19]:
+      - generic [ref=f4e21]:
+        - generic [ref=f4e22]:
+          - heading "Digital Growth, Engineered For Scale" [level=1] [ref=f4e23]:
+            - generic [ref=f4e24]: Digital Growth,
+            - generic [ref=f4e25]: Engineered
+            - generic [ref=f4e26]: For Scale
+          - generic [aria-hidden]:
+            - generic: Digital Growth,
+            - generic: Engineered
+            - generic: For Scale
+        - generic [ref=f4e27]:
+          - paragraph [ref=f4e28]: A digital growth and IT solutions partner building automated client acquisition and operations pipelines for SMEs.
+          - generic [ref=f4e29]:
+            - link "Book a Free Audit" [ref=f4e30] [cursor=pointer]:
+              - /url: "#contact"
+            - link "Explore our services" [ref=f4e33] [cursor=pointer]:
+              - /url: "#services"
+        - generic [aria-hidden] [ref=f4e37]:
+          - generic [ref=f4e38]: Client acquisition
+          - generic [ref=f4e39]: Operations pipelines
+          - generic [ref=f4e40]: IT solutions
+          - generic [ref=f4e41]: Built for SMEs
+      - generic [ref=f4e43]:
+        - heading "Services" [level=2] [ref=f4e44]
+        - generic [ref=f4e45]:
+          - generic [ref=f4e46]:
+            - article [ref=f4e48]:
+              - button "Web & Mobile Development 01" [expanded] [ref=f4e49] [cursor=pointer]:
+                - generic [ref=f4e55]: Web & Mobile Development
+                - generic [ref=f4e56]: "01"
+              - generic [ref=f4e57]:
+                - paragraph [ref=f4e58]: Sub-second websites with spam-protected lead forms, plus cross-platform iOS & Android apps with push notifications, loyalty programs, VIP bookings and staff tools.
+                - list [ref=f4e59]:
+                  - listitem [ref=f4e60]: 5-page custom site
+                  - listitem [ref=f4e61]: Cloudflare / Vercel
+                  - listitem [ref=f4e62]: Expo / FlutterFlow
+                  - listitem [ref=f4e63]: Supabase
+                - paragraph [ref=f4e64]: Sites live in under 7 days · Apps in 3–4 weeks
+            - article [ref=f4e68]:
+              - button "Local SEO & AEO 02" [ref=f4e69] [cursor=pointer]:
+                - generic [ref=f4e75]: Local SEO & AEO
+                - generic [ref=f4e76]: "02"
+              - generic [ref=f4e77]:
+                - paragraph [ref=f4e78]: Rank on the Google Map Pack and get cited by ChatGPT, Gemini, Perplexity and Google AI Overviews, with machine-readable context kept fresh every month.
+                - list [ref=f4e79]:
+                  - listitem [ref=f4e80]: Google Business Profile
+                  - listitem [ref=f4e81]: llms.txt
+                  - listitem [ref=f4e82]: LocalBusiness JSON-LD
+                  - listitem [ref=f4e83]: AI citation tracking
+                - paragraph [ref=f4e84]: One-time setup or monthly retainer
+            - article [ref=f4e88]:
+              - button "AI Agents & Automation 03" [ref=f4e89] [cursor=pointer]:
+                - generic [ref=f4e94]: AI Agents & Automation
+                - generic [ref=f4e95]: "03"
+              - generic [ref=f4e96]:
+                - paragraph [ref=f4e97]: 24/7 AI sales agents on Messenger, Instagram and WhatsApp that answer instantly, collect deposits via GCash, Maya, PayNow or Stripe, and sync every lead to your CRM.
+                - list [ref=f4e98]:
+                  - listitem [ref=f4e99]: Messenger / IG / WhatsApp
+                  - listitem [ref=f4e100]: n8n / Make
+                  - listitem [ref=f4e101]: PayMongo / Stripe
+                  - listitem [ref=f4e102]: Google Sheets / CRM
+                - paragraph [ref=f4e103]: Agent deployed in under 90 minutes
+            - article [ref=f4e107]:
+              - button "Digital Consulting 04" [ref=f4e108] [cursor=pointer]:
+                - generic [ref=f4e113]: Digital Consulting
+                - generic [ref=f4e114]: "04"
+              - generic [ref=f4e115]:
+                - paragraph [ref=f4e116]: A productized AI Workflow & Digital Audit for growing businesses with disjointed tools. We interview your team and deliver a roadmap you can act on.
+                - list [ref=f4e117]:
+                  - listitem [ref=f4e118]: 1-day audit
+                  - listitem [ref=f4e119]: 15-page roadmap
+                  - listitem [ref=f4e120]: Fractional CTO
+                - paragraph [ref=f4e121]: Fixed scope, no open-ended hourly billing
+          - paragraph [ref=f4e138]: Showing an example of Web & Mobile Development
+      - generic [ref=f4e140]:
+        - generic [ref=f4e141]:
+          - heading "How We Work" [level=2] [ref=f4e142]
+          - generic [ref=f4e143]: (04 Steps)
+        - list [ref=f4e144]:
+          - listitem [ref=f4e145]:
+            - generic [aria-hidden] [ref=f4e146]: "01"
+            - 'heading "Step 01: Discovery & Auditing" [level=3] [ref=f4e150]':
+              - generic [ref=f4e151]: "Step 01:"
+              - text: Discovery & Auditing
+            - paragraph [ref=f4e152]: We audit your website, Google Map Pack listing and Messenger response speed to find missing AEO schema, slow load times and manual inquiry bottlenecks.
+          - listitem [ref=f4e153]:
+            - generic [aria-hidden] [ref=f4e154]: "02"
+            - 'heading "Step 02: Design & Prototyping" [level=3] [ref=f4e158]':
+              - generic [ref=f4e159]: "Step 02:"
+              - text: Design & Prototyping
+            - paragraph [ref=f4e160]: AI UI generators and our Tailwind component library spin up a live, interactive homepage preview before you sign anything.
+          - listitem [ref=f4e161]:
+            - generic [aria-hidden] [ref=f4e162]: "03"
+            - 'heading "Step 03: Web, AEO & Automation Build" [level=3] [ref=f4e166]':
+              - generic [ref=f4e167]: "Step 03:"
+              - text: Web, AEO & Automation Build
+            - paragraph [ref=f4e168]: We deploy your site with auto-generated AEO files (llms.txt + JSON-LD), then set up your AI agent, payment gateway and CRM integration from proven blueprints.
+          - listitem [ref=f4e169]:
+            - generic [aria-hidden] [ref=f4e170]: "04"
+            - 'heading "Step 04: Handoff & Ongoing Support" [level=3] [ref=f4e174]':
+              - generic [ref=f4e175]: "Step 04:"
+              - text: Handoff & Ongoing Support
+            - paragraph [ref=f4e176]: A short video walkthrough shows leads flowing from website and Messenger to payment to your sheet. Then we keep it growing with monthly SEO/AEO and automation maintenance.
+      - generic [ref=f4e178]:
+        - generic [ref=f4e179]:
+          - heading "Service Packages" [level=2] [ref=f4e180]
+          - generic [ref=f4e181]:
+            - generic [ref=f4e182]: (06 Tiers)
+            - paragraph [ref=f4e183]: Modular packages built on reusable blueprints—so your business gets full-stack digital infrastructure and AI automation deployed in days, not months.
+        - region "Service packages" [ref=f4e184]:
+          - generic [ref=f4e185]:
+            - article [ref=f4e188] [cursor=pointer]:
+              - generic [ref=f4e189]:
+                - img [aria-hidden] [ref=f4e190]:
+                  - generic [ref=f4e207]: 0.8s
+                - generic [ref=f4e209]: Pilot slots available
+              - generic [ref=f4e213]:
+                - generic [ref=f4e214]:
+                  - heading [level=3] [ref=f4e215]: Launchpad
+                  - generic [ref=f4e216]: "01"
+                - paragraph [ref=f4e217]: Web + Local SEO + AEO Setup
+                - paragraph [ref=f4e218]: Best for local businesses needing a fast, high-converting website that ranks on Google and AI search.
+                - list [ref=f4e219]:
+                  - listitem [ref=f4e220]:
+                    - generic [ref=f4e225]: 5-page custom responsive website
+                  - listitem [ref=f4e226]:
+                    - generic [ref=f4e231]: Google Business Profile (GBP) optimization
+                  - listitem [ref=f4e232]:
+                    - generic [ref=f4e237]: Technical SEO & Answer Engine Optimization (llms.txt + JSON-LD schema)
+                  - listitem [ref=f4e238]:
+                    - generic [ref=f4e243]: AI Q&A blocks for ChatGPT, Perplexity & Google AI Overviews
+                  - listitem [ref=f4e244]:
+                    - generic [ref=f4e249]: Spam-protected lead capture forms
+                  - listitem [ref=f4e250]:
+                    - generic [ref=f4e255]: High-speed Cloudflare / Vercel hosting
+                - generic [ref=f4e256]: One-time setup
+            - article [ref=f4e265] [cursor=pointer]:
+              - img [aria-hidden] [ref=f4e267]:
+                - generic [ref=f4e274]: Map Pack · AI answers
+                - generic [ref=f4e275]: "#1"
+                - generic [ref=f4e278]: "#2"
+                - generic [ref=f4e281]: "#3"
+              - generic [ref=f4e291]:
+                - generic [ref=f4e292]:
+                  - heading [level=3] [ref=f4e293]: Search & AI Visibility
+                  - generic [ref=f4e294]: "02"
+                - paragraph [ref=f4e295]: Monthly SEO + AEO Retainer
+                - paragraph [ref=f4e296]: Best for established brands looking to dominate local Map Pack rankings and AI recommendations every month.
+                - list [ref=f4e297]:
+                  - listitem [ref=f4e298]:
+                    - generic [ref=f4e303]: Monthly Google Business Profile posts & photo updates
+                  - listitem [ref=f4e304]:
+                    - generic [ref=f4e309]: 2–4 programmatic local & AI-search Q&A pages per month
+                  - listitem [ref=f4e310]:
+                    - generic [ref=f4e315]: Local directory & citation building
+                  - listitem [ref=f4e316]:
+                    - generic [ref=f4e321]: Automated Google Review funnel link
+                  - listitem [ref=f4e322]:
+                    - generic [ref=f4e327]: Search Console & AI citation tracking report
+                - generic [ref=f4e328]: Monthly retainer · Ongoing growth
+            - 'generic "3 of 6: AI Chat & Payment Suite" [ref=f4e335]':
+              - article [ref=f4e337]:
+                - generic [ref=f4e338]:
+                  - img [aria-hidden] [ref=f4e339]:
+                    - generic [ref=f4e341]: Hi! May slot pa po sa Sabado?
+                    - generic [ref=f4e343]: Yes! 10AM is open — reserve now?
+                    - generic [ref=f4e347]: ₱500 deposit · GCash
+                    - generic [ref=f4e348]: Verified automatically
+                  - generic [ref=f4e354]: Most Popular
+                - generic [ref=f4e360]:
+                  - generic [ref=f4e361]:
+                    - heading "AI Chat & Payment Suite" [level=3] [ref=f4e362]
+                    - generic [ref=f4e363]: "03"
+                  - paragraph [ref=f4e364]: Messenger / IG / WhatsApp AI + Auto-Pay
+                  - paragraph [ref=f4e365]: Best for clinics, gyms, and service businesses losing leads to slow replies or manual GCash screenshot checks.
+                  - list [ref=f4e366]:
+                    - listitem [ref=f4e367]:
+                      - generic [ref=f4e372]: 24/7 Taglish-fluent AI Sales Agent on FB Messenger, IG DM & WhatsApp
+                    - listitem [ref=f4e373]:
+                      - generic [ref=f4e378]: Trained on your exact FAQs, services & pricing
+                    - listitem [ref=f4e379]:
+                      - generic [ref=f4e384]: Automated booking deposit checkout via GCash & Maya (PayMongo / Xendit)
+                    - listitem [ref=f4e385]:
+                      - generic [ref=f4e390]: Instant calendar slot lock on Google Calendar / Cal.com
+                    - listitem [ref=f4e391]:
+                      - generic [ref=f4e396]: Zero manual screenshot verification or late replies
+                  - generic [ref=f4e397]: Setup + monthly
+            - article [ref=f4e406] [cursor=pointer]:
+              - img [aria-hidden] [ref=f4e408]:
+                - generic [ref=f4e409]: Leads
+                - generic [ref=f4e413]: CRM
+                - generic [ref=f4e417]: Sheets
+                - generic [ref=f4e421]: Invoice
+              - generic [ref=f4e435]:
+                - generic [ref=f4e436]:
+                  - heading [level=3] [ref=f4e437]: AI Automation & Operations OS
+                  - generic [ref=f4e438]: "04"
+                - paragraph [ref=f4e439]: Back-Office Integrations & Custom Systems
+                - paragraph [ref=f4e440]: Best for teams spending hours on manual encoding, quoting, and follow-ups across disconnected tools.
+                - list [ref=f4e441]:
+                  - listitem [ref=f4e442]:
+                    - generic [ref=f4e447]: Instant speed-to-lead Messenger / WhatsApp / Slack router (<10s response)
+                  - listitem [ref=f4e448]:
+                    - generic [ref=f4e453]: Auto-sync leads to Google Sheets, Notion, HubSpot or Airtable
+                  - listitem [ref=f4e454]:
+                    - generic [ref=f4e459]: Automated branded PDF quote & invoice generator
+                  - listitem [ref=f4e460]:
+                    - generic [ref=f4e465]: Post-service automated review & SMS/chat reactivation triggers
+                  - listitem [ref=f4e466]:
+                    - generic [ref=f4e471]: Custom Supabase operations dashboards
+                - generic [ref=f4e472]: Setup + monthly
+            - article [ref=f4e481] [cursor=pointer]:
+              - generic [ref=f4e482]:
+                - img [aria-hidden] [ref=f4e483]:
+                  - generic [ref=f4e492]: New VIP booking · 3:00 PM
+                  - generic [ref=f4e495]: +50 loyalty points
+                  - generic [ref=f4e496]: iOS
+                  - generic [ref=f4e497]: Android
+                - generic [ref=f4e499]: Shipped in 3–4 weeks
+              - generic [ref=f4e504]:
+                - generic [ref=f4e505]:
+                  - heading [level=3] [ref=f4e506]: Mobile App Development
+                  - generic [ref=f4e507]: "05"
+                - paragraph [ref=f4e508]: Cross-Platform iOS & Android
+                - paragraph [ref=f4e509]: Best for multi-branch clinics, gyms, and retail brands ready for a dedicated iOS & Android app.
+                - list [ref=f4e510]:
+                  - listitem [ref=f4e511]:
+                    - generic [ref=f4e516]: Single codebase deployment to Apple App Store & Google Play
+                  - listitem [ref=f4e517]:
+                    - generic [ref=f4e522]: Push notifications, loyalty programs & VIP booking flows
+                  - listitem [ref=f4e523]:
+                    - generic [ref=f4e528]: Internal staff management & Supabase backend
+                  - listitem [ref=f4e529]:
+                    - generic [ref=f4e534]: App Store & Play Store submission and ongoing maintenance
+                - generic [ref=f4e535]: Custom build + App Store maintenance
+            - generic [aria-hidden]:
+              - generic:
+                - article:
+                  - generic:
+                    - img [aria-hidden]:
+                      - generic: Audit
+                      - generic: Build
+                      - generic: Scale
+                    - generic: 1-Day Audit
+                  - generic:
+                    - generic:
+                      - heading [level=3]: Digital Transformation Audit
+                      - generic: "06"
+                    - paragraph: Productized Advisory & Roadmap
+                    - paragraph: Best for growing SMEs (20–50+ staff) that need a clear automation and software roadmap before investing in a build.
+                    - list:
+                      - listitem:
+                        - generic: 2-hour deep-dive interview with your management & ops team
+                      - listitem:
+                        - generic: Full audit of disjointed SaaS tools & manual data bottlenecks
+                      - listitem:
+                        - generic: Comprehensive 15-page Digital Transformation Roadmap PDF
+                      - listitem:
+                        - generic: Actionable architecture blueprint before any software spend
+                    - generic: Fixed-scope audit · Optional Fractional CTO
+          - generic [ref=f4e542]:
+            - button "Previous" [ref=f4e543] [cursor=pointer]
+            - generic [ref=f4e546]:
+              - button "Go to Launchpad" [ref=f4e547] [cursor=pointer]
+              - button "Go to Search & AI Visibility" [ref=f4e549] [cursor=pointer]
+              - button "Go to AI Chat & Payment Suite" [ref=f4e551] [cursor=pointer]
+              - button "Go to AI Automation & Operations OS" [ref=f4e553] [cursor=pointer]
+              - button "Go to Mobile App Development" [ref=f4e555] [cursor=pointer]
+              - button "Go to Digital Transformation Audit" [ref=f4e557] [cursor=pointer]
+            - button "Next" [ref=f4e559] [cursor=pointer]
+          - paragraph [ref=f4e562]: "3 of 6: AI Chat & Payment Suite"
+        - paragraph [ref=f4e563]: "Tiers 05–06 (custom apps & advisory): 50% upfront · 50% on launch"
+      - generic [ref=f4e565]:
+        - generic [ref=f4e566]:
+          - heading "Selected Work" [level=2] [ref=f4e567]
+          - generic [ref=f4e568]: (04 Projects)
+        - generic [ref=f4e570]:
+          - link "Nexus Architect website Nexus Architect A portfolio site for an architecture studio, built around full-bleed project imagery. View project Portfolio Website" [ref=f4e571] [cursor=pointer]:
+            - /url: "#"
+            - img "Nexus Architect website" [ref=f4e576]
+            - generic [ref=f4e577]:
+              - heading "Nexus Architect" [level=3] [ref=f4e578]
+              - paragraph [ref=f4e579]: A portfolio site for an architecture studio, built around full-bleed project imagery.
+              - generic [ref=f4e580]:
+                - generic [ref=f4e581]: View project
+                - generic [ref=f4e584]: Portfolio Website
+          - link "Bull's Restaurant website Bull's Restaurant A restaurant website with the menu, location and reservations a tap away. View project Business Website" [ref=f4e585] [cursor=pointer]:
+            - /url: "#"
+            - img "Bull's Restaurant website" [ref=f4e590]
+            - generic [ref=f4e591]:
+              - heading "Bull's Restaurant" [level=3] [ref=f4e592]
+              - paragraph [ref=f4e593]: A restaurant website with the menu, location and reservations a tap away.
+              - generic [ref=f4e594]:
+                - generic [ref=f4e595]: View project
+                - generic [ref=f4e598]: Business Website
+          - link "Linea Architects website Linea Architects A minimal interior and architecture portfolio with a calm, editorial layout. View project Portfolio Website" [ref=f4e599] [cursor=pointer]:
+            - /url: "#"
+            - img "Linea Architects website" [ref=f4e604]
+            - generic [ref=f4e605]:
+              - heading "Linea Architects" [level=3] [ref=f4e606]
+              - paragraph [ref=f4e607]: A minimal interior and architecture portfolio with a calm, editorial layout.
+              - generic [ref=f4e608]:
+                - generic [ref=f4e609]: View project
+                - generic [ref=f4e612]: Portfolio Website
+          - link "Electria website Electria A service business website that turns visitors into quote requests. View project Business Website" [ref=f4e613] [cursor=pointer]:
+            - /url: "#"
+            - img "Electria website" [ref=f4e618]
+            - generic [ref=f4e619]:
+              - heading "Electria" [level=3] [ref=f4e620]
+              - paragraph [ref=f4e621]: A service business website that turns visitors into quote requests.
+              - generic [ref=f4e622]:
+                - generic [ref=f4e623]: View project
+                - generic [ref=f4e626]: Business Website
+        - link "View All Projects" [ref=f4e628] [cursor=pointer]:
+          - /url: /projects
+      - generic [ref=f4e632]:
+        - heading "Developer-Led by Design" [level=2] [ref=f4e633]
+        - generic [ref=f4e634]:
+          - paragraph [ref=f4e635]: We are a digital growth and IT solutions partner led by developers, not a bloated traditional agency. We embed AI across the whole business lifecycle, so small and medium businesses get fast, full-stack digital infrastructure without the overhead.
+          - generic [ref=f4e636]:
+            - generic [ref=f4e637]:
+              - generic [ref=f4e638]: Philippines
+              - generic [ref=f4e639]:
+                - heading "Chat & Payment Automation" [level=3] [ref=f4e640]
+                - paragraph [ref=f4e641]: Most local commerce happens in Messenger, IG DMs and Viber. A Taglish-fluent AI agent answers instantly, collects a GCash/Maya deposit and logs the booking automatically.
+            - generic [ref=f4e642]:
+              - generic [ref=f4e643]: Singapore
+              - generic [ref=f4e644]:
+                - heading "Speed-to-Lead & Efficiency" [level=3] [ref=f4e645]
+                - paragraph [ref=f4e646]: A sub-second site tuned for the Map Pack and AI search, with instant WhatsApp lead routing, PayNow/Stripe deposits and automated quoting that saves 10+ admin hours a week.
+      - generic [ref=f4e648]:
+        - generic [ref=f4e649]:
+          - generic [ref=f4e650]: Alipato
+          - generic [ref=f4e653]: Digital Growth
+          - generic [ref=f4e656]: IT Solutions
+          - generic [ref=f4e659]: Local SEO & AEO
+          - generic [ref=f4e662]: 24/7 AI Agents
+          - generic [ref=f4e665]: Digital Consulting
+        - generic [aria-hidden] [ref=f4e668]:
+          - generic [ref=f4e669]: Alipato
+          - generic [ref=f4e672]: Digital Growth
+          - generic [ref=f4e675]: IT Solutions
+          - generic [ref=f4e678]: Local SEO & AEO
+          - generic [ref=f4e681]: 24/7 AI Agents
+          - generic [ref=f4e684]: Digital Consulting
+      - generic [ref=f4e687]:
+        - generic [ref=f4e688]:
+          - heading [level=2] [ref=f4e689]:
+            - text: Ready to automate?
+            - link "Book a free audit." [ref=f4e690] [cursor=pointer]:
+              - /url: mailto:alipatosolutions@gmail.com
+          - generic [ref=f4e691]:
+            - generic [ref=f4e692]:
+              - link "Chat on WhatsApp" [ref=f4e693] [cursor=pointer]:
+                - /url: https://wa.me/639957431885
+              - link "0995 743 1885" [ref=f4e697] [cursor=pointer]:
+                - /url: tel:+639957431885
+              - link "alipatosolutions@gmail.com" [ref=f4e703] [cursor=pointer]:
+                - /url: mailto:alipatosolutions@gmail.com
+            - generic [ref=f4e708]:
+              - generic [ref=f4e709]: "Or leave your email for a 30-minute audit of your site and operations:"
+              - generic [ref=f4e711]:
+                - textbox "Or leave your email for a 30-minute audit of your site and operations:" [ref=f4e712]:
+                  - /placeholder: Email address or business website
+                - button "Submit audit request" [ref=f4e713] [cursor=pointer]
+        - generic [ref=f4e716]:
+          - generic [ref=f4e717]:
+            - link "Alipato Alipato" [ref=f4e718] [cursor=pointer]:
+              - /url: /
+              - img "Alipato" [ref=f4e719]
+              - generic [ref=f4e720]: Alipato
+            - paragraph [ref=f4e721]: Alipato is a digital growth and IT solutions partner building web, SEO/AEO, AI agents and automation for SMBs.
+          - generic [ref=f4e722]:
+            - generic [ref=f4e723]: Direct Contact
+            - link "alipatosolutions@gmail.com" [ref=f4e724] [cursor=pointer]:
+              - /url: mailto:alipatosolutions@gmail.com
+            - link "+63 963 464 4192" [ref=f4e729] [cursor=pointer]:
+              - /url: tel:+639634644192
+          - generic [ref=f4e732]:
+            - generic [ref=f4e733]: Instant Messaging
+            - link "WhatsApp (+63 963 464 4192)" [ref=f4e734] [cursor=pointer]:
+              - /url: https://wa.me/639957431885
+          - generic [ref=f4e738]:
+            - paragraph [ref=f4e739]: © 2026 Alipato. All rights reserved.
+            - generic [ref=f4e740]:
+              - link "Privacy Policy" [ref=f4e741] [cursor=pointer]:
+                - /url: "#"
+              - link "Terms of Service" [ref=f4e742] [cursor=pointer]:
+                - /url: "#"
+  - button "Open Next.js Dev Tools" [ref=f4e748] [cursor=pointer]
+  - alert [ref=f4e752]

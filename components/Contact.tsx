@@ -82,7 +82,7 @@ export default function Contact() {
               className="inline-flex h-12 items-center gap-2 rounded-full px-6 text-[15px] font-medium text-fg shadow-[inset_0_0_0_1px_theme(colors.line)] transition duration-150 hover:text-accent hover:shadow-[inset_0_0_0_1px_theme(colors.accent)]"
             >
               <Icon icon="solar:phone-calling-linear" size={18} />
-              0995 743 1885
+              +63 995 743 1885
             </a>
             <a
               href="mailto:alipatosolutions@gmail.com"
@@ -200,7 +200,7 @@ export default function Contact() {
             Instant Messaging
           </span>
           <a
-            href="https://wa.me/639957431885"
+            href="https://wa.me/09634644192"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-2 text-sm font-light text-fg/85 transition-colors hover:text-accent"

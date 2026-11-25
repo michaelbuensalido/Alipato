@@ -1,0 +1,110 @@
+- generic [active] [ref=f5e1]:
+  - generic [ref=f5e2]:
+    - banner [ref=f5e3]:
+      - generic [ref=f5e4]:
+        - link "Alipato Alipato" [ref=f5e5] [cursor=pointer]:
+          - /url: /
+          - img "Alipato" [ref=f5e6]
+          - generic [ref=f5e7]: Alipato
+        - navigation "Primary" [ref=f5e8]:
+          - link "Services" [ref=f5e9] [cursor=pointer]:
+            - /url: /#services
+          - link "Process" [ref=f5e10] [cursor=pointer]:
+            - /url: /#process
+          - link "Pricing" [ref=f5e11] [cursor=pointer]:
+            - /url: /#pricing
+          - link "Work" [ref=f5e12] [cursor=pointer]:
+            - /url: /#work
+          - link "About" [ref=f5e13] [cursor=pointer]:
+            - /url: /#agency
+          - link "Contact" [ref=f5e14] [cursor=pointer]:
+            - /url: /#contact
+        - link "Book a Free Audit" [ref=f5e16] [cursor=pointer]:
+          - /url: /#contact
+    - main [ref=f5e17]:
+      - generic [ref=f5e18]:
+        - generic [ref=f5e19]:
+          - heading "All Projects" [level=1] [ref=f5e20]
+          - generic [ref=f5e21]: (04 Projects)
+        - generic [ref=f5e22]:
+          - link "Nexus Architect website Nexus Architect A portfolio site for an architecture studio, built around full-bleed project imagery. View project Portfolio Website" [ref=f5e23] [cursor=pointer]:
+            - /url: "#"
+            - img "Nexus Architect website" [ref=f5e28]
+            - generic [ref=f5e29]:
+              - heading "Nexus Architect" [level=3] [ref=f5e30]
+              - paragraph [ref=f5e31]: A portfolio site for an architecture studio, built around full-bleed project imagery.
+              - generic [ref=f5e32]:
+                - generic [ref=f5e33]: View project
+                - generic [ref=f5e34]: Portfolio Website
+          - link "Bull's Restaurant website Bull's Restaurant A restaurant website with the menu, location and reservations a tap away. View project Business Website" [ref=f5e35] [cursor=pointer]:
+            - /url: "#"
+            - img "Bull's Restaurant website" [ref=f5e40]
+            - generic [ref=f5e41]:
+              - heading "Bull's Restaurant" [level=3] [ref=f5e42]
+              - paragraph [ref=f5e43]: A restaurant website with the menu, location and reservations a tap away.
+              - generic [ref=f5e44]:
+                - generic [ref=f5e45]: View project
+                - generic [ref=f5e46]: Business Website
+          - link "Linea Architects website Linea Architects A minimal interior and architecture portfolio with a calm, editorial layout. View project Portfolio Website" [ref=f5e47] [cursor=pointer]:
+            - /url: "#"
+            - img "Linea Architects website" [ref=f5e52]
+            - generic [ref=f5e53]:
+              - heading "Linea Architects" [level=3] [ref=f5e54]
+              - paragraph [ref=f5e55]: A minimal interior and architecture portfolio with a calm, editorial layout.
+              - generic [ref=f5e56]:
+                - generic [ref=f5e57]: View project
+                - generic [ref=f5e58]: Portfolio Website
+          - link "Electria website Electria A service business website that turns visitors into quote requests. View project Business Website" [ref=f5e59] [cursor=pointer]:
+            - /url: "#"
+            - img "Electria website" [ref=f5e64]
+            - generic [ref=f5e65]:
+              - heading "Electria" [level=3] [ref=f5e66]
+              - paragraph [ref=f5e67]: A service business website that turns visitors into quote requests.
+              - generic [ref=f5e68]:
+                - generic [ref=f5e69]: View project
+                - generic [ref=f5e70]: Business Website
+    - generic [ref=f5e71]:
+      - generic [ref=f5e72]:
+        - heading [level=2] [ref=f5e73]:
+          - text: Ready to automate?
+          - link "Book a free audit." [ref=f5e74] [cursor=pointer]:
+            - /url: mailto:alipatosolutions@gmail.com
+        - generic [ref=f5e75]:
+          - generic [ref=f5e76]:
+            - link "Chat on WhatsApp" [ref=f5e77] [cursor=pointer]:
+              - /url: https://wa.me/639957431885
+            - link "0995 743 1885" [ref=f5e78] [cursor=pointer]:
+              - /url: tel:+639957431885
+            - link "alipatosolutions@gmail.com" [ref=f5e79] [cursor=pointer]:
+              - /url: mailto:alipatosolutions@gmail.com
+          - generic [ref=f5e80]:
+            - generic [ref=f5e81]: "Or leave your email for a 30-minute audit of your site and operations:"
+            - generic [ref=f5e83]:
+              - textbox "Or leave your email for a 30-minute audit of your site and operations:" [ref=f5e84]:
+                - /placeholder: Email address or business website
+              - button "Submit audit request" [ref=f5e85] [cursor=pointer]
+      - generic [ref=f5e86]:
+        - generic [ref=f5e87]:
+          - link "Alipato Alipato" [ref=f5e88] [cursor=pointer]:
+            - /url: /
+            - img "Alipato" [ref=f5e89]
+            - generic [ref=f5e90]: Alipato
+          - paragraph [ref=f5e91]: Alipato is a digital growth and IT solutions partner building web, SEO/AEO, AI agents and automation for SMBs.
+        - generic [ref=f5e92]:
+          - generic [ref=f5e93]: Direct Contact
+          - link "alipatosolutions@gmail.com" [ref=f5e94] [cursor=pointer]:
+            - /url: mailto:alipatosolutions@gmail.com
+          - link "+63 963 464 4192" [ref=f5e95] [cursor=pointer]:
+            - /url: tel:+639634644192
+        - generic [ref=f5e96]:
+          - generic [ref=f5e97]: Instant Messaging
+          - link "WhatsApp (+63 963 464 4192)" [ref=f5e98] [cursor=pointer]:
+            - /url: https://wa.me/639957431885
+        - generic [ref=f5e99]:
+          - paragraph [ref=f5e100]: © 2026 Alipato. All rights reserved.
+          - generic [ref=f5e101]:
+            - link "Privacy Policy" [ref=f5e102] [cursor=pointer]:
+              - /url: "#"
+            - link "Terms of Service" [ref=f5e103] [cursor=pointer]:
+              - /url: "#"
+  - button "Open Next.js Dev Tools" [ref=f5e109] [cursor=pointer]
